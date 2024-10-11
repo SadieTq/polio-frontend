@@ -20,7 +20,7 @@ function AddDivisionalManager() {
   const fetchFlws = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://203.161.43.125:4000/api/users/all-flw');
+      const response = await fetch('https://survey.al-mizan.store/api/users/all-flw');
       const data = await response.json();
       setFlwList(data.body); 
       setLoading(false);
@@ -63,7 +63,7 @@ function AddDivisionalManager() {
     };
 
     try {
-      const response = await fetch('http://203.161.43.125:4000/api/users/add-flw', {
+      const response = await fetch('https://survey.al-mizan.store/api/users/add-flw', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

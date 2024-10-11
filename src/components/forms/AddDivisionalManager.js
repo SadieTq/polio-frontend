@@ -22,7 +22,7 @@ function AddDivisionalManager() {
   const fetchAICs = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://203.161.43.125:4000/api/users/all-ucmo');
+      const response = await fetch('https://survey.al-mizan.store/api/users/all-ucmo');
       const data = await response.json();
       setAicList(data.body); 
       setLoading(false);
@@ -35,7 +35,7 @@ function AddDivisionalManager() {
   // Fetch AIC data on component mount and after form submission
   const fetchAicData = async () => {
     try {
-      const response = await fetch('http://203.161.43.125:4000/api/users/all-aic');
+      const response = await fetch('https://survey.al-mizan.store/api/users/all-aic');
       const data = await response.json();
       setAicData(data.body); // Assuming the data is in the body field
     } catch (error) {
@@ -75,7 +75,7 @@ function AddDivisionalManager() {
     };
 
     try {
-      const response = await fetch('http://203.161.43.125:4000/api/users/add-aic', {
+      const response = await fetch('https://survey.al-mizan.store/api/users/add-aic', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

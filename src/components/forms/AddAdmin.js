@@ -16,7 +16,7 @@ function AddAdmin() {
   // Fetch UCMO data on component mount
   const fetchUCMOData = async () => {
     try {
-      const response = await fetch('http://203.161.43.125:4000/api/users/all-ucmo');
+      const response = await fetch('https://survey.al-mizan.store/api/users/all-ucmo');
       const data = await response.json();
       setDataSource(data.body); // Assuming the data is in the body field
     } catch (error) {
@@ -45,7 +45,7 @@ function AddAdmin() {
 
     try {
       // POST request to API
-      const response = await fetch('http://203.161.43.125:4000/api/users/add-umco', {
+      const response = await fetch('https://survey.al-mizan.store/api/users/add-umco', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -15,7 +15,7 @@ function AddSuperAdmin() {
   // Fetch Admin data on component mount
   const fetchAdminData = async () => {
     try {
-      const response = await fetch('http://203.161.43.125:4000/api/users/all-admin');
+      const response = await fetch('https://survey.al-mizan.store/api/users/all-admin');
       const data = await response.json();
       setAdminData(data.body); 
     } catch (error) {
@@ -44,7 +44,7 @@ function AddSuperAdmin() {
 
     try {
       // POST request to API
-      const response = await fetch('http://203.161.43.125:4000/api/users/add-admin', {
+      const response = await fetch('https://survey.al-mizan.store/api/users/add-admin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
