@@ -342,10 +342,15 @@ function TeamData({refreshKey}) {
         <div>
           <label>Select Division</label>
           <Select
+          showSearch
             style={{ width: '100%', marginBottom: '10px' }}
             placeholder="Select Division"
             value={division}
             onChange={(value) => setDivision(value)}
+            optionFilterProp="children"  // Ensures the search filters based on the displayed text
+            filterOption={(input, option) =>
+              option.children.toLowerCase().includes(input.toLowerCase())
+            }
           >
             {divisions.map((div) => (
               <Option key={div._id} value={div.name}>
@@ -356,10 +361,15 @@ function TeamData({refreshKey}) {
 
           <label>Select District</label>
           <Select
+          showSearch
             style={{ width: '100%', marginBottom: '10px' }}
             placeholder="Select District"
             value={district}
             onChange={(value) => setDistrict(value)}
+            optionFilterProp="children"  // Ensures the search filters based on the displayed text
+            filterOption={(input, option) =>
+              option.children.toLowerCase().includes(input.toLowerCase())
+            }
           >
             {districts.map((dist) => (
               <Option key={dist._id} value={dist.name}>
@@ -370,10 +380,15 @@ function TeamData({refreshKey}) {
 
           <label>Select Tehsil/Town</label>
           <Select
+          showSearch
             style={{ width: '100%', marginBottom: '10px' }}
             placeholder="Select Tehsil/Town"
             value={tehsil}
             onChange={(value) => setTehsil(value)}
+            optionFilterProp="children"  // Ensures the search filters based on the displayed text
+            filterOption={(input, option) =>
+              option.children.toLowerCase().includes(input.toLowerCase())
+            }
           >
             {tehsils.map((tehsil) => (
               <Option key={tehsil._id} value={tehsil.name}>
@@ -384,10 +399,15 @@ function TeamData({refreshKey}) {
 
           <label>Select UC</label>
           <Select
+          showSearch
             style={{ width: '100%', marginBottom: '10px' }}
             placeholder="Select UC"
             value={mauza}
             onChange={(value) => setMauza(value)}
+            optionFilterProp="children"  // Ensures the search filters based on the displayed text
+            filterOption={(input, option) =>
+              option.children.toLowerCase().includes(input.toLowerCase())
+            }
           >
             {mauzas.map((uc) => (
               <Option key={uc._id} value={uc.name}>
@@ -398,11 +418,16 @@ function TeamData({refreshKey}) {
 
           <label>Select UCMO</label>
           <Select
+          showSearch
            style={{ width: '100%', marginBottom: '10px' }}
             placeholder="Select UCMO"
             className="custom-select-team"
             onChange={handleUCMOChange}
             value={selectedUCMO}
+            optionFilterProp="children"  // Ensures the search filters based on the displayed text
+            filterOption={(input, option) =>
+              option.children.toLowerCase().includes(input.toLowerCase())
+            }
           >
             {ucmos.map(ucmo => (
               <Option key={ucmo._id} value={ucmo._id}>
@@ -413,11 +438,16 @@ function TeamData({refreshKey}) {
 
           <label>Select AIC</label>
           <Select
+          showSearch
            style={{ width: '100%', marginBottom: '10px' }}
             placeholder="Select AIC"
             className="custom-select-team"
             onChange={handleAICChange}
             value={selectedAIC}
+            optionFilterProp="children"  // Ensures the search filters based on the displayed text
+            filterOption={(input, option) =>
+              option.children.toLowerCase().includes(input.toLowerCase())
+            }
           >
             {aics.map(aic => (
               <Option key={aic._id} value={aic._id}>
@@ -428,12 +458,17 @@ function TeamData({refreshKey}) {
 
           <label>Select FLWs</label>
           <Select
+          showSearch
            style={{ width: '100%', marginBottom: '10px' }}
             placeholder="Select FLWs"
             className="custom-select-team"
             mode="multiple"  // Enable multiple selection
             onChange={setSelectedFLWs}
             value={selectedFLWs}
+            optionFilterProp="children"  // Ensures the search filters based on the displayed text
+            filterOption={(input, option) =>
+              option.children.toLowerCase().includes(input.toLowerCase())
+            }
           >
             {flws.map(flw => (
               <Option key={flw._id} value={flw._id}>

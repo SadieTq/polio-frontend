@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Spin, Alert } from 'antd'; 
 
@@ -9,6 +9,10 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false); 
   const [error, setError] = useState(null); 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.removeItem('token');
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +38,7 @@ const LoginPage = () => {
       const data = await response.json();
 
       if (response.ok && data.token) {
-        // localStorage.setItem('token', data.token);
+        localStorage.setItem('token', data.token); // Store the token
         navigate('/dashboard');
       } else {
         console.error('Login failed:', data);

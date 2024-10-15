@@ -5,9 +5,9 @@ import { SearchOutlined } from '@ant-design/icons';
 const { Option } = Select;
 
 function AddDivisionalManager() {
-  const [aicList, setAicList] = useState([]); // State for AIC list
+  const [UcmoList, setUcmoList] = useState([]); // State for Ucmo list
   const [loading, setLoading] = useState(false);
-  const [selectedAic, setSelectedAic] = useState(null); // UCMO ID
+  const [selectedUcmo, setSelectedUcmo] = useState(null); // UCMO ID
   const [gender, setGender] = useState('MALE'); // State for gender radio buttons
   const [isEmployee, setIsEmployee] = useState(true); // State for employment status radio buttons
   const [formData, setFormData] = useState({
@@ -19,38 +19,27 @@ function AddDivisionalManager() {
     address: '',
   });
 
-  const [aicData, setAicData] = useState([]);
+  const [UcmoData, setUcmoData] = useState([]);
   const [searchTerm, setSearchTerm] = useState(''); // State for search input
   const [filteredData, setFilteredData] = useState([]); // Filtered data for table
 
-  // Function to fetch the list of AICs (UCMOs)
-  const fetchAICs = async () => {
-    setLoading(true);
+  // Function to fetch the list of Ucmos (UCMOs)
+ 
+
+  // Fetch Ucmo data on component mount and after form submission
+  const fetchUcmoData = async () => {
     try {
       const response = await fetch('https://survey.al-mizan.store/api/users/all-ucmo');
       const data = await response.json();
-      setAicList(data.body); 
-      setLoading(false);
-    } catch (error) {
-      message.error('Failed to fetch AIC list');
-      setLoading(false);
-    }
-  };
-
-  // Fetch AIC data on component mount and after form submission
-  const fetchAicData = async () => {
-    try {
-      const response = await fetch('https://survey.al-mizan.store/api/users/all-aic');
-      const data = await response.json();
-      setAicData(data.body); // Assuming the data is in the body field
+      setUcmoData(data.body); // Assuming the data is in the body field
       setFilteredData(data.body); // Initialize filteredData to the full dataset
     } catch (error) {
-      message.error('Failed to fetch AIC data');
+      message.error('Failed to fetch Ucmo data');
     }
   };
 
   useEffect(() => {
-    fetchAicData(); // Fetch data on component mount
+    fetchUcmoData(); // Fetch data on component mount
   }, []);
 
   // Handle form input changes
@@ -62,10 +51,7 @@ function AddDivisionalManager() {
     }));
   };
 
-  // Handle selection of AIC (UCMO)
-  const handleSelectAIC = (value) => {
-    setSelectedAic(value); // The selected AIC's _id (UCMO ID)
-  };
+ 
 
   // Function to submit the form and send data to the API
   const handleSubmit = async (e) => {
@@ -77,13 +63,13 @@ function AddDivisionalManager() {
         street: formData.address,
       },
       gender: gender,  // Include gender
-      employmentStatus: isEmployee ? 'Employed' : 'Unemployed',  // Include employment status
-      qualifications: [], 
-      ucmo: selectedAic,  // Send selected UCMO ID
+      isEmployee: isEmployee
+
+      
     };
 
     try {
-      const response = await fetch('https://survey.al-mizan.store/api/users/add-aic', {
+      const response = await fetch('https://survey.al-mizan.store/api/users/add-umco', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -92,7 +78,7 @@ function AddDivisionalManager() {
       });
 
       if (response.ok) {
-        message.success('AIC added successfully');
+        message.success('Ucmo added successfully');
 
         // Clear the form and dropdown after successful submission
         setFormData({
@@ -103,17 +89,17 @@ function AddDivisionalManager() {
           phone: '',
           address: '',
         });
-        setSelectedAic(null); // Clear the UCMO dropdown selection
+        setSelectedUcmo(null); // Clear the UCMO dropdown selection
         setGender('MALE');  // Reset gender to default
         setIsEmployee(true);  // Reset employment status to default
 
-        // Fetch updated AIC data to refresh the table
-        fetchAicData();
+        // Fetch updated Ucmo data to refresh the table
+        fetchUcmoData();
       } else {
-        message.error('Failed to add AIC');
+        message.error('Failed to add Ucmo');
       }
     } catch (error) {
-      message.error('An error occurred while adding AIC');
+      message.error('An error occurred while adding Ucmo');
     }
   };
 
@@ -122,14 +108,14 @@ function AddDivisionalManager() {
     const value = e.target.value.toLowerCase();
     setSearchTerm(value);
 
-    const filtered = aicData.filter(item =>
+    const filtered = UcmoData.filter(item =>
       item.firstName.toLowerCase().includes(value)
     );
     setFilteredData(filtered);
   };
 
-  // Columns for the AIC Table
-  const aicColumns = [
+  // Columns for the Ucmo Table
+  const UcmoColumns = [
     {
       title: 'First Name',
       dataIndex: 'firstName',
@@ -159,35 +145,12 @@ function AddDivisionalManager() {
 
   return (<>
     <div className="form-container">
-      <h2>Add AIC</h2>
+      <h2>Add UCMO</h2>
       <p>Fill in the details below:</p>
       <form onSubmit={handleSubmit}>
+        
         <div className="form-group">
-          <label>Select UCMO</label>
-          <Select
-            placeholder="Select UCMO"
-            style={{ width: '42%' }}
-            onFocus={fetchAICs} // Trigger API call when dropdown is focused
-            value={selectedAic} // Bind the selected value to the dropdown
-            loading={loading}
-            onChange={handleSelectAIC} 
-            notFoundContent={
-              loading ? (
-                <div className="spinner-container">
-                  <Spin size="small" />
-                </div>
-              ) : 'No data'
-            } 
-          >
-            {aicList.map(aic => (
-              <Option key={aic._id} value={aic._id}>
-                {aic.firstName}
-              </Option>
-            ))}
-          </Select>
-        </div>
-        <div className="form-group">
-          <label>AIC CNIC</label>
+          <label>UCMO CNIC</label>
           <input
             type="text"
             name="cnic"
@@ -292,9 +255,9 @@ function AddDivisionalManager() {
       </div>
       <Table
         dataSource={filteredData}
-        columns={aicColumns}
+        columns={UcmoColumns}
         rowKey="_id" 
-        pagination={{ pageSize: 5 }}
+        pagination={{ pageSize: 7 }}
       />
     </div>
   </>

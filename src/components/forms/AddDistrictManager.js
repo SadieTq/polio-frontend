@@ -168,11 +168,16 @@ function AddDivisionalManager() {
         <div className="form-group">
           <label>Select AIC</label>
           <Select
+          showSearch
             placeholder="Select AIC"
             style={{ width: '42%' }}
             value={selectedAic} // Bind the selected value to the dropdown
             loading={loading}
             onChange={handleSelectAic} // Handle selection change
+            optionFilterProp="children"  // Ensures the search filters based on the displayed text
+            filterOption={(input, option) =>
+              option.children.toLowerCase().includes(input.toLowerCase())
+            }
             notFoundContent={
               loading ? (
                 <div className="spinner-container">
@@ -297,7 +302,7 @@ function AddDivisionalManager() {
           style={{ width: 200 }}
         />
       </div>
-      <Table dataSource={filteredFlwList} columns={flwColumns} rowKey="_id" />
+      <Table dataSource={filteredFlwList} columns={flwColumns} rowKey="_id"  pagination={{ pageSize: 7 }}/>
 
     </div>
 

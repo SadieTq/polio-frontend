@@ -136,10 +136,15 @@ function TeamAssignment() {
         <div className="select-group-team">
           <label>Select Division</label>
           <Select
+          showSearch
             placeholder="Select Division"
             className="custom-select-team"
             onChange={setSelectedDivision}
             value={selectedDivision}
+            optionFilterProp="children"  // Ensures the search filters based on the displayed text
+            filterOption={(input, option) =>
+              option.children.toLowerCase().includes(input.toLowerCase())
+            }
           >
             {divisions.map(division => (
               <Option key={division._id} value={division.name}>
@@ -153,10 +158,15 @@ function TeamAssignment() {
         <div className="select-group-team">
           <label>Select District</label>
           <Select
+          showSearch
             placeholder="Select District"
             className="custom-select-team"
             onChange={setSelectedDistrict}
             value={selectedDistrict}
+            optionFilterProp="children"  // Ensures the search filters based on the displayed text
+            filterOption={(input, option) =>
+              option.children.toLowerCase().includes(input.toLowerCase())
+            }
           >
             {districts.map(district => (
               <Option key={district._id} value={district.name}>
@@ -170,17 +180,23 @@ function TeamAssignment() {
         <div className="select-group-team">
           <label>Select Town</label>
           <Select
-            placeholder="Select Town"
-            className="custom-select-team"
-            onChange={setSelectedTown}
-            value={selectedTown}
-          >
-            {towns.map(town => (
-              <Option key={town._id} value={town.name}>
-                {town.name}
-              </Option>
-            ))}
-          </Select>
+  showSearch
+  placeholder="Select Town"
+  className="custom-select-team"
+  onChange={setSelectedTown}
+  value={selectedTown}
+  optionFilterProp="children"  // Ensures the search filters based on the displayed text
+  filterOption={(input, option) =>
+    option.children.toLowerCase().includes(input.toLowerCase())
+  }
+>
+  {towns.map(town => (
+    <Option key={town._id} value={town.name}>
+      {town.name}
+    </Option>
+  ))}
+</Select>
+
         </div>
       </div>
 
@@ -189,10 +205,15 @@ function TeamAssignment() {
         <div className="select-group-team">
           <label>Select UC</label>
           <Select
+          showSearch
             placeholder="Select UC"
             className="custom-select-team"
             onChange={setSelectedUc}
             value={selectedUc}
+            optionFilterProp="children"  // Ensures the search filters based on the displayed text
+            filterOption={(input, option) =>
+              option.children.toLowerCase().includes(input.toLowerCase())
+            }
           >
             {ucs.map(uc => (
               <Option key={uc._id} value={uc.name}>
@@ -206,10 +227,15 @@ function TeamAssignment() {
         <div className="select-group-team">
           <label>Select UCMO</label>
           <Select
+          showSearch
             placeholder="Select UCMO"
             className="custom-select-team"
             onChange={handleUCMOChange}
             value={selectedUCMO}
+            optionFilterProp="children"  // Ensures the search filters based on the displayed text
+            filterOption={(input, option) =>
+              option.children.toLowerCase().includes(input.toLowerCase())
+            }
           >
             {ucmos.map(ucmo => (
               <Option key={ucmo._id} value={ucmo._id}>
@@ -223,10 +249,15 @@ function TeamAssignment() {
         <div className="select-group-team">
           <label>Select AIC</label>
           <Select
+          showSearch
             placeholder="Select AIC"
             className="custom-select-team"
             onChange={handleAICChange}
             value={selectedAIC}
+            optionFilterProp="children"  // Ensures the search filters based on the displayed text
+            filterOption={(input, option) =>
+              option.children.toLowerCase().includes(input.toLowerCase())
+            }
           >
             {aics.map(aic => (
               <Option key={aic._id} value={aic._id}>
@@ -242,11 +273,16 @@ function TeamAssignment() {
         <div className="select-group-team">
           <label>Select FLWs</label>
           <Select
+          showSearch
             placeholder="Select FLWs"
             className="custom-select-team"
             mode="multiple"  // Enable multiple selection
             onChange={setSelectedFLWs}
             value={selectedFLWs}
+            optionFilterProp="children"  // Ensures the search filters based on the displayed text
+            filterOption={(input, option) =>
+              option.children.toLowerCase().includes(input.toLowerCase())
+            }
           >
             {flws.map(flw => (
               <Option key={flw._id} value={flw._id}>

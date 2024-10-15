@@ -226,7 +226,7 @@ function AddSuperAdmin() {
         </div>
 
         {/* Admin Table */}
-        <Table dataSource={filteredData} columns={adminColumns} rowKey="_id" />
+        <Table dataSource={filteredData} columns={adminColumns} rowKey="_id"  pagination={{ pageSize: 7 }} />
       </div>
     </>
   );

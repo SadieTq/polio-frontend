@@ -165,12 +165,17 @@ function AddDivisionalManager() {
         <div className="form-group">
           <label>Select UCMO</label>
           <Select
+          showSearch
             placeholder="Select UCMO"
             style={{ width: '42%' }}
             onFocus={fetchAICs} // Trigger API call when dropdown is focused
             value={selectedAic} // Bind the selected value to the dropdown
             loading={loading}
             onChange={handleSelectAIC} 
+            optionFilterProp="children"  // Ensures the search filters based on the displayed text
+            filterOption={(input, option) =>
+              option.children.toLowerCase().includes(input.toLowerCase())
+            }
             notFoundContent={
               loading ? (
                 <div className="spinner-container">
@@ -295,7 +300,7 @@ function AddDivisionalManager() {
         dataSource={filteredData}
         columns={aicColumns}
         rowKey="_id" 
-        pagination={{ pageSize: 5 }}
+        pagination={{ pageSize: 7 }}
       />
     </div>
   </>
