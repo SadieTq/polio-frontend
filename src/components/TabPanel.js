@@ -3,7 +3,6 @@ import { Tabs } from 'antd';
 import AddSuperAdmin from './forms/AddSuperAdmin';
 import AddAdmin from './forms/AddAdmin';
 import AddDivisionalManager from './forms/AddDivisionalManager';
-import AddDistrictManager from './forms/AddDistrictManager';
 
 const { TabPane } = Tabs;
 
@@ -22,9 +21,7 @@ function TabPanel() {
         <TabPane tab="Add AIC" key="3">
           <AddDivisionalManager />
         </TabPane>
-        <TabPane tab="Add FLW" key="4">
-          <AddDistrictManager />
-        </TabPane>
+       
       </Tabs>
     </div>
   );

@@ -1,11 +1,12 @@
 import React from 'react';
+import TabPanelSurveyor from '../TabPanelSurveyor';
 
 
 
 
 function SurveyorManagement() {
   return (
-<h1>SurveyorManagement</h1>
+<TabPanelSurveyor />
   );
 }
 

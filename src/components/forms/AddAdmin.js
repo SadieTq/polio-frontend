@@ -1,51 +1,89 @@
 import React, { useState, useEffect } from 'react';
-import { Button, message, Table, Divider } from 'antd';
+import { Button, Select, message, Spin, Table, Divider, Input, Radio } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 
-function AddAdmin() {
+const { Option } = Select;
 
-  const [cnic, setCnic] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [mobileNo, setMobileNo] = useState('');
-  const [street, setStreet] = useState('');
+function AddDivisionalManager() {
+  const [aicList, setAicList] = useState([]); // State for AIC list
+  const [loading, setLoading] = useState(false);
+  const [selectedAic, setSelectedAic] = useState(null); // UCMO ID
+  const [gender, setGender] = useState('MALE'); // State for gender radio buttons
+  const [isEmployee, setIsEmployee] = useState(true); // State for employment status radio buttons
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    cnic: '',
+    phone: '',
+    address: '',
+  });
 
-  // State for UCMO data fetched from API
-  const [dataSource, setDataSource] = useState([]);
+  const [aicData, setAicData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(''); // State for search input
+  const [filteredData, setFilteredData] = useState([]); // Filtered data for table
 
-  // Fetch UCMO data on component mount
-  const fetchUCMOData = async () => {
+  // Function to fetch the list of AICs (UCMOs)
+  const fetchAICs = async () => {
+    setLoading(true);
     try {
       const response = await fetch('https://survey.al-mizan.store/api/users/all-ucmo');
       const data = await response.json();
-      setDataSource(data.body); // Assuming the data is in the body field
+      setAicList(data.body); 
+      setLoading(false);
     } catch (error) {
-      message.error('Failed to fetch UCMO data');
+      message.error('Failed to fetch AIC list');
+      setLoading(false);
+    }
+  };
+
+  // Fetch AIC data on component mount and after form submission
+  const fetchAicData = async () => {
+    try {
+      const response = await fetch('https://survey.al-mizan.store/api/users/all-aic');
+      const data = await response.json();
+      setAicData(data.body); // Assuming the data is in the body field
+      setFilteredData(data.body); // Initialize filteredData to the full dataset
+    } catch (error) {
+      message.error('Failed to fetch AIC data');
     }
   };
 
   useEffect(() => {
-    fetchUCMOData(); // Fetch data on component mount
+    fetchAicData(); // Fetch data on component mount
   }, []);
 
+  // Handle form input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  // Handle selection of AIC (UCMO)
+  const handleSelectAIC = (value) => {
+    setSelectedAic(value); // The selected AIC's _id (UCMO ID)
+  };
+
+  // Function to submit the form and send data to the API
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Payload for API request
     const payload = {
-      firstName,
-      lastName,
-      email,
-      cnic,
-      phone: mobileNo,
+      ...formData,
       address: {
-        street,
+        street: formData.address,
       },
+      gender: gender,  // Include gender
+      employmentStatus: isEmployee ? 'Employed' : 'Unemployed',  // Include employment status
+      qualifications: [], 
+      ucmo: selectedAic,  // Send selected UCMO ID
     };
 
     try {
-      // POST request to API
-      const response = await fetch('https://survey.al-mizan.store/api/users/add-umco', {
+      const response = await fetch('https://survey.al-mizan.store/api/users/add-aic', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,32 +91,45 @@ function AddAdmin() {
         body: JSON.stringify(payload),
       });
 
-      const data = await response.json();
-
       if (response.ok) {
-        message.success('UCMO added successfully!');
+        message.success('AIC added successfully');
 
-        // Clear the form
-        setCnic('');
-        setFirstName('');
-        setLastName('');
-        setEmail('');
-        setMobileNo('');
-        setStreet('');
+        // Clear the form and dropdown after successful submission
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          cnic: '',
+          phone: '',
+          address: '',
+        });
+        setSelectedAic(null); // Clear the UCMO dropdown selection
+        setGender('MALE');  // Reset gender to default
+        setIsEmployee(true);  // Reset employment status to default
 
-        // Fetch the updated UCMO data to refresh the table
-        fetchUCMOData();
+        // Fetch updated AIC data to refresh the table
+        fetchAicData();
       } else {
-        message.error('Failed to add UCMO: ' + data.message);
+        message.error('Failed to add AIC');
       }
     } catch (error) {
-      console.error('Error:', error);
-      message.error('An error occurred while adding the UCMO.');
+      message.error('An error occurred while adding AIC');
     }
   };
 
-  // Columns for UCMO Table
-  const columns = [
+  // Handle search input change and filter the data
+  const handleSearch = (e) => {
+    const value = e.target.value.toLowerCase();
+    setSearchTerm(value);
+
+    const filtered = aicData.filter(item =>
+      item.firstName.toLowerCase().includes(value)
+    );
+    setFilteredData(filtered);
+  };
+
+  // Columns for the AIC Table
+  const aicColumns = [
     {
       title: 'First Name',
       dataIndex: 'firstName',
@@ -106,80 +157,148 @@ function AddAdmin() {
     }
   ];
 
-  return (
+  return (<>
     <div className="form-container">
-      <h2>Add UCMO</h2>
+      <h2>Add AIC</h2>
       <p>Fill in the details below:</p>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>UCMO CNIC</label>
+          <label>Select UCMO</label>
+          <Select
+            placeholder="Select UCMO"
+            style={{ width: '42%' }}
+            onFocus={fetchAICs} // Trigger API call when dropdown is focused
+            value={selectedAic} // Bind the selected value to the dropdown
+            loading={loading}
+            onChange={handleSelectAIC} 
+            notFoundContent={
+              loading ? (
+                <div className="spinner-container">
+                  <Spin size="small" />
+                </div>
+              ) : 'No data'
+            } 
+          >
+            {aicList.map(aic => (
+              <Option key={aic._id} value={aic._id}>
+                {aic.firstName}
+              </Option>
+            ))}
+          </Select>
+        </div>
+        <div className="form-group">
+          <label>AIC CNIC</label>
           <input
             type="text"
+            name="cnic"
             placeholder="e.g. 1234512345678"
-            value={cnic}
-            onChange={(e) => setCnic(e.target.value)}
-            required
+            value={formData.cnic}
+            onChange={handleInputChange}
           />
         </div>
         <div className="form-group">
           <label>First Name</label>
           <input
             type="text"
+            name="firstName"
             placeholder="e.g. Saad"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
+            value={formData.firstName}
+            onChange={handleInputChange}
           />
         </div>
         <div className="form-group">
           <label>Last Name</label>
           <input
             type="text"
+            name="lastName"
             placeholder="e.g. Tariq"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
+            value={formData.lastName}
+            onChange={handleInputChange}
           />
         </div>
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="email"
-            placeholder="e.g. xyz@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+      
         <div className="form-group">
           <label>Mobile No</label>
           <input
             type="text"
+            name="phone"
             placeholder="e.g. 03001234567"
-            value={mobileNo}
-            onChange={(e) => setMobileNo(e.target.value)}
-            required
+            value={formData.phone}
+            onChange={handleInputChange}
           />
         </div>
+
         <div className="form-group">
-          <label>Street Address</label>
+          <label>Email (Optional)</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="e.g. xyz@example.com"
+            value={formData.email}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Address (Optional)</label>
           <input
             type="text"
+            name="address"
             placeholder="e.g. 123 Street Name"
-            value={street}
-            onChange={(e) => setStreet(e.target.value)}
-            required
+            value={formData.address}
+            onChange={handleInputChange}
           />
         </div>
+
+        <div className="form-group">
+          <label>Gender</label>
+          <Radio.Group
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+          >
+            <Radio value="MALE">Male</Radio>
+            <Radio value="FEMALE">Female</Radio>
+          </Radio.Group>
+        </div>
+
+        {/* Employment Status Toggle */}
+        <div className="form-group">
+          <label>Employment Status</label>
+          <Radio.Group
+            value={isEmployee}
+            onChange={(e) => setIsEmployee(e.target.value === true)}
+          >
+            <Radio value={true}>Employed</Radio>
+            <Radio value={false}>Unemployed</Radio>
+          </Radio.Group>
+        </div>
+
         <Button type="primary" htmlType="submit">Add UCMO</Button>
       </form>
-
-      {/* Divider and UCMO Table */}
-      <Divider style={{ marginTop: '40px' }} />
-      <h3>UCMO Details</h3>
-      <Table dataSource={dataSource} columns={columns} rowKey="_id" />
     </div>
+
+    <Divider style={{ marginTop: '20px' }} />
+
+    <div className="form-container">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h3>UCMO Details</h3>
+        <Input
+          placeholder="Search by First Name"
+          prefix={<SearchOutlined />}
+          value={searchTerm}
+          onChange={handleSearch}
+          style={{ width: 300 }}
+        />
+      </div>
+      <Table
+        dataSource={filteredData}
+        columns={aicColumns}
+        rowKey="_id" 
+        pagination={{ pageSize: 5 }}
+      />
+    </div>
+  </>
   );
 }
 
-export default AddAdmin;
+export default AddDivisionalManager;

@@ -1,11 +1,12 @@
-import React from 'react';
 
-
-
+import React, { useState } from 'react';
 
 function TerritoryAssignment() {
+
   return (
-<h1>TerritoryAssignment</h1>
+    <div className="tab-panel">
+      <h1>Territory Assignment</h1>
+    </div>
   );
 }
 

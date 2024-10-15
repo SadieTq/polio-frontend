@@ -13,7 +13,7 @@ body, html {
 
 .sidebar {
   width: 200px;
-  background-color: #1a1c2e;
+  background-color: #1e1f28;
   color: white;
   height: 100vh; /* Full height */
   margin: 0;
@@ -58,7 +58,7 @@ nav ul li a {
 .header-bar {
   display: flex;
   align-items: center;
-  background-color: #1a7659;
+  background-color: #4278db;
   color: white;
   padding: 20px;
   justify-content: space-between;
@@ -168,6 +168,7 @@ button {
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 1rem;
+  background-color: #e7e6e6;
 }
 
 .buttonLogin {
@@ -190,4 +191,31 @@ button {
   justify-content: center;
   align-items: center;
   height: 10px; 
+}
+
+
+.select-container-team {
+  display: flex;
+  justify-content: space-between; 
+}
+
+.select-container-team2 {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between; 
+}
+
+.select-group-team {
+  flex: 1; 
+  margin: 0 10px; 
+}
+
+.custom-select-team {
+  width: 300px; 
+}
+
+.select-group-team label {
+  display: block; 
+  margin-bottom: 8px;
+  margin-left: 0; 
 }

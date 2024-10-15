@@ -8,7 +8,7 @@ import LoginPage from './components/LoginPage';
 import UserManagement from './components/Management/UserManagement';
 import SurveyorManagement from './components/Management/SurveyorManagement';
 import TerritoryAssignment from './components/Management/TerritoryAssignment';
-
+import TeamAssignment from './components/Management/TeamAssignment';
 function App() {
   return (
     <Router>
@@ -23,8 +23,9 @@ function App() {
                 <HeaderBar />
                 <Routes>
                   <Route path="user" element={<UserManagement />} />
-                  <Route path="surveyor" element={<SurveyorManagement />} />
-                  <Route path="territory" element={<TerritoryAssignment />} />
+                  <Route path="flw" element={<SurveyorManagement />} />
+                  {/* <Route path="territory" element={<TerritoryAssignment />} /> */}
+                  <Route path="team" element={<TeamAssignment />} />
                   <Route path="/" element={<TabPanel />} /> {/* Default dashboard content */}
                 </Routes>
               </div>

@@ -11,11 +11,15 @@ function Sidebar() {
             <Link to="/dashboard">User Management</Link>
           </li>
           <li>
-            <Link to="/dashboard">Surveyor Management</Link>
+            <Link to="/dashboard/flw">FLW Management</Link>
           </li>
           <li>
-            <Link to="/dashboard">Territory Assignment</Link>
+            <Link to="/dashboard/team">Team Assignment</Link>
           </li>
+          {/* <li>
+            <Link to="/dashboard/territory">Territory Assignment</Link>
+          </li> */}
+         
         </ul>
       </nav>
     </div>
