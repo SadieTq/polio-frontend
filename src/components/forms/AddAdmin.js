@@ -41,9 +41,10 @@ const userID = localStorage.getItem('id');
   }, []);
 
   useEffect(() => {
-    // Filter admin data based on the search term
+    // Filter admin data based on the search term for both firstName and cnic
     const filtered = adminData.filter((admin) =>
-      admin.firstName.toLowerCase().includes(searchTerm.toLowerCase())
+      admin.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      admin.cnic.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredData(filtered); // Update filtered data
   }, [searchTerm, adminData]);
@@ -307,7 +308,7 @@ const userID = localStorage.getItem('id');
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <h3>Admin Details</h3>
           <Input
-            placeholder="Search by First Name"
+            placeholder="Search by First Name Or CNIC"
             prefix={<SearchOutlined />}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}

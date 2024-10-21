@@ -172,12 +172,16 @@ function AddAIC() {
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
     setSearchTerm(value);
-
+  
+    // Filter aicData by both firstName and cnic
     const filtered = aicData.filter(item =>
-      item.firstName.toLowerCase().includes(value)
+      item.firstName.toLowerCase().includes(value) ||
+      item.cnic.toLowerCase().includes(value)
     );
+  
     setFilteredData(filtered);
   };
+  
 
   // Columns for the AIC Table
   const aicColumns = [
@@ -363,7 +367,7 @@ function AddAIC() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h3>UCMO Details</h3>
         <Input
-          placeholder="Search by First Name"
+          placeholder="Search by First Name Or CNIC"
           prefix={<SearchOutlined />}
           value={searchTerm}
           onChange={handleSearch}

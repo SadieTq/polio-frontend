@@ -113,12 +113,16 @@ function AddUCMO() {
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
     setSearchTerm(value);
-
+  
+    // Filter UcmoData by both firstName and cnic
     const filtered = UcmoData.filter(item =>
-      item.firstName.toLowerCase().includes(value)
+      item.firstName.toLowerCase().includes(value) ||
+      item.cnic.toLowerCase().includes(value)
     );
+    
     setFilteredData(filtered);
   };
+  
   const handleUpdate = async () => {
     const payload = {
       firstName: editingAdmin.firstName,
@@ -318,7 +322,7 @@ function AddUCMO() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h3>UCMO Details</h3>
         <Input
-          placeholder="Search by First Name"
+          placeholder="Search by First Name or CNIC"
           prefix={<SearchOutlined />}
           value={searchTerm}
           onChange={handleSearch}

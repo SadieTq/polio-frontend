@@ -182,10 +182,13 @@ const userID = localStorage.getItem('id');
   // Handle search input change for filtering the table data
   const handleSearch = (value) => {
     const filteredData = flwList.filter((flw) =>
-      flw.firstName.toLowerCase().includes(value.toLowerCase())
+      flw.firstName.toLowerCase().includes(value.toLowerCase()) ||
+      flw.cnic.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredFlwList(filteredData);
   };
+  
+
 
   // Table columns for the FLW data
   const flwColumns = [
@@ -384,10 +387,10 @@ const userID = localStorage.getItem('id');
         <h3>FLW Details</h3>
         {/* Search input with SearchOutlined icon */}
         <Input
-          placeholder="Search by first name"
+          placeholder="Search by First Name Or CNIC"
           onChange={(e) => handleSearch(e.target.value)}
           prefix={<SearchOutlined />}
-          style={{ width: 200 }}
+          style={{ width: 300 }}
         />
       </div>
       <Table dataSource={filteredFlwList} columns={flwColumns} rowKey="_id"  pagination={{ pageSize: 7 }}/>

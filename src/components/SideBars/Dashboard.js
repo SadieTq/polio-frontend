@@ -23,7 +23,7 @@ function Dashboard() {
 
   return (
     <div className="tab-panel">
-        <h2 style={{marginLeft:10}} >Team Data</h2>
+        <h2 style={{marginLeft:10}} >Analytics</h2>
       <Row gutter={[16, 16]}>
         {/* Display cards only if surveyData is available */}
         {surveyData && (
@@ -71,25 +71,25 @@ function Dashboard() {
             </Col>
 
             <Col span={8}>
-              <Card className="custom-card" title="School children count">
+              <Card className="custom-card" title="School Children Vaccinated">
                 {surveyData.school}
               </Card>
             </Col>
 
             <Col span={8}>
-              <Card className="custom-card" title="Street children count">
+              <Card className="custom-card" title="Street Children Vaccinated">
                 {surveyData.street}
               </Card>
             </Col>
 
             <Col span={8}>
-              <Card className="custom-card" title="Guest Children Count">
+              <Card className="custom-card" title="Guest Children Vaccinated">
                 {surveyData.guestChild}
               </Card>
             </Col>
 
             <Col span={8}>
-              <Card className="custom-card" title="Available Children Count">
+              <Card className="custom-card" title="Vaccinated Children in Households">
                 {surveyData.avaibleChild}
               </Card>
             </Col>
