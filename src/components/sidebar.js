@@ -16,9 +16,9 @@ function Sidebar() {
           <li>
             <Link to="/dashboard/team">Team Assignment</Link>
           </li>
-          {/* <li>
-            <Link to="/dashboard/territory">Territory Assignment</Link>
-          </li> */}
+          <li>
+            <Link to="/dashboard/campaign">Campaign Assignment</Link>
+          </li>
          
         </ul>
       </nav>

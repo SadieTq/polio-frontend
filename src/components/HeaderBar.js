@@ -1,5 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IoPowerSharp } from "react-icons/io5";
+import { Tooltip } from 'antd';
 
 function HeaderBar() {
   const navigate = useNavigate();
@@ -12,7 +14,7 @@ function HeaderBar() {
   return (
     <div className="header-bar">
       <p className="logout" onClick={handleLogout} style={{ cursor: 'pointer' }}>
-        Logout
+      <Tooltip title="Sign Out"><IoPowerSharp size={25} style={{ marginRight: '20px' }}/></Tooltip>
       </p>
     </div>
   );

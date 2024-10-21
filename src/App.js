@@ -5,9 +5,10 @@ import HeaderBar from './components/HeaderBar';
 import TabPanel from './components/TabPanel';
 import Sidebar from './components/sidebar';
 import LoginPage from './components/LoginPage';
-import SurveyorManagement from './components/Management/SurveyorManagement';
-import TeamAssignment from './components/Management/TeamAssignment';
-import PrivateRoute from './components/PrivateRoute'; // Import the PrivateRoute component
+import FlwManagement from './components/SideBars/FlwManagement';
+import TeamAssignment from './components/SideBars/TeamAssignment';
+import PrivateRoute from './components/PrivateRoute'; 
+import CampaignManagement from './components/SideBars/CampaignManagement';
 
 function App() {
   return (
@@ -21,8 +22,9 @@ function App() {
               <div className="main-content">
                 <HeaderBar />
                 <Routes>                  
-                  <Route path="flw" element={<SurveyorManagement />} />
+                  <Route path="flw" element={<FlwManagement />} />
                   <Route path="team" element={<TeamAssignment />} />
+                  <Route path="campaign" element={<CampaignManagement />} />
                   <Route path="/" element={<TabPanel />} /> {/* Default dashboard content */}
                 </Routes>
               </div>

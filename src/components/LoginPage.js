@@ -12,6 +12,8 @@ const LoginPage = () => {
 
   useEffect(() => {
     localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    localStorage.removeItem('role');
   }, []);
 
   const handleSubmit = async (e) => {
@@ -27,7 +29,7 @@ const LoginPage = () => {
 
     try {
       // Making the POST request
-      const response = await fetch('https://survey.al-mizan.store/api/auth/login', {
+      const response = await fetch('http://203.161.43.125:4000/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,8 +39,10 @@ const LoginPage = () => {
 
       const data = await response.json();
 
-      if (response.ok && data.token) {
+      if (response.ok && data.token && data.user && data.user.role) { // Check for token and user role
         localStorage.setItem('token', data.token); // Store the token
+        localStorage.setItem('role', data.user.role);   // Store the user role
+        localStorage.setItem('id', data.user.id);   // Store the user id
         navigate('/dashboard');
       } else {
         console.error('Login failed:', data);
