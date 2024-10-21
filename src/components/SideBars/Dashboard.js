@@ -8,7 +8,7 @@ function Dashboard() {
   // Function to fetch survey data
   const fetchSurveyData = async () => {
     try {
-      const response = await fetch('http://203.161.43.125:4000/api/survey/');
+      const response = await fetch('https://survey.al-mizan.store/api/survey/');
       const data = await response.json();
       setSurveyData(data); // Store data in state
     } catch (error) {

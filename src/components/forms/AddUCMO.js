@@ -31,7 +31,7 @@ function AddUCMO() {
   // Fetch Ucmo data on component mount and after form submission
   const fetchUcmoData = async () => {
     try {
-      const response = await fetch('http://203.161.43.125:4000/api/users/all-ucmo');
+      const response = await fetch('https://survey.al-mizan.store/api/users/all-ucmo');
       const data = await response.json();
       setUcmoData(data.body); // Assuming the data is in the body field
       setFilteredData(data.body); // Initialize filteredData to the full dataset
@@ -76,7 +76,7 @@ function AddUCMO() {
     };
 
     try {
-      const response = await fetch('http://203.161.43.125:4000/api/users/add-umco', {
+      const response = await fetch('https://survey.al-mizan.store/api/users/add-umco', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ function AddUCMO() {
     };
   
     try {
-      const response = await fetch(`http://203.161.43.125:4000/api/users/${editingAdmin._id}`, {
+      const response = await fetch(`https://survey.al-mizan.store/api/users/${editingAdmin._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

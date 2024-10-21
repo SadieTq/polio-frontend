@@ -21,7 +21,7 @@ function CampaignManagement() {
 
   const fetchCampData = async () => {
     try {
-      const response = await fetch('http://203.161.43.125:4000/api/campaign');
+      const response = await fetch('https://survey.al-mizan.store/api/campaign');
       const data = await response.json();
       setAicData(data.body);
       setFilteredData(data.body);
@@ -61,8 +61,8 @@ function CampaignManagement() {
 
   const handleStatusToggle = async (checked, record) => {
     const apiUrl = checked
-      ? `http://203.161.43.125:4000/api/campaign/active/${record._id}`
-      : `http://203.161.43.125:4000/api/campaign/inactive/${record._id}`;
+      ? `https://survey.al-mizan.store/api/campaign/active/${record._id}`
+      : `https://survey.al-mizan.store/api/campaign/inactive/${record._id}`;
 
     try {
       const response = await fetch(apiUrl, { method: 'GET' });
@@ -88,7 +88,7 @@ function CampaignManagement() {
     };
 
     try {
-      const response = await fetch('http://203.161.43.125:4000/api/campaign', {
+      const response = await fetch('https://survey.al-mizan.store/api/campaign', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ function CampaignManagement() {
       cancelText: 'No, Cancel',
       onOk() {
         // If confirmed, perform the DELETE request
-        fetch(`http://203.161.43.125:4000/api/campaign/${teamId}`, {
+        fetch(`https://survey.al-mizan.store/api/campaign/${teamId}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',

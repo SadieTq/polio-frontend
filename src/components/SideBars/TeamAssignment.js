@@ -23,28 +23,28 @@ function TeamAssignment() {
   const [refreshKey, setRefreshKey] = useState(0);
   // Fetch data from APIs for the first 4 selects
   useEffect(() => {
-    fetch('http://203.161.43.125:4000/api/division')
+    fetch('https://survey.al-mizan.store/api/division')
       .then(response => response.json())
       .then(data => setDivisions(data.body || []))
       .catch(error => console.error('Error fetching divisions:', error));
 
-    fetch('http://203.161.43.125:4000/api/district')
+    fetch('https://survey.al-mizan.store/api/district')
       .then(response => response.json())
       .then(data => setDistricts(data.body || []))
       .catch(error => console.error('Error fetching districts:', error));
 
-    fetch('http://203.161.43.125:4000/api/tehsil')
+    fetch('https://survey.al-mizan.store/api/tehsil')
       .then(response => response.json())
       .then(data => setTowns(data.body || []))
       .catch(error => console.error('Error fetching towns:', error));
 
-    fetch('http://203.161.43.125:4000/api/uc')
+    fetch('https://survey.al-mizan.store/api/uc')
       .then(response => response.json())
       .then(data => setUcs(data.body || []))
       .catch(error => console.error('Error fetching UCs:', error));
 
     // Fetch UCMO data
-    fetch('http://203.161.43.125:4000/api/users/all-ucmo')
+    fetch('https://survey.al-mizan.store/api/users/all-ucmo')
       .then(response => response.json())
       .then(data => setUCMOs(data.body || []))
       .catch(error => console.error('Error fetching UCMOs:', error));
@@ -55,7 +55,7 @@ function TeamAssignment() {
     setSelectedUCMO(ucmoid);
 
     // Make API call to fetch AICs for the selected UCMO
-    fetch(`http://203.161.43.125:4000/api/users/umco/${ucmoid}/aics`)
+    fetch(`https://survey.al-mizan.store/api/users/umco/${ucmoid}/aics`)
       .then(response => response.json())
       .then(data => setAICs(data.body || []))  // Set AICs
       .catch(error => console.error('Error fetching AICs:', error));
@@ -66,7 +66,7 @@ function TeamAssignment() {
     setSelectedAIC(aicId);
 
     // Make API call to fetch FLWs for the selected AIC
-    fetch(`http://203.161.43.125:4000/api/users/aics/${aicId}/flws`)
+    fetch(`https://survey.al-mizan.store/api/users/aics/${aicId}/flws`)
       .then(response => response.json())
       .then(data => setFLWs(data.body || []))  // Set FLWs
       .catch(error => console.error('Error fetching FLWs:', error));
@@ -94,7 +94,7 @@ function TeamAssignment() {
     };
 
     // POST request to the Add Team API
-    fetch('http://203.161.43.125:4000/api/teams', {
+    fetch('https://survey.al-mizan.store/api/teams', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
