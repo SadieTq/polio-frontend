@@ -9,6 +9,7 @@ import FlwManagement from './components/SideBars/FlwManagement';
 import TeamAssignment from './components/SideBars/TeamAssignment';
 import PrivateRoute from './components/PrivateRoute'; 
 import CampaignManagement from './components/SideBars/CampaignManagement';
+import Dashboard from './components/SideBars/Dashboard';
 
 function App() {
   return (
@@ -21,11 +22,12 @@ function App() {
               <Sidebar />
               <div className="main-content">
                 <HeaderBar />
-                <Routes>                  
+                <Routes>               
+                <Route path="/" element={<Dashboard />} />   
                   <Route path="flw" element={<FlwManagement />} />
                   <Route path="team" element={<TeamAssignment />} />
                   <Route path="campaign" element={<CampaignManagement />} />
-                  <Route path="/" element={<TabPanel />} /> {/* Default dashboard content */}
+                  <Route path="users" element={<TabPanel />} /> 
                 </Routes>
               </div>
             </div>

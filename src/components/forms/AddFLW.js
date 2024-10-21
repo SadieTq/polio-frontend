@@ -29,7 +29,7 @@ const userID = localStorage.getItem('id');
   const fetchAics = async () => {
     setLoading(true);
     try {
-      const response = await fetch('https://survey.al-mizan.store/api/users/all-aic');
+      const response = await fetch('http://203.161.43.125:4000/api/users/all-aic');
       const data = await response.json();
       setAicList(data.body);
       setLoading(false);
@@ -48,7 +48,7 @@ const userID = localStorage.getItem('id');
   const fetchFlwsForTable = async () => {
     setLoading(true);
     try {
-      const response = await fetch('https://survey.al-mizan.store/api/users/all-flw');
+      const response = await fetch('http://203.161.43.125:4000/api/users/all-flw');
       const data = await response.json();
       setFlwList(data.body);
       setFilteredFlwList(data.body); // Initialize the filtered list
@@ -106,7 +106,7 @@ const userID = localStorage.getItem('id');
     };
 
     try {
-      const response = await fetch('https://survey.al-mizan.store/api/users/add-flw', {
+      const response = await fetch('http://203.161.43.125:4000/api/users/add-flw', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -156,7 +156,7 @@ const userID = localStorage.getItem('id');
   };
 
   try {
-    const response = await fetch(`https://survey.al-mizan.store/api/users/${editingAdmin._id}`, {
+    const response = await fetch(`http://203.161.43.125:4000/api/users/${editingAdmin._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -233,12 +233,15 @@ const userID = localStorage.getItem('id');
       <h2>Add FLW</h2>
       <p>Fill in the details below:</p>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+
+  <div className="select-container-team">
+      <div className="select-group-team">
+      <div className="form-group">
           <label>Select AIC</label>
           <Select
   showSearch
   placeholder="Select AIC"
-  style={{ width: '42%' }}
+  style={{ width: '83%' }}
   value={selectedAic} // Bind the selected value for the Add FLW form
   loading={loading}
   onChange={handleSelectAic} // Use handleSelectAic for the Add FLW form
@@ -261,7 +264,9 @@ const userID = localStorage.getItem('id');
   ))}
 </Select>
         </div>
-        <div className="form-group">
+      </div>
+      <div className="select-group-team">
+      <div className="form-group">
           <label>FLW CNIC</label>
           <input
             type="text"
@@ -271,7 +276,13 @@ const userID = localStorage.getItem('id');
             onChange={handleInputChange}
           />
         </div>
-        <div className="form-group">
+     
+      </div>
+     </div>
+
+     <div className="select-container-team">
+      <div className="select-group-team">
+      <div className="form-group">
           <label>First Name</label>
           <input
             type="text"
@@ -281,7 +292,10 @@ const userID = localStorage.getItem('id');
             onChange={handleInputChange}
           />
         </div>
-        <div className="form-group">
+      </div>
+      <div className="select-group-team">
+     
+      <div className="form-group">
           <label>Last Name</label>
           <input
             type="text"
@@ -291,8 +305,12 @@ const userID = localStorage.getItem('id');
             onChange={handleInputChange}
           />
         </div>
-       
-        <div className="form-group">
+      </div>
+     </div>
+
+     <div className="select-container-team">
+      <div className="select-group-team">
+      <div className="form-group">
           <label>Mobile No</label>
           <input
             type="text"
@@ -302,9 +320,10 @@ const userID = localStorage.getItem('id');
             onChange={handleInputChange}
           />
         </div>
-
-
-        <div className="form-group">
+      </div>
+      <div className="select-group-team">
+     
+      <div className="form-group">
           <label>Address (Optional)</label>
           <input
             type="text"
@@ -314,6 +333,18 @@ const userID = localStorage.getItem('id');
             onChange={handleInputChange}
           />
         </div>
+
+     
+      </div>
+     </div>
+
+      
+       
+      
+     
+       
+       
+
 
 
         <div className="form-group">

@@ -97,7 +97,7 @@ nav ul li a {
 }
 
 .form-group input {
-  width: 40%;
+  width: 80%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -162,7 +162,7 @@ button {
 }
 
 .inputLogin {
-  width: 100%;
+  width: 70%;
   padding: 12px;
   margin-bottom: 20px;
   border: 1px solid #ddd;
@@ -172,7 +172,7 @@ button {
 }
 
 .buttonLogin {
-  width: 100%;
+  width: 50%;
   padding: 12px;
   background-color: #2c3e50;
   color: white;
@@ -207,15 +207,55 @@ button {
 
 .select-group-team {
   flex: 1; 
-  margin: 0 10px; 
+  margin: 0 0px; 
 }
 
 .custom-select-team {
-  width: 300px; 
+  width: 85%; 
 }
-
+.custom-select-team2 {
+  width: 29%; 
+}
 .select-group-team label {
   display: block; 
   margin-bottom: 8px;
   margin-left: 0; 
+}
+
+
+.form-group2 {
+  margin-bottom: 15px;
+}
+
+.form-group2 label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group2 input {
+  width: 40%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.custom-card {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); /* Adds shadow */
+  border: 1px solid rgb(17, 17, 22); /* Adds black border */
+  border-radius: 8px; /* Adds slight border radius */
+  transition: transform 0.3s ease; /* Adds a smooth animation */
+}
+
+/* Hover effect */
+.custom-card:hover {
+  transform: translateY(-5px); /* Adds hover effect */
+}
+
+/* Styling the card header */
+.custom-card .ant-card-head {
+  border-bottom: 1px solid rgb(0, 0, 0); /* Changes the bottom border of the card header to black */
+}
+
+.custom-card {
+  background: linear-gradient(45deg, #fbf6fb, #ffffff); /* Purple to blue gradient */
 }

@@ -31,7 +31,7 @@ function AddUCMO() {
   // Fetch Ucmo data on component mount and after form submission
   const fetchUcmoData = async () => {
     try {
-      const response = await fetch('https://survey.al-mizan.store/api/users/all-ucmo');
+      const response = await fetch('http://203.161.43.125:4000/api/users/all-ucmo');
       const data = await response.json();
       setUcmoData(data.body); // Assuming the data is in the body field
       setFilteredData(data.body); // Initialize filteredData to the full dataset
@@ -76,7 +76,7 @@ function AddUCMO() {
     };
 
     try {
-      const response = await fetch('https://survey.al-mizan.store/api/users/add-umco', {
+      const response = await fetch('http://203.161.43.125:4000/api/users/add-umco', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ function AddUCMO() {
     };
   
     try {
-      const response = await fetch(`https://survey.al-mizan.store/api/users/${editingAdmin._id}`, {
+      const response = await fetch(`http://203.161.43.125:4000/api/users/${editingAdmin._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -203,7 +203,10 @@ function AddUCMO() {
       <p>Fill in the details below:</p>
       <form onSubmit={handleSubmit}>
         
-        <div className="form-group">
+
+      <div className="select-container-team">
+      <div className="select-group-team">
+      <div className="form-group">
           <label>UCMO CNIC</label>
           <input
             type="text"
@@ -213,7 +216,9 @@ function AddUCMO() {
             onChange={handleInputChange}
           />
         </div>
-        <div className="form-group">
+      </div>
+      <div className="select-group-team">
+      <div className="form-group">
           <label>First Name</label>
           <input
             type="text"
@@ -223,7 +228,12 @@ function AddUCMO() {
             onChange={handleInputChange}
           />
         </div>
-        <div className="form-group">
+      </div>
+     </div>
+
+     <div className="select-container-team">
+      <div className="select-group-team">
+      <div className="form-group">
           <label>Last Name</label>
           <input
             type="text"
@@ -233,8 +243,10 @@ function AddUCMO() {
             onChange={handleInputChange}
           />
         </div>
-      
-        <div className="form-group">
+      </div>
+      <div className="select-group-team">
+         
+      <div className="form-group">
           <label>Mobile No</label>
           <input
             type="text"
@@ -244,10 +256,12 @@ function AddUCMO() {
             onChange={handleInputChange}
           />
         </div>
+      </div>
+     </div>
 
-       
-
-        <div className="form-group">
+     <div className="select-container-team">
+      <div className="select-group-team">
+      <div className="form-group2">
           <label>Address (Optional)</label>
           <input
             type="text"
@@ -257,6 +271,19 @@ function AddUCMO() {
             onChange={handleInputChange}
           />
         </div>
+      </div>
+     
+     </div>
+
+
+        
+      
+        
+     
+
+       
+
+       
 
         <div className="form-group">
           <label>Gender</label>

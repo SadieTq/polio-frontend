@@ -7,8 +7,14 @@ function Sidebar() {
       <div className="logo">Polio</div>
       <nav>
         <ul>
+        <li>
+            <Link to="/dashboard">Dashboard</Link>
+          </li>
+        <li>
+            <Link to="/dashboard/campaign">Campaign</Link>
+          </li>
           <li>
-            <Link to="/dashboard">User Management</Link>
+            <Link to="/dashboard/users">User Management</Link>
           </li>
           <li>
             <Link to="/dashboard/flw">FLW Management</Link>
@@ -16,9 +22,7 @@ function Sidebar() {
           <li>
             <Link to="/dashboard/team">Team Assignment</Link>
           </li>
-          <li>
-            <Link to="/dashboard/campaign">Campaign Assignment</Link>
-          </li>
+         
          
         </ul>
       </nav>

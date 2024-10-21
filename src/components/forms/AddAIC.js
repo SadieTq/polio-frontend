@@ -30,7 +30,7 @@ function AddAIC() {
   const fetchAICs = async () => {
     setLoading(true);
     try {
-      const response = await fetch('https://survey.al-mizan.store/api/users/all-ucmo');
+      const response = await fetch('http://203.161.43.125:4000/api/users/all-ucmo');
       const data = await response.json();
       setAicList(data.body); 
       setLoading(false);
@@ -43,7 +43,7 @@ function AddAIC() {
   // Fetch AIC data on component mount and after form submission
   const fetchAicData = async () => {
     try {
-      const response = await fetch('https://survey.al-mizan.store/api/users/all-aic');
+      const response = await fetch('http://203.161.43.125:4000/api/users/all-aic');
       const data = await response.json();
       setAicData(data.body); // Assuming the data is in the body field
       setFilteredData(data.body); // Initialize filteredData to the full dataset
@@ -97,7 +97,7 @@ function AddAIC() {
     };
 
     try {
-      const response = await fetch('https://survey.al-mizan.store/api/users/add-aic', {
+      const response = await fetch('http://203.161.43.125:4000/api/users/add-aic', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -145,7 +145,7 @@ function AddAIC() {
     };
   
     try {
-      const response = await fetch(`https://survey.al-mizan.store/api/users/${editingAdmin._id}`, {
+      const response = await fetch(`http://203.161.43.125:4000/api/users/${editingAdmin._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -225,12 +225,17 @@ function AddAIC() {
       <h2>Add AIC</h2>
       <p>Fill in the details below:</p>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+      
+
+
+        <div className="select-container-team">
+      <div className="select-group-team">
+      <div className="form-group">
           <label>Select UCMO</label>
           <Select
   showSearch
   placeholder="Select UCMO"
-  style={{ width: '42%' }}
+  style={{ width: '83%' }}
   onFocus={fetchAICs} // Trigger API call when dropdown is focused
   value={selectedAic} // Bind the selected value to the dropdown
   loading={loading}
@@ -249,7 +254,9 @@ function AddAIC() {
 </Select>
 
         </div>
-        <div className="form-group">
+      </div>
+      <div className="select-group-team">
+      <div className="form-group">
           <label>AIC CNIC</label>
           <input
             type="text"
@@ -259,7 +266,14 @@ function AddAIC() {
             onChange={handleInputChange}
           />
         </div>
-        <div className="form-group">
+     
+      </div>
+     </div>
+
+
+     <div className="select-container-team">
+      <div className="select-group-team">
+      <div className="form-group">
           <label>First Name</label>
           <input
             type="text"
@@ -269,7 +283,9 @@ function AddAIC() {
             onChange={handleInputChange}
           />
         </div>
-        <div className="form-group">
+      </div>
+      <div className="select-group-team">
+      <div className="form-group">
           <label>Last Name</label>
           <input
             type="text"
@@ -279,8 +295,14 @@ function AddAIC() {
             onChange={handleInputChange}
           />
         </div>
-      
-        <div className="form-group">
+     
+      </div>
+     </div>
+
+
+     <div className="select-container-team">
+      <div className="select-group-team">
+      <div className="form-group">
           <label>Mobile No</label>
           <input
             type="text"
@@ -290,8 +312,10 @@ function AddAIC() {
             onChange={handleInputChange}
           />
         </div>
-
-
+      </div>
+      <div className="select-group-team">
+         
+     
         <div className="form-group">
           <label>Address (Optional)</label>
           <input
@@ -302,8 +326,10 @@ function AddAIC() {
             onChange={handleInputChange}
           />
         </div>
+      </div>
+     </div>
 
-        {/* Gender Toggle */}
+
         <div className="form-group">
           <label>Gender</label>
           <Radio.Group

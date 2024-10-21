@@ -12,6 +12,7 @@ function CampaignManagement() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const userID = localStorage.getItem('id');
+  const userRole = localStorage.getItem('role');
   const [formData, setFormData] = useState({
     campaignType: '',
     campaignName: '',
@@ -20,7 +21,7 @@ function CampaignManagement() {
 
   const fetchCampData = async () => {
     try {
-      const response = await fetch('https://survey.al-mizan.store/api/campaign');
+      const response = await fetch('http://203.161.43.125:4000/api/campaign');
       const data = await response.json();
       setAicData(data.body);
       setFilteredData(data.body);
@@ -60,8 +61,8 @@ function CampaignManagement() {
 
   const handleStatusToggle = async (checked, record) => {
     const apiUrl = checked
-      ? `https://survey.al-mizan.store/api/campaign/active/${record._id}`
-      : `https://survey.al-mizan.store/api/campaign/inactive/${record._id}`;
+      ? `http://203.161.43.125:4000/api/campaign/active/${record._id}`
+      : `http://203.161.43.125:4000/api/campaign/inactive/${record._id}`;
 
     try {
       const response = await fetch(apiUrl, { method: 'GET' });
@@ -87,7 +88,7 @@ function CampaignManagement() {
     };
 
     try {
-      const response = await fetch('https://survey.al-mizan.store/api/campaign', {
+      const response = await fetch('http://203.161.43.125:4000/api/campaign', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -121,7 +122,7 @@ function CampaignManagement() {
       cancelText: 'No, Cancel',
       onOk() {
         // If confirmed, perform the DELETE request
-        fetch(`https://survey.al-mizan.store/api/campaign/${teamId}`, {
+        fetch(`http://203.161.43.125:4000/api/campaign/${teamId}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
@@ -178,13 +179,17 @@ function CampaignManagement() {
       title: 'Action',
       key: 'action',
       render: (text, record) => (
-        <Tooltip title="Delete">
+        <Tooltip title={userRole === 'ADMIN' ? "Delete" : "Action Unauthorized"}>
           <MdDelete
-            style={{ marginLeft: '17px', cursor: 'pointer' }}
-            onClick={() => deleteTeam(record._id)} // Use record._id instead of record.key
+            style={{
+              marginLeft: '17px',
+              cursor: userRole === 'ADMIN' ? 'pointer' : 'not-allowed',
+              opacity: userRole === 'ADMIN' ? 1 : 0.5,
+            }}
+            onClick={userRole === 'ADMIN' ? () => deleteTeam(record._id) : null} // Disable click if not ADMIN
           />
         </Tooltip>
-      ),
+      )
     },
   ];
 
@@ -194,7 +199,7 @@ function CampaignManagement() {
         <h2>Add Campaign</h2>
         <p>Fill in the details below:</p>
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
+          <div className="form-group2">
             <label>Select Campaign Type</label>
             <Select
               placeholder="Select Type"
@@ -210,7 +215,7 @@ function CampaignManagement() {
               ))}
             </Select>
           </div>
-          <div className="form-group">
+          <div className="form-group2">
             <label>Campaign Name</label>
             <input
               type="text"
@@ -221,7 +226,7 @@ function CampaignManagement() {
               required
             />
           </div>
-          <div className="form-group">
+          <div className="form-group2">
             <label>Number of Days</label>
             <input
               type="number"

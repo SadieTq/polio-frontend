@@ -27,7 +27,7 @@ const userID = localStorage.getItem('id');
   // Fetch Admin data on component mount
   const fetchAdminData = async () => {
     try {
-      const response = await fetch('https://survey.al-mizan.store/api/users/all-admin');
+      const response = await fetch('http://203.161.43.125:4000/api/users/all-admin');
       const data = await response.json();
       setAdminData(data.body); // Set initial data
       setFilteredData(data.body); // Set filtered data as full dataset initially
@@ -67,7 +67,7 @@ const userID = localStorage.getItem('id');
 
     try {
       // POST request to API
-      const response = await fetch('https://survey.al-mizan.store/api/users/add-admin', {
+      const response = await fetch('http://203.161.43.125:4000/api/users/add-admin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -117,7 +117,7 @@ const userID = localStorage.getItem('id');
     };
   
     try {
-      const response = await fetch(`https://survey.al-mizan.store/api/users/${editingAdmin._id}`, {
+      const response = await fetch(`http://203.161.43.125:4000/api/users/${editingAdmin._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -184,10 +184,17 @@ const userID = localStorage.getItem('id');
   return (
     <>
       <div className="form-container">
+
+  
         <h2>Add Admin</h2>
         <p>Fill in the details below:</p>
         <form onSubmit={handleSubmit}>
-        <div className="form-group">
+
+
+      <div className="select-container-team">
+      <div className="select-group-team">
+
+                <div className="form-group">
             <label>Admin CNIC</label>
             <input
               type="text"
@@ -197,7 +204,12 @@ const userID = localStorage.getItem('id');
               required
             />
           </div>
-          <div className="form-group">
+      </div>
+    
+    
+      <div className="select-group-team">
+
+         <div className="form-group">
             <label>First Name</label>
             <input
               type="text"
@@ -207,7 +219,14 @@ const userID = localStorage.getItem('id');
               required
             />
           </div>
-          <div className="form-group">
+      </div>
+   </div>
+
+
+   <div className="select-container-team">
+
+   <div className="select-group-team">
+     <div className="form-group">
             <label>Last Name</label>
             <input
               type="text"
@@ -217,6 +236,12 @@ const userID = localStorage.getItem('id');
               required
             />
           </div>
+
+   </div>
+
+   <div className="select-group-team">
+
+
           <div className="form-group">
             <label>Mobile No</label>
             <input
@@ -227,9 +252,16 @@ const userID = localStorage.getItem('id');
               required
             />
           </div>
-        
-          <div className="form-group">
-            <label>Street Address (Optional)</label>
+   </div>
+  
+   </div>
+
+ <div className="select-container-team">
+
+   <div className="select-group-team">
+
+<div className="form-group2">
+            <label>Address (Optional)</label>
             <input
               type="text"
               placeholder="e.g. 123 Street Name"
@@ -237,6 +269,15 @@ const userID = localStorage.getItem('id');
               onChange={(e) => setStreet(e.target.value)}
             />
           </div>
+   </div>
+
+
+   </div>
+
+         
+     
+        
+          
 
           {/* Gender Toggle */}
           <div className="form-group">
