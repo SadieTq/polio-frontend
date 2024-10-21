@@ -30,7 +30,7 @@ function AddAIC() {
   const fetchAICs = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://203.161.43.125:4000/api/users/all-ucmo');
+      const response = await fetch('https://survey.al-mizan.store/api/users/all-ucmo');
       const data = await response.json();
       setAicList(data.body); 
       setLoading(false);
@@ -43,7 +43,7 @@ function AddAIC() {
   // Fetch AIC data on component mount and after form submission
   const fetchAicData = async () => {
     try {
-      const response = await fetch('http://203.161.43.125:4000/api/users/all-aic');
+      const response = await fetch('https://survey.al-mizan.store/api/users/all-aic');
       const data = await response.json();
       setAicData(data.body); // Assuming the data is in the body field
       setFilteredData(data.body); // Initialize filteredData to the full dataset
@@ -97,7 +97,7 @@ function AddAIC() {
     };
 
     try {
-      const response = await fetch('http://203.161.43.125:4000/api/users/add-aic', {
+      const response = await fetch('https://survey.al-mizan.store/api/users/add-aic', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -145,7 +145,7 @@ function AddAIC() {
     };
   
     try {
-      const response = await fetch(`http://203.161.43.125:4000/api/users/${editingAdmin._id}`, {
+      const response = await fetch(`https://survey.al-mizan.store/api/users/${editingAdmin._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -29,7 +29,7 @@ const userID = localStorage.getItem('id');
   const fetchAics = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://203.161.43.125:4000/api/users/all-aic');
+      const response = await fetch('https://survey.al-mizan.store/api/users/all-aic');
       const data = await response.json();
       setAicList(data.body);
       setLoading(false);
@@ -48,7 +48,7 @@ const userID = localStorage.getItem('id');
   const fetchFlwsForTable = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://203.161.43.125:4000/api/users/all-flw');
+      const response = await fetch('https://survey.al-mizan.store/api/users/all-flw');
       const data = await response.json();
       setFlwList(data.body);
       setFilteredFlwList(data.body); // Initialize the filtered list
@@ -106,7 +106,7 @@ const userID = localStorage.getItem('id');
     };
 
     try {
-      const response = await fetch('http://203.161.43.125:4000/api/users/add-flw', {
+      const response = await fetch('https://survey.al-mizan.store/api/users/add-flw', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -156,7 +156,7 @@ const userID = localStorage.getItem('id');
   };
 
   try {
-    const response = await fetch(`http://203.161.43.125:4000/api/users/${editingAdmin._id}`, {
+    const response = await fetch(`https://survey.al-mizan.store/api/users/${editingAdmin._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

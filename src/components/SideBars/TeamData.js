@@ -36,7 +36,7 @@ function TeamData({refreshKey}) {
   useEffect(() => {
     fetchTeams();
 
-    fetch('http://203.161.43.125:4000/api/division')
+    fetch('https://survey.al-mizan.store/api/division')
       .then((response) => response.json())
       .then((data) => {
         setDivisions(data.body);
@@ -45,7 +45,7 @@ function TeamData({refreshKey}) {
         console.error('Error fetching divisions:', error);
       });
 
-    fetch('http://203.161.43.125:4000/api/district')
+    fetch('https://survey.al-mizan.store/api/district')
       .then((response) => response.json())
       .then((data) => {
         setDistricts(data.body);
@@ -54,7 +54,7 @@ function TeamData({refreshKey}) {
         console.error('Error fetching districts:', error);
       });
 
-    fetch('http://203.161.43.125:4000/api/tehsil')
+    fetch('https://survey.al-mizan.store/api/tehsil')
       .then((response) => response.json())
       .then((data) => {
         setTehsils(data.body);
@@ -63,7 +63,7 @@ function TeamData({refreshKey}) {
         console.error('Error fetching tehsils:', error);
       });
 
-    fetch('http://203.161.43.125:4000/api/uc')
+    fetch('https://survey.al-mizan.store/api/uc')
       .then((response) => response.json())
       .then((data) => {
         setMauzas(data.body);
@@ -71,7 +71,7 @@ function TeamData({refreshKey}) {
       .catch((error) => {
         console.error('Error fetching UCs:', error);
       });
-      fetch('http://203.161.43.125:4000/api/users/all-ucmo')
+      fetch('https://survey.al-mizan.store/api/users/all-ucmo')
       .then((response) => response.json())
       .then((data) => setUCMOs(data.body))
        .catch((error) => {
@@ -84,7 +84,7 @@ function TeamData({refreshKey}) {
     setSelectedUCMO(ucmoid);
 
     // Make API call to fetch AICs for the selected UCMO
-    fetch(`http://203.161.43.125:4000/api/users/umco/${ucmoid}/aics`)
+    fetch(`https://survey.al-mizan.store/api/users/umco/${ucmoid}/aics`)
       .then(response => response.json())
       .then(data => setAICs(data.body || []))  // Set AICs
       .catch(error => console.error('Error fetching AICs:', error));
@@ -95,14 +95,14 @@ function TeamData({refreshKey}) {
     setSelectedAIC(aicId);
 
     // Make API call to fetch FLWs for the selected AIC
-    fetch(`http://203.161.43.125:4000/api/users/aics/${aicId}/flws`)
+    fetch(`https://survey.al-mizan.store/api/users/aics/${aicId}/flws`)
       .then(response => response.json())
       .then(data => setFLWs(data.body || []))  // Set FLWs
       .catch(error => console.error('Error fetching FLWs:', error));
   };
 
   const fetchTeams = () => {
-    fetch('http://203.161.43.125:4000/api/teams/')
+    fetch('https://survey.al-mizan.store/api/teams/')
       .then((response) => response.json())
       .then((data) => {
         const teams = data.body.map((team) => {
@@ -152,7 +152,7 @@ function TeamData({refreshKey}) {
       ucmo: selectedUCMO,
     };
 
-    fetch(`http://203.161.43.125:4000/api/teams/${teamId}`, {
+    fetch(`https://survey.al-mizan.store/api/teams/${teamId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -187,7 +187,7 @@ function TeamData({refreshKey}) {
   };
 
   const fetchTeamDetails = (teamId) => {
-    fetch(`http://203.161.43.125:4000/api/teams/${teamId}`)
+    fetch(`https://survey.al-mizan.store/api/teams/${teamId}`)
       .then((response) => response.json())
       .then((data) => {
         const { flws, aic, ucmo } = data.body;
@@ -227,7 +227,7 @@ function TeamData({refreshKey}) {
       cancelText: 'No, Cancel',
       onOk() {
         // If confirmed, perform the DELETE request
-        fetch(`http://203.161.43.125:4000/api/teams/${teamId}`, {
+        fetch(`https://survey.al-mizan.store/api/teams/${teamId}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
