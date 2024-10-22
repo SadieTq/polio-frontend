@@ -170,6 +170,16 @@ const userID = localStorage.getItem('id');
       key: 'status',
     },
     {
+      title: 'Created By',
+      dataIndex: ['createdBy', 'firstName'], 
+      key: 'createdby',
+    },
+    {
+      title: 'Updated By',
+      dataIndex: ['updatedBy', 'firstName'], 
+      key: 'createdby',
+    },
+    {
       title: 'Action',
       key: 'action',
       render: (text, record) => (

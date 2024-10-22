@@ -189,6 +189,11 @@ function AddUCMO() {
       key: 'status',
     },
     {
+      title: 'Updated By',
+      dataIndex: ['updatedBy', 'firstName'], 
+      key: 'createdby',
+    },
+    {
       title: 'Action',
       key: 'action',
       render: (text, record) => (

@@ -220,6 +220,21 @@ const userID = localStorage.getItem('id');
       key: 'status',
     },
     {
+      title: 'Created By',
+      dataIndex: ['createdBy', 'firstName'], //Check object name when API is fixed
+      key: 'createdby',
+    },
+    {
+      title: 'Updated By',
+      dataIndex: ['updatedBy', 'firstName'], 
+      key: 'updatedby',
+    },
+    // {
+    //   title: 'Reporting To',
+    //   dataIndex: ['aicDetails', 'firstName'], 
+    //   key: 'createdby',
+    // },
+    {
       title: 'Action',
       key: 'action',
       render: (text, record) => (

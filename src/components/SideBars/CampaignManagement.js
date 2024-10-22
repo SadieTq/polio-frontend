@@ -185,6 +185,11 @@ function CampaignManagement() {
       key: 'numberOfDays',
     },
     {
+      title: 'Created By',
+      dataIndex: ['createdBy', 'firstName'], 
+      key: 'createdby',
+    },
+    {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',

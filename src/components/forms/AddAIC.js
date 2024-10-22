@@ -194,7 +194,7 @@ function AddAIC() {
     {
       title: 'Last Name',
       dataIndex: 'lastName',
-      key: 'firstName',
+      key: 'lastname',
     },
     {
       title: 'CNIC',
@@ -210,6 +210,21 @@ function AddAIC() {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
+    },
+    {
+      title: 'Created By',
+      dataIndex: ['createdBy', 'firstName'], 
+      key: 'createdby',
+    },
+    {
+      title: 'Updated By',
+      dataIndex: ['updatedBy', 'firstName'], 
+      key: 'createdby',
+    },
+    {
+      title: 'Reporting To',
+      dataIndex: ['ucmoDetails', 'firstName'], 
+      key: 'createdby',
     },
     {
       title: 'Action',
