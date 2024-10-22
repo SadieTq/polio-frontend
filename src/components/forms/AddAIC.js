@@ -9,6 +9,7 @@ const { Option } = Select;
 function AddAIC() {
   const [aicList, setAicList] = useState([]); // State for AIC list
   const [loading, setLoading] = useState(false);
+  const [loading1, setLoading1] = useState(false);
   const [selectedAic, setSelectedAic] = useState(null); // UCMO ID
   const [gender, setGender] = useState('MALE'); // State for gender toggle
   const [isEmployee, setIsEmployee] = useState(true); // State for employment status toggle
@@ -17,7 +18,6 @@ function AddAIC() {
     lastName: '',
     cnic: '',
     phone: '',
-    address: '',
   });
 
   const [aicData, setAicData] = useState([]);
@@ -42,6 +42,7 @@ function AddAIC() {
 
   // Fetch AIC data on component mount and after form submission
   const fetchAicData = async () => {
+    setLoading1(true);
     try {
       const response = await fetch('https://survey.al-mizan.store/api/users/all-aic');
       const data = await response.json();
@@ -49,6 +50,10 @@ function AddAIC() {
       setFilteredData(data.body); // Initialize filteredData to the full dataset
     } catch (error) {
       message.error('Failed to fetch AIC data');
+     
+    }
+    finally {
+      setLoading1(false); // Stop loading spinner
     }
   };
 
@@ -86,9 +91,7 @@ function AddAIC() {
 
     const payload = {
       ...formData,
-      address: {
-        street: formData.address,
-      },
+  
       gender: gender,  // Include gender
       isEmployee: isEmployee,  // Include employment status
       qualifications: [], 
@@ -114,7 +117,7 @@ function AddAIC() {
           lastName: '',
           cnic: '',
           phone: '',
-          address: '',
+    
         });
         setSelectedAic(null); // Clear the UCMO dropdown selection
         setGender('MALE');  // Reset gender to default
@@ -135,9 +138,7 @@ function AddAIC() {
       firstName: editingAdmin.firstName,
       lastName: editingAdmin.lastName,
       phone: editingAdmin.phone,
-      address: {
-        street: editingAdmin.address?.street,
-      },
+     
       status: editingAdmin.status,
       isEmployee: editingAdmin.isEmployee,
       updatedBy:userID,
@@ -188,6 +189,11 @@ function AddAIC() {
     {
       title: 'First Name',
       dataIndex: 'firstName',
+      key: 'firstName',
+    },
+    {
+      title: 'Last Name',
+      dataIndex: 'lastName',
       key: 'firstName',
     },
     {
@@ -320,16 +326,7 @@ function AddAIC() {
       <div className="select-group-team">
          
      
-        <div className="form-group">
-          <label>Address (Optional)</label>
-          <input
-            type="text"
-            name="address"
-            placeholder="e.g. 123 Street Name"
-            value={formData.address}
-            onChange={handleInputChange}
-          />
-        </div>
+      
       </div>
      </div>
 
@@ -365,7 +362,7 @@ function AddAIC() {
 
     <div className="form-container">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h3>UCMO Details</h3>
+        <h3>AIC Details</h3>
         <Input
           placeholder="Search by First Name Or CNIC"
           prefix={<SearchOutlined />}
@@ -374,12 +371,14 @@ function AddAIC() {
           style={{ width: 300 }}
         />
       </div>
+      <Spin spinning={loading1}>
       <Table
         dataSource={filteredData}
         columns={aicColumns}
         rowKey="_id" 
         pagination={{ pageSize: 7 }}
       />
+      </Spin>
     </div>
 
     <Modal
@@ -452,14 +451,7 @@ function AddAIC() {
         required
       />
     </div>
-    <div className="form-group">
-      <label>Street Address (Optional)</label>
-      <input
-        type="text"
-        value={editingAdmin?.address?.street || ''}
-        onChange={(e) => setEditingAdmin({ ...editingAdmin, address: { ...editingAdmin.address, street: e.target.value } })}
-      />
-    </div>
+    
     <div className="form-group">
       <label>Update Password (Optional)</label>
       <input

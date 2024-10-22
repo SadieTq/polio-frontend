@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Select, message, Table, Divider, Input, Switch, Tooltip, Modal } from 'antd';
+import { Button, Select, message, Table, Divider, Input, Switch, Tooltip, Modal, Spin, Form } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { MdDelete } from "react-icons/md";
 
@@ -20,6 +20,7 @@ function CampaignManagement() {
   });
 
   const fetchCampData = async () => {
+    setLoading(true);
     try {
       const response = await fetch('https://survey.al-mizan.store/api/campaign');
       const data = await response.json();
@@ -27,6 +28,9 @@ function CampaignManagement() {
       setFilteredData(data.body);
     } catch (error) {
       message.error('Failed to fetch Campaign data');
+    }
+    finally {
+      setLoading(false); // Stop loading spinner
     }
   };
 
@@ -63,30 +67,45 @@ function CampaignManagement() {
     const apiUrl = checked
       ? `https://survey.al-mizan.store/api/campaign/active/${record._id}`
       : `https://survey.al-mizan.store/api/campaign/inactive/${record._id}`;
-
+  
+    // Find the active campaign and its page number
+    const activeCampaign = aicData.find(item => item.status === 'ACTIVE');
+    const activeCampaignPage = activeCampaign
+      ? Math.floor(aicData.indexOf(activeCampaign) / 7) + 1 // Calculate page number based on pagination (7 items per page)
+      : null;
+  
     try {
       const response = await fetch(apiUrl, { method: 'GET' });
+  
       if (response.ok) {
         message.success(`Campaign ${checked ? 'activated' : 'inactivated'} successfully`);
         fetchCampData();
-      } else {
-        message.error(`Only one campaign can be active!`);
+      } else if (activeCampaign) {
+        // Show confirm popup with the active campaign's name and page number
+        Modal.confirm({
+          title: 'Campaign Activation Error',
+          content: `The campaign "${activeCampaign.campaignName}" is already active on page ${activeCampaignPage}. Please deactivate it first.`,
+          okText: 'OK',
+          cancelText: 'Cancel',
+          onOk() {
+            // Close the modal automatically when "OK" is pressed
+          },
+        });
       }
     } catch (error) {
       message.error('An error occurred while changing the status');
     }
   };
+  
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
     const payload = {
       campaignName: formData.campaignName,
       numberOfDays: parseInt(formData.numberOfDays, 10),
       campaignType: formData.campaignType,
-      createdBy:userID
+      createdBy: userID
     };
-
+  
     try {
       const response = await fetch('https://survey.al-mizan.store/api/campaign', {
         method: 'POST',
@@ -95,7 +114,7 @@ function CampaignManagement() {
         },
         body: JSON.stringify(payload),
       });
-
+  
       if (response.ok) {
         message.success('Campaign added successfully');
         fetchCampData();
@@ -111,6 +130,7 @@ function CampaignManagement() {
       message.error('An error occurred while adding the campaign');
     }
   };
+  
 
   const deleteTeam = (teamId) => {
     // Show Ant Design confirmation modal
@@ -198,22 +218,32 @@ function CampaignManagement() {
       <div className="form-container">
         <h2>Add Campaign</h2>
         <p>Fill in the details below:</p>
-        <form onSubmit={handleSubmit}>
+     
+     
+     
+        <Form layout="vertical" onFinish={handleSubmit} requiredMark="optional">
           <div className="form-group2">
             <label>Select Campaign Type</label>
-            <Select
-              placeholder="Select Type"
-              style={{ width: '42%' }}
-              loading={loading}
-              value={formData.campaignType || undefined}
-              onChange={handleCampaignTypeChange}
-            >
-              {['SNID', 'NID', 'OBR', 'CR'].map(type => (
-                <Option key={type} value={type}>
-                  {type}
-                </Option>
-              ))}
-            </Select>
+            <Form.Item
+  label="Campaign Type"
+  name="campaignType"
+  rules={[{ required: true, message: 'Please select a campaign type' }]}
+>
+  <Select
+    placeholder="Select Type"
+    style={{ width: '42%' }}
+    loading={loading}
+    value={formData.campaignType || undefined}
+    onChange={handleCampaignTypeChange}
+  >
+    {['SNID', 'NID', 'OBR', 'CR'].map(type => (
+      <Option key={type} value={type}>
+        {type}
+      </Option>
+    ))}
+  </Select>
+</Form.Item>
+
           </div>
           <div className="form-group2">
             <label>Campaign Name</label>
@@ -227,19 +257,27 @@ function CampaignManagement() {
             />
           </div>
           <div className="form-group2">
-            <label>Number of Days</label>
-            <input
-              type="number"
-              name="numberOfDays"
-              placeholder="e.g. 30"
-              value={formData.numberOfDays}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
+  <label>Number of Days</label>
+  <input
+    type="number"
+    name="numberOfDays"
+    placeholder="e.g. 30"
+    value={formData.numberOfDays}
+    onChange={(e) => {
+      const value = e.target.value;
+      if (value > 0) {
+        handleInputChange(e);
+      } else {
+        message.error('Number of days must be greater than 0');
+      }
+    }}
+    required
+  />
+</div>
+
 
           <Button type="primary" htmlType="submit">Add Campaign</Button>
-        </form>
+        </Form>
       </div>
 
       <Divider style={{ marginTop: '20px' }} />
@@ -255,15 +293,28 @@ function CampaignManagement() {
             style={{ width: 300 }}
           />
         </div>
+        <Spin spinning={loading}>
         <Table
           dataSource={filteredData}
           columns={aicColumns}
           rowKey="_id"
           pagination={{ pageSize: 7 }}
         />
+        </Spin>
       </div>
     </div>
   );
 }
 
 export default CampaignManagement;
+
+
+
+
+
+
+
+
+
+
+

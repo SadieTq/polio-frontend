@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Col, Row, message } from 'antd';
+import { Card, Col, Row, message, Spin } from 'antd';
 
 
 function Dashboard() {
   const [surveyData, setSurveyData] = useState(null); // To store the survey data
+  const [loading, setLoading] = useState(false); // Loading state for spinner
 
   // Function to fetch survey data
   const fetchSurveyData = async () => {
+    setLoading(true);
     try {
       const response = await fetch('https://survey.al-mizan.store/api/survey/');
       const data = await response.json();
       setSurveyData(data); // Store data in state
     } catch (error) {
       message.error('Failed to fetch survey data');
+    }
+    finally {
+      setLoading(false); // Stop loading spinner
     }
   };
 
@@ -23,14 +28,15 @@ function Dashboard() {
 
   return (
     <div className="tab-panel">
-        <h2 style={{marginLeft:10}} >Analytics</h2>
+      <Spin spinning={loading}>
+        <h2 style={{marginLeft:10}} >Team Data</h2>
       <Row gutter={[16, 16]}>
         {/* Display cards only if surveyData is available */}
         {surveyData && (
           <>
 
 <Col span={8}>
-              <Card className="custom-card" title="Total vaccinated today">
+              <Card className="custom-card" title="Total Vaccinated">
                 {surveyData.total}
               </Card>
             </Col>
@@ -53,7 +59,7 @@ function Dashboard() {
             </Col>
 
             <Col span={8}>
-              <Card className="custom-card" title="Team visited after 2PM">
+              <Card className="custom-card" title="Team revisited after 2PM">
                 {surveyData.visitsAfter2PMCount}
               </Card>
             </Col>
@@ -71,25 +77,25 @@ function Dashboard() {
             </Col>
 
             <Col span={8}>
-              <Card className="custom-card" title="School Children Vaccinated">
+              <Card className="custom-card" title="School children count">
                 {surveyData.school}
               </Card>
             </Col>
 
             <Col span={8}>
-              <Card className="custom-card" title="Street Children Vaccinated">
+              <Card className="custom-card" title="Street children count">
                 {surveyData.street}
               </Card>
             </Col>
 
             <Col span={8}>
-              <Card className="custom-card" title="Guest Children Vaccinated">
+              <Card className="custom-card" title="Guest Children Count">
                 {surveyData.guestChild}
               </Card>
             </Col>
 
             <Col span={8}>
-              <Card className="custom-card" title="Vaccinated Children in Households">
+              <Card className="custom-card" title="Available Children Count">
                 {surveyData.avaibleChild}
               </Card>
             </Col>
@@ -109,7 +115,7 @@ function Dashboard() {
             </Col>
           </>
         )}
-      </Row>
+      </Row></Spin>
     </div>
   );
 }

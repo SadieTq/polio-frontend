@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, message, Table, Divider, Input, Radio, Tooltip, Modal  } from 'antd';
+import { Button, message, Table, Divider, Input, Radio, Tooltip, Modal, Spin  } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { FaEdit } from 'react-icons/fa';
 
@@ -10,7 +10,7 @@ function AddAdmin() {
   const [lastName, setLastName] = useState('');
   const [mobileNo, setMobileNo] = useState('');
   const [street, setStreet] = useState('');
-  
+  const [loading, setLoading] = useState(false);
   // State for gender and employment status
   const [gender, setGender] = useState('MALE'); // Default value 'MALE'
   const [isEmployee, setIsEmployee] = useState(true); // Default value true (Employed)
@@ -26,6 +26,7 @@ const [editingAdmin, setEditingAdmin] = useState(null); // Holds the admin data 
 const userID = localStorage.getItem('id');
   // Fetch Admin data on component mount
   const fetchAdminData = async () => {
+    setLoading(true);
     try {
       const response = await fetch('https://survey.al-mizan.store/api/users/all-admin');
       const data = await response.json();
@@ -33,6 +34,9 @@ const userID = localStorage.getItem('id');
       setFilteredData(data.body); // Set filtered data as full dataset initially
     } catch (error) {
       message.error('Failed to fetch Admin data');
+    }
+    finally {
+      setLoading(false); // Stop loading spinner
     }
   };
 
@@ -58,9 +62,7 @@ const userID = localStorage.getItem('id');
       lastName,
       cnic,
       phone: mobileNo,
-      address: {
-        street,
-      },
+    
       gender, // MALE or FEMALE
       isEmployee, // true or false
       createdBy: userID
@@ -108,9 +110,7 @@ const userID = localStorage.getItem('id');
       firstName: editingAdmin.firstName,
       lastName: editingAdmin.lastName,
       phone: editingAdmin.phone,
-      address: {
-        street: editingAdmin.address?.street,
-      },
+    
       status: editingAdmin.status,
       isEmployee: editingAdmin.isEmployee,
       updatedBy: userID,
@@ -147,6 +147,11 @@ const userID = localStorage.getItem('id');
     {
       title: 'First Name',
       dataIndex: 'firstName',
+      key: 'firstName',
+    },
+    {
+      title: 'Last Name',
+      dataIndex: 'lastName',
       key: 'firstName',
     },
     {
@@ -261,15 +266,7 @@ const userID = localStorage.getItem('id');
 
    <div className="select-group-team">
 
-<div className="form-group2">
-            <label>Address (Optional)</label>
-            <input
-              type="text"
-              placeholder="e.g. 123 Street Name"
-              value={street}
-              onChange={(e) => setStreet(e.target.value)}
-            />
-          </div>
+
    </div>
 
 
@@ -317,7 +314,9 @@ const userID = localStorage.getItem('id');
         </div>
 
         {/* Admin Table */}
+        <Spin spinning={loading}>
         <Table dataSource={filteredData} columns={adminColumns} rowKey="_id"  pagination={{ pageSize: 7 }} />
+        </Spin>
       </div>
 
       <Modal
@@ -364,14 +363,7 @@ const userID = localStorage.getItem('id');
         required
       />
     </div>
-    <div className="form-group">
-      <label>Street Address (Optional)</label>
-      <input
-        type="text"
-        value={editingAdmin?.address?.street || ''}
-        onChange={(e) => setEditingAdmin({ ...editingAdmin, address: { ...editingAdmin.address, street: e.target.value } })}
-      />
-    </div>
+   
     <div className="form-group">
       <label>Update Password (Optional)</label>
       <input

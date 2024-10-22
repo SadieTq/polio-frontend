@@ -16,7 +16,6 @@ function AddUCMO() {
     lastName: '',
     cnic: '',
     phone: '',
-    address: '',
   });
 
   const [UcmoData, setUcmoData] = useState([]);
@@ -25,11 +24,13 @@ function AddUCMO() {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [editingAdmin, setEditingAdmin] = useState(null); // Holds the admin data to edit
   const userID = localStorage.getItem('id');
+  
   // Function to fetch the list of Ucmos (UCMOs)
  
 
   // Fetch Ucmo data on component mount and after form submission
   const fetchUcmoData = async () => {
+    setLoading(true);
     try {
       const response = await fetch('https://survey.al-mizan.store/api/users/all-ucmo');
       const data = await response.json();
@@ -37,6 +38,9 @@ function AddUCMO() {
       setFilteredData(data.body); // Initialize filteredData to the full dataset
     } catch (error) {
       message.error('Failed to fetch Ucmo data');
+    }
+    finally {
+      setLoading(false); // Stop loading spinner
     }
   };
 
@@ -65,9 +69,7 @@ function AddUCMO() {
 
     const payload = {
       ...formData,
-      address: {
-        street: formData.address,
-      },
+      
       gender: gender,  // Include gender
       isEmployee: isEmployee,
       createdBy: userID
@@ -83,7 +85,7 @@ function AddUCMO() {
         },
         body: JSON.stringify(payload),
       });
-
+      const data = await response.json();
       if (response.ok) {
         message.success('Ucmo added successfully');
 
@@ -93,7 +95,7 @@ function AddUCMO() {
           lastName: '',
           cnic: '',
           phone: '',
-          address: '',
+
         });
         setSelectedUcmo(null); // Clear the UCMO dropdown selection
         setGender('MALE');  // Reset gender to default
@@ -102,7 +104,7 @@ function AddUCMO() {
         // Fetch updated Ucmo data to refresh the table
         fetchUcmoData();
       } else {
-        message.error('Failed to add Ucmo');
+        message.error('Failed to add Ucmo' + data.message);
       }
     } catch (error) {
       message.error('An error occurred while adding Ucmo');
@@ -128,9 +130,7 @@ function AddUCMO() {
       firstName: editingAdmin.firstName,
       lastName: editingAdmin.lastName,
       phone: editingAdmin.phone,
-      address: {
-        street: editingAdmin.address?.street,
-      },
+     
       status: editingAdmin.status,
       isEmployee: editingAdmin.isEmployee,
       updatedBy: userID,
@@ -166,6 +166,11 @@ function AddUCMO() {
     {
       title: 'First Name',
       dataIndex: 'firstName',
+      key: 'firstName',
+    },
+    {
+      title: 'Last Name',
+      dataIndex: 'lastName',
       key: 'firstName',
     },
     {
@@ -263,21 +268,7 @@ function AddUCMO() {
       </div>
      </div>
 
-     <div className="select-container-team">
-      <div className="select-group-team">
-      <div className="form-group2">
-          <label>Address (Optional)</label>
-          <input
-            type="text"
-            name="address"
-            placeholder="e.g. 123 Street Name"
-            value={formData.address}
-            onChange={handleInputChange}
-          />
-        </div>
-      </div>
-     
-     </div>
+    
 
 
         
@@ -329,12 +320,13 @@ function AddUCMO() {
           style={{ width: 300 }}
         />
       </div>
+      <Spin spinning={loading}>
       <Table
         dataSource={filteredData}
         columns={UcmoColumns}
         rowKey="_id" 
         pagination={{ pageSize: 7 }}
-      />
+      /></Spin>
     </div>
 
     <Modal
@@ -381,14 +373,7 @@ function AddUCMO() {
         required
       />
     </div>
-    <div className="form-group">
-      <label>Street Address (Optional)</label>
-      <input
-        type="text"
-        value={editingAdmin?.address?.street || ''}
-        onChange={(e) => setEditingAdmin({ ...editingAdmin, address: { ...editingAdmin.address, street: e.target.value } })}
-      />
-    </div>
+  
 
     <div className="form-group">
       <label>Update Password (Optional)</label>

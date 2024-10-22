@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Input, Modal, Select, Button, message,Tooltip,Descriptions, Typography, Divider  } from 'antd';
-import { FaUserEdit, FaEdit, FaRegNewspaper  } from 'react-icons/fa';
+import { Table, Input, Modal, Select, Button, message,Tooltip,Descriptions, Typography, Spin } from 'antd';
+import { FaUserEdit, FaEdit  } from 'react-icons/fa';
 import { MdDelete } from "react-icons/md";
+import { SearchOutlined } from '@ant-design/icons';
 const { Title, Text } = Typography;
 const { Search } = Input;
 const { Option } = Select;
@@ -27,6 +28,10 @@ function TeamData({refreshKey}) {
   const [selectedUCMO, setSelectedUCMO] = useState(null);
   const [selectedAIC, setSelectedAIC] = useState(null);
   const [selectedFLWs, setSelectedFLWs] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(''); // State for search input
+  const [UcmoData, setUcmoData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]); // Filtered data for table
+  const [loading, setLoading] = useState(false); // Loading state for spinner
 
   useEffect(() => {
     fetchTeams();
@@ -89,7 +94,17 @@ function TeamData({refreshKey}) {
       .then(data => setAICs(data.body || []))  // Set AICs
       .catch(error => console.error('Error fetching AICs:', error));
   };
-
+  const handleSearch = (e) => {
+    const value = e.target.value.toLowerCase();
+    setSearchTerm(value);
+  
+    // Filter UcmoData by both firstName and cnic
+    const filtered = dataSource.filter(item =>
+      item.teamName.toLowerCase().includes(value)
+    );
+    
+    setFilteredData(filtered);
+  };
 
   const handleAICChange = (aicId) => {
     setSelectedAIC(aicId);
@@ -101,30 +116,34 @@ function TeamData({refreshKey}) {
       .catch(error => console.error('Error fetching FLWs:', error));
   };
 
-  const fetchTeams = () => {
-    fetch('https://survey.al-mizan.store/api/teams/')
-      .then((response) => response.json())
-      .then((data) => {
-        const teams = data.body.map((team) => {
-          const firstName = team.flws[0]?.firstName || '';
-          const lastName = team.flws[0]?.lastName || '';
-          const name = firstName && lastName ? `${firstName} ${lastName}` : 'Unavailable';
-
-          return {
-            key: team._id,
-            teamName: team.teamName,
-            district: team.territory.district,
-            division: team.territory.division,
-            town: team.territory.tehsilOrTown,
-            uc: team.territory.uc,
-          };
-        });
-        setDataSource(teams);
-      })
-      .catch((error) => {
-        console.error('Error fetching team data:', error);
+  const fetchTeams = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('https://survey.al-mizan.store/api/teams/');
+      const data = await response.json();
+      const teams = data.body.map((team) => {
+        const firstName = team.flws[0]?.firstName || '';
+        const lastName = team.flws[0]?.lastName || '';
+        const name = firstName && lastName ? `${firstName} ${lastName}` : 'Unavailable';
+  
+        return {
+          key: team._id,
+          teamName: team.teamName,
+          district: team.territory.district,
+          division: team.territory.division,
+          town: team.territory.tehsilOrTown,
+          uc: team.territory.uc,
+        };
       });
+      setDataSource(teams);
+      setFilteredData(teams); // Initialize filteredData with full data
+    } catch (error) {
+      console.error('Error fetching team data:', error);
+    } finally {
+      setLoading(false); // Stop loading spinner
+    }
   };
+  
 
   const showEditModal = (team) => {
     setSelectedTeam(team);
@@ -308,23 +327,35 @@ function TeamData({refreshKey}) {
     },
   ];
 
-  const onSearch = (value) => {
-    console.log(value);
-  };
+
 
   return (
     <div className="team-container" style={{ padding: '20px' }}>
-      <h2>Team Data</h2>
-      <p>Assign territories to teams</p>
+     
+     <h2>Team Data</h2>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 
-      {/* <Search
-        placeholder="Search by Surveyor Name"
-        onSearch={onSearch}
-        style={{ width: 300, marginBottom: '20px' }}
-      /> */}
+           
+      
+        <p>Assign territories to teams</p>
+        <Input
+          placeholder="Search by Team Name"
+          prefix={<SearchOutlined />}
+          value={searchTerm}
+          onChange={handleSearch}
+          style={{ width: 300 }}
+        />
+      
 
-      <Table dataSource={dataSource} columns={columns} pagination={true} />
 
+    
+      </div>
+  
+      
+
+      <Spin spinning={loading}>
+      <Table dataSource={filteredData} columns={columns} pagination={true} />
+      </Spin>
       <Modal
         title="Select Territory"
         visible={isModalVisible}

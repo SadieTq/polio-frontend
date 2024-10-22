@@ -256,6 +256,3 @@ button {
   border-bottom: 1px solid rgb(0, 0, 0); /* Changes the bottom border of the card header to black */
 }
 
-.custom-card {
-  background: linear-gradient(45deg, #fbf6fb, #ffffff); /* Purple to blue gradient */
-}

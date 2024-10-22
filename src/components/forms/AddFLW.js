@@ -55,7 +55,9 @@ const userID = localStorage.getItem('id');
       setLoading(false);
     } catch (error) {
       message.error('Failed to fetch FLW data');
-      setLoading(false);
+    }
+    finally {
+      setLoading(false); // Stop loading spinner
     }
   };
 
@@ -163,14 +165,14 @@ const userID = localStorage.getItem('id');
       },
       body: JSON.stringify(payload),
     });
-
+    const data = await response.json();
     if (response.ok) {
       message.success('Admin updated successfully!');
       fetchFlwsForTable(); // Refresh data
       setIsEditModalVisible(false); // Close modal
       
     } else {
-      message.error('Failed to update admin');
+      message.error('Failed to update admin' + data.message);
     }
   } catch (error) {
     message.error('An error occurred while updating the admin');
@@ -195,6 +197,11 @@ const userID = localStorage.getItem('id');
     {
       title: 'First Name',
       dataIndex: 'firstName',
+      key: 'firstName',
+    },
+    {
+      title: 'Last Name',
+      dataIndex: 'lastName',
       key: 'firstName',
     },
     {
@@ -393,8 +400,9 @@ const userID = localStorage.getItem('id');
           style={{ width: 300 }}
         />
       </div>
+      <Spin spinning={loading}>
       <Table dataSource={filteredFlwList} columns={flwColumns} rowKey="_id"  pagination={{ pageSize: 7 }}/>
-
+</Spin>
     </div>
 
 
