@@ -39,7 +39,7 @@ function TeamData({refreshKey}) {
 
 
   useEffect(() => {
-    fetchTeams();
+ 
 
     fetch('https://survey.al-mizan.store/api/division')
       .then((response) => response.json())
@@ -214,7 +214,7 @@ function TeamData({refreshKey}) {
         // Store all FLW details
         const teamMembers = flws.map((flw) => ({
           firstName: flw.firstName || 'Unavailable',
-          lastName: flw.lastName || 'Unavailable',
+          lastName: flw.lastName || '',
           cnic: flw.cnic || 'Unavailable',
           phone: flw.phone || 'Unavailable',
           role: flw.role || 'Unavailable',
