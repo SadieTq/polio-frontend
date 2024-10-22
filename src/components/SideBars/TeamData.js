@@ -124,7 +124,7 @@ function TeamData({refreshKey}) {
       const teams = data.body.map((team) => {
         const firstName = team.flws[0]?.firstName || '';
         const lastName = team.flws[0]?.lastName || '';
-        const name = firstName && lastName ? `${firstName} ${lastName}` : 'Unavailable';
+        const name = firstName && lastName ? `${firstName} ${lastName}` : '';
   
         return {
           key: team._id,
