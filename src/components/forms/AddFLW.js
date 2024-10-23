@@ -251,6 +251,16 @@ function AddFLW() {
       },
     },
     {
+      title: "Team",
+      key: "reportingTo",
+      render: (text, record) => {
+        
+        return record.teams && record.teams.length > 0 && record.teams[0].aicDetails
+          ? record.teams[0].teamName
+          : "Not Assigned"; // 
+      },
+    },
+    {
       title: "Action",
       key: "action",
       render: (text, record) => (
