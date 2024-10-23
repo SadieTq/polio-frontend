@@ -5,7 +5,6 @@ import AddUCMO from './forms/AddUCMO';
 import AddAIC from './forms/AddAIC';
 import { useNavigate } from 'react-router-dom';
 
-
 const { TabPane } = Tabs;
 
 function TabPanel() {
@@ -18,22 +17,17 @@ function TabPanel() {
     const userRole = localStorage.getItem('role');
     setRole(userRole);
 
-    // Set the default active tab based on roles
+    // Only ADMIN role should have access
     if (userRole === 'ADMIN') {
       setActiveKey("1");
-    } else if (userRole === 'UCMO') {
-      setActiveKey("2");
-    } else if (userRole === 'AIC') {
-      setActiveKey("3");
-    } else if (userRole === 'FLW') {
+    } else {
       setIsModalVisible(true); // Show modal if user is not authorized
     }
   }, [navigate]);
 
   const handleModalOk = () => {
-  navigate('/');
-  setIsModalVisible(false);
-    
+    navigate('/');
+    setIsModalVisible(false);
   };
 
   return (
@@ -45,39 +39,23 @@ function TabPanel() {
         onOk={handleModalOk}
         onCancel={handleModalOk}
       >
-        <p>Sorry, you are not authorized</p>
+        <p>Sorry, you do not have access</p>
       </Modal>
 
-      <Tabs activeKey={activeKey} onChange={(key) => setActiveKey(key)}>
-        {role === 'ADMIN' && (
-          <>
-            <TabPane tab="Add Admin" key="1">
-              <AddAdmin />
-            </TabPane>
-            <TabPane tab="Add UCMO" key="2">
-              <AddUCMO />
-            </TabPane>
-            <TabPane tab="Add AIC" key="3">
-              <AddAIC />
-            </TabPane>
-          </>
-        )}
-        {role === 'UCMO' && (
-          <>
-            <TabPane tab="Add UCMO" key="2">
-              <AddUCMO />
-            </TabPane>
-            <TabPane tab="Add AIC" key="3">
-              <AddAIC />
-            </TabPane>
-          </>
-        )}
-        {role === 'AIC' && (
+      {/* Only render tabs if role is ADMIN */}
+      {role === 'ADMIN' && (
+        <Tabs activeKey={activeKey} onChange={(key) => setActiveKey(key)}>
+          <TabPane tab="Add Admin" key="1">
+            <AddAdmin />
+          </TabPane>
+          <TabPane tab="Add UCMO" key="2">
+            <AddUCMO />
+          </TabPane>
           <TabPane tab="Add AIC" key="3">
             <AddAIC />
           </TabPane>
-        )}
-      </Tabs>
+        </Tabs>
+      )}
     </div>
   );
 }

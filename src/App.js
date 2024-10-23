@@ -23,11 +23,11 @@ function App() {
               <div className="main-content">
                 <HeaderBar />
                 <Routes>               
-                <Route path="/" element={<Dashboard />} />   
+                <Route path="stats" element={<Dashboard />} />   
                   <Route path="flw" element={<FlwManagement />} />
                   <Route path="team" element={<TeamAssignment />} />
                   <Route path="campaign" element={<CampaignManagement />} />
-                  <Route path="users" element={<TabPanel />} /> 
+                  <Route path="/" element={<TabPanel />} /> 
                 </Routes>
               </div>
             </div>
