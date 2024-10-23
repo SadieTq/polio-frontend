@@ -5,6 +5,7 @@ import AddUCMO from './forms/AddUCMO';
 import AddAIC from './forms/AddAIC';
 import { useNavigate } from 'react-router-dom';
 
+
 const { TabPane } = Tabs;
 
 function TabPanel() {
@@ -17,7 +18,7 @@ function TabPanel() {
     const userRole = localStorage.getItem('role');
     setRole(userRole);
 
-    // Set the default active tab based on role
+    // Set the default active tab based on roles
     if (userRole === 'ADMIN') {
       setActiveKey("1");
     } else if (userRole === 'UCMO') {
