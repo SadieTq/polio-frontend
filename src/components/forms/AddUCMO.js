@@ -212,25 +212,27 @@ function AddUCMO() {
       <div className="select-container-team">
       <div className="select-group-team">
       <div className="form-group">
-          <label>UCMO CNIC</label>
+          <label>UCMO CNIC<span style={{ color: "red" }}>*</span></label>
           <input
             type="text"
             name="cnic"
             placeholder="e.g. 1234512345678"
             value={formData.cnic}
             onChange={handleInputChange}
+            required
           />
         </div>
       </div>
       <div className="select-group-team">
       <div className="form-group">
-          <label>First Name</label>
+          <label>First Name<span style={{ color: "red" }}>*</span></label>
           <input
             type="text"
             name="firstName"
             placeholder="e.g. Saad"
             value={formData.firstName}
             onChange={handleInputChange}
+            required
           />
         </div>
       </div>
@@ -241,19 +243,20 @@ function AddUCMO() {
       <div className="select-group-team">
          
       <div className="form-group">
-          <label>Mobile No</label>
+          <label>Mobile No<span style={{ color: "red" }}>*</span></label>
           <input
             type="text"
             name="phone"
             placeholder="e.g. 03001234567"
             value={formData.phone}
             onChange={handleInputChange}
+            required
           />
         </div>
       </div>
       <div className="select-group-team">
       <div className="form-group">
-          <label>Last Name</label>
+          <label>Last Name<span style={{ color: "red" }}>*</span></label>
           <input
             type="text"
             name="lastName"
@@ -278,7 +281,6 @@ function AddUCMO() {
           </Radio.Group>
         </div>
 
-        {/* Employment Status Toggle */}
         <div className="form-group">
           <label>Employment Status</label>
           <Radio.Group
@@ -334,7 +336,7 @@ function AddUCMO() {
   <form>
   
     <div className="form-group">
-      <label>First Name</label>
+      <label>First Name<span style={{ color: "red" }}>*</span></label>
       <input
         type="text"
         value={editingAdmin?.firstName || ''}
@@ -343,7 +345,7 @@ function AddUCMO() {
       />
     </div>
     <div className="form-group">
-      <label>Last Name</label>
+      <label>Last Name<span style={{ color: "red" }}>*</span></label>
       <input
         type="text"
         value={editingAdmin?.lastName || ''}
@@ -352,7 +354,7 @@ function AddUCMO() {
       />
     </div>
     <div className="form-group">
-      <label>Mobile No</label>
+      <label>Mobile No<span style={{ color: "red" }}>*</span></label>
       <input
         type="text"
         value={editingAdmin?.phone || ''}
