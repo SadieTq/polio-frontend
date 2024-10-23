@@ -252,7 +252,7 @@ function AddFLW() {
     },
     {
       title: "Team",
-      key: "reportingTo",
+      key: "team",
       render: (text, record) => {
         
         return record.teams && record.teams.length > 0 && record.teams[0].aicDetails
