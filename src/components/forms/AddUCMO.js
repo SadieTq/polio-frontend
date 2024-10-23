@@ -6,11 +6,11 @@ import { FaEdit } from 'react-icons/fa';
 const { Option } = Select;
 
 function AddUCMO() {
-  const [UcmoList, setUcmoList] = useState([]); // State for Ucmo list
+  const [UcmoList, setUcmoList] = useState([]); 
   const [loading, setLoading] = useState(false);
-  const [selectedUcmo, setSelectedUcmo] = useState(null); // UCMO ID
-  const [gender, setGender] = useState('MALE'); // State for gender radio buttons
-  const [isEmployee, setIsEmployee] = useState(true); // State for employment status radio buttons
+  const [selectedUcmo, setSelectedUcmo] = useState(null); 
+  const [gender, setGender] = useState('MALE'); 
+  const [isEmployee, setIsEmployee] = useState(true); 
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -25,22 +25,19 @@ function AddUCMO() {
   const [editingAdmin, setEditingAdmin] = useState(null); // Holds the admin data to edit
   const userID = localStorage.getItem('id');
   
-  // Function to fetch the list of Ucmos (UCMOs)
- 
 
-  // Fetch Ucmo data on component mount and after form submission
   const fetchUcmoData = async () => {
     setLoading(true);
     try {
       const response = await fetch('https://survey.al-mizan.store/api/users/all-ucmo');
       const data = await response.json();
-      setUcmoData(data.body); // Assuming the data is in the body field
-      setFilteredData(data.body); // Initialize filteredData to the full dataset
+      setUcmoData(data.body); 
+      setFilteredData(data.body); 
     } catch (error) {
-      message.error('Failed to fetch Ucmo data');
+      message.error('Failed to fetch UCMO data');
     }
     finally {
-      setLoading(false); // Stop loading spinner
+      setLoading(false); 
     }
   };
 
@@ -61,8 +58,6 @@ function AddUCMO() {
     setIsEditModalVisible(true); // Show the modal
   };
   
- 
-
   // Function to submit the form and send data to the API
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,11 +65,9 @@ function AddUCMO() {
     const payload = {
       ...formData,
       
-      gender: gender,  // Include gender
+      gender: gender,  
       isEmployee: isEmployee,
-      createdBy: userID
-
-      
+      createdBy: userID 
     };
 
     try {
@@ -87,7 +80,7 @@ function AddUCMO() {
       });
       const data = await response.json();
       if (response.ok) {
-        message.success('Ucmo added successfully');
+        message.success('UCMO added successfully');
 
         // Clear the form and dropdown after successful submission
         setFormData({
@@ -104,10 +97,10 @@ function AddUCMO() {
         // Fetch updated Ucmo data to refresh the table
         fetchUcmoData();
       } else {
-        message.error('Failed to add Ucmo' + data.message);
+        message.error('Failed to add UCMO' + data.message);
       }
     } catch (error) {
-      message.error('An error occurred while adding Ucmo');
+      message.error('An error occurred while adding UCMO');
     }
   };
 
@@ -149,15 +142,15 @@ function AddUCMO() {
       const data = await response.json();
   
       if (response.ok) {
-        message.success('Admin updated successfully!');
+        message.success('UCMO updated successfully!');
         fetchUcmoData(); // Refresh admin data
         setIsEditModalVisible(false); // Close the modal
       } else {
-        message.error('Failed to update admin: ' + data.message);
+        message.error('Failed to update UCMO: ' + data.message);
       }
     } catch (error) {
       console.error('Error:', error);
-      message.error('An error occurred while updating the admin.');
+      message.error('An error occurred while updating UCMO');
     }
   };
   
@@ -204,8 +197,6 @@ function AddUCMO() {
             style={{ marginRight: '10px', cursor: 'pointer' }}
             onClick={() => showEditModal(record)}
           /></Tooltip></div>
-      
-
         </>
       ),
     },
@@ -246,18 +237,7 @@ function AddUCMO() {
      </div>
 
      <div className="select-container-team">
-      <div className="select-group-team">
-      <div className="form-group">
-          <label>Last Name</label>
-          <input
-            type="text"
-            name="lastName"
-            placeholder="e.g. Tariq"
-            value={formData.lastName}
-            onChange={handleInputChange}
-          />
-        </div>
-      </div>
+
       <div className="select-group-team">
          
       <div className="form-group">
@@ -271,19 +251,21 @@ function AddUCMO() {
           />
         </div>
       </div>
+      <div className="select-group-team">
+      <div className="form-group">
+          <label>Last Name</label>
+          <input
+            type="text"
+            name="lastName"
+            placeholder="e.g. Tariq"
+            value={formData.lastName}
+            onChange={handleInputChange}
+          />
+        </div>
+      </div>
+      
      </div>
 
-    
-
-
-        
-      
-        
-     
-
-       
-
-       
 
         <div className="form-group">
           <label>Gender</label>
@@ -338,8 +320,8 @@ function AddUCMO() {
   title="Edit UCMO"
   visible={isEditModalVisible}
   onCancel={() => setIsEditModalVisible(false)}
-  width={600} // Set a fixed width for the modal
-  bodyStyle={{ maxHeight: '55vh', overflowY: 'auto' }} // Set max height and enable vertical scroll
+  width={600} 
+  bodyStyle={{ maxHeight: '55vh', overflowY: 'auto' }} 
   footer={[
     <Button key="back" onClick={() => setIsEditModalVisible(false)}>
       Cancel

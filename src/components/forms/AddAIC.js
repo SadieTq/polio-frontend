@@ -281,23 +281,7 @@ function AddAIC() {
         </div>
       </div>
       <div className="select-group-team">
-      <div className="form-group">
-          <label>AIC CNIC</label>
-          <input
-            type="text"
-            name="cnic"
-            placeholder="e.g. 1234512345678"
-            value={formData.cnic}
-            onChange={handleInputChange}
-          />
-        </div>
      
-      </div>
-     </div>
-
-
-     <div className="select-container-team">
-      <div className="select-group-team">
       <div className="form-group">
           <label>First Name</label>
           <input
@@ -306,6 +290,23 @@ function AddAIC() {
             placeholder="e.g. Saad"
             value={formData.firstName}
             onChange={handleInputChange}
+          />
+        </div> 
+      </div>
+     </div>
+
+
+     <div className="select-container-team">
+      <div className="select-group-team">
+     <div className="form-group">
+          <label>AIC CNIC</label>
+          <input
+            type="text"
+            name="cnic"
+            placeholder="e.g. 1234512345678"
+            value={formData.cnic}
+            onChange={handleInputChange}
+            
           />
         </div>
       </div>

@@ -22,7 +22,6 @@ const userID = localStorage.getItem('id');
     lastName: '',
     cnic: '',
     phone: '',
-    address: '',
   });
 
   // Function to fetch AICs for the dropdown
@@ -61,7 +60,6 @@ const userID = localStorage.getItem('id');
     }
   };
 
-  // Fetch AICs (for the dropdown) and FLWs (for the table) on component mount
   useEffect(() => {
     fetchAics(); // Fetch AICs for dropdown
     fetchFlwsForTable(); // Fetch FLWs for the table
@@ -96,9 +94,6 @@ const userID = localStorage.getItem('id');
 
     const payload = {
       ...formData,
-      address: {
-        street: formData.address,
-      },
       gender: gender,  // Include gender
       isEmployee: isEmployee,  // Include employment status
       qualifications: [],
@@ -117,7 +112,7 @@ const userID = localStorage.getItem('id');
       });
 
       if (response.ok) {
-        const newFlw = await response.json(); // Get the newly added FLW data from the response
+        const newFlw = await response.json(); 
         message.success('FLW added successfully');
 
         setEditingAdmin(null);
@@ -127,7 +122,6 @@ const userID = localStorage.getItem('id');
           lastName: '',
           cnic: '',
           phone: '',
-          address: '',
         });
         setSelectedAic(null); // Clear the AIC dropdown selection
         setGender('MALE');  // Reset gender to default
@@ -148,9 +142,6 @@ const userID = localStorage.getItem('id');
     firstName: editingAdmin.firstName,
     lastName: editingAdmin.lastName,
     phone: editingAdmin.phone,
-    address: {
-      street: editingAdmin.address?.street,
-    },
     status: editingAdmin.status,
     isEmployee: editingAdmin.isEmployee,
     updatedBy:userID,
@@ -167,15 +158,15 @@ const userID = localStorage.getItem('id');
     });
     const data = await response.json();
     if (response.ok) {
-      message.success('Admin updated successfully!');
+      message.success('FLW updated successfully!');
       fetchFlwsForTable(); // Refresh data
       setIsEditModalVisible(false); // Close modal
       
     } else {
-      message.error('Failed to update admin' + data.message);
+      message.error('Failed to update FLW' + data.message);
     }
   } catch (error) {
-    message.error('An error occurred while updating the admin');
+    message.error('An error occurred while updating FLW');
   }
 };
 
@@ -291,22 +282,7 @@ const userID = localStorage.getItem('id');
         </div>
       </div>
       <div className="select-group-team">
-      <div className="form-group">
-          <label>FLW CNIC</label>
-          <input
-            type="text"
-            name="cnic"
-            placeholder="e.g. 1234512345678"
-            value={formData.cnic}
-            onChange={handleInputChange}
-          />
-        </div>
      
-      </div>
-     </div>
-
-     <div className="select-container-team">
-      <div className="select-group-team">
       <div className="form-group">
           <label>First Name</label>
           <input
@@ -314,6 +290,21 @@ const userID = localStorage.getItem('id');
             name="firstName"
             placeholder="e.g. Saad"
             value={formData.firstName}
+            onChange={handleInputChange}
+          />
+        </div>
+      </div>
+     </div>
+
+     <div className="select-container-team">
+      <div className="select-group-team">
+      <div className="form-group">
+          <label>FLW CNIC</label>
+          <input
+            type="text"
+            name="cnic"
+            placeholder="e.g. 1234512345678"
+            value={formData.cnic}
             onChange={handleInputChange}
           />
         </div>
@@ -347,30 +338,9 @@ const userID = localStorage.getItem('id');
         </div>
       </div>
       <div className="select-group-team">
-     
-      <div className="form-group">
-          <label>Address (Optional)</label>
-          <input
-            type="text"
-            name="address"
-            placeholder="e.g. 123 Street Name"
-            value={formData.address}
-            onChange={handleInputChange}
-          />
-        </div>
 
-     
       </div>
      </div>
-
-      
-       
-      
-     
-       
-       
-
-
 
         <div className="form-group">
           <label>Gender</label>
@@ -503,14 +473,7 @@ const userID = localStorage.getItem('id');
         required
       />
     </div>
-    <div className="form-group">
-      <label>Street Address (Optional)</label>
-      <input
-        type="text"
-        value={editingAdmin?.address?.street || ''}
-        onChange={(e) => setEditingAdmin({ ...editingAdmin, address: { ...editingAdmin.address, street: e.target.value } })}
-      />
-    </div>
+ 
     <div className="form-group">
       <label>Update Password (Optional)</label>
       <input

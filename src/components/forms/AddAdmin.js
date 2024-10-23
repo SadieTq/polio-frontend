@@ -4,18 +4,14 @@ import { SearchOutlined } from '@ant-design/icons';
 import { FaEdit } from 'react-icons/fa';
 
 function AddAdmin() {
-  // State for form values
   const [cnic, setCnic] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [mobileNo, setMobileNo] = useState('');
   const [street, setStreet] = useState('');
   const [loading, setLoading] = useState(false);
-  // State for gender and employment status
-  const [gender, setGender] = useState('MALE'); // Default value 'MALE'
+  const [gender, setGender] = useState('MALE'); 
   const [isEmployee, setIsEmployee] = useState(true); // Default value true (Employed)
-
-  // State for Admin data and search term
   const [adminData, setAdminData] = useState([]);
   const [searchTerm, setSearchTerm] = useState(''); // Search term for filtering
   const [filteredData, setFilteredData] = useState([]); // Filtered data for the table
@@ -24,7 +20,7 @@ function AddAdmin() {
 const [editingAdmin, setEditingAdmin] = useState(null); // Holds the admin data to edit
 
 const userID = localStorage.getItem('id');
-  // Fetch Admin data on component mount
+  
   const fetchAdminData = async () => {
     setLoading(true);
     try {
@@ -93,11 +89,11 @@ const userID = localStorage.getItem('id');
         // Refresh the admin data after adding a new one
         fetchAdminData();
       } else {
-        message.error('Failed to add admin: ' + data.message);
+        message.error('Failed to add Admin: ' + data.message);
       }
     } catch (error) {
       console.error('Error:', error);
-      message.error('An error occurred while adding the admin.');
+      message.error('An error occurred while adding the Admin.');
     }
   };
   const showEditModal = (admin) => {
@@ -133,11 +129,11 @@ const userID = localStorage.getItem('id');
         fetchAdminData(); // Refresh admin data
         setIsEditModalVisible(false); // Close the modal
       } else {
-        message.error('Failed to update admin: ' + data.message);
+        message.error('Failed to update Admin: ' + data.message);
       }
     } catch (error) {
       console.error('Error:', error);
-      message.error('An error occurred while updating the admin.');
+      message.error('An error occurred while updating the Admin.');
     }
   };
   
@@ -242,7 +238,23 @@ const userID = localStorage.getItem('id');
    <div className="select-container-team">
 
    <div className="select-group-team">
-     <div className="form-group">
+     
+<div className="form-group">
+            <label>Mobile No</label>
+            <input
+              type="text"
+              placeholder="e.g. 03001234567"
+              value={mobileNo}
+              onChange={(e) => setMobileNo(e.target.value)}
+              required
+            />
+          </div>
+   </div>
+
+   <div className="select-group-team">
+
+
+<div className="form-group">
             <label>Last Name</label>
             <input
               type="text"
@@ -253,21 +265,8 @@ const userID = localStorage.getItem('id');
             />
           </div>
 
-   </div>
 
-   <div className="select-group-team">
-
-
-          <div className="form-group">
-            <label>Mobile No</label>
-            <input
-              type="text"
-              placeholder="e.g. 03001234567"
-              value={mobileNo}
-              onChange={(e) => setMobileNo(e.target.value)}
-              required
-            />
-          </div>
+          
    </div>
   
    </div>
@@ -282,12 +281,6 @@ const userID = localStorage.getItem('id');
 
    </div>
 
-         
-     
-        
-          
-
-          {/* Gender Toggle */}
           <div className="form-group">
             <label>Gender</label>
             <Radio.Group onChange={(e) => setGender(e.target.value)} value={gender}>
@@ -333,8 +326,8 @@ const userID = localStorage.getItem('id');
   title="Edit Admin"
   visible={isEditModalVisible}
   onCancel={() => setIsEditModalVisible(false)}
-  width={600} // Set a fixed width for the modal
-  bodyStyle={{ maxHeight: '55vh', overflowY: 'auto' }} // Set max height and enable vertical scroll
+  width={600} 
+  bodyStyle={{ maxHeight: '55vh', overflowY: 'auto' }}
   footer={[
     <Button key="back" onClick={() => setIsEditModalVisible(false)}>
       Cancel
