@@ -240,11 +240,16 @@ function AddFLW() {
       dataIndex: ["updatedBy", "firstName"],
       key: "updatedby",
     },
-    // {
-    //   title: 'Reporting To',
-    //   dataIndex: ['aicDetails', 'firstName'],
-    //   key: 'createdby',
-    // },
+    {
+      title: "Reporting To",
+      key: "reportingTo",
+      render: (text, record) => {
+        
+        return record.teams && record.teams.length > 0 && record.teams[0].aicDetails
+          ? record.teams[0].aicDetails.firstName 
+          : ""; // 
+      },
+    },
     {
       title: "Action",
       key: "action",
