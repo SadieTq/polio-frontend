@@ -47,7 +47,7 @@ function TeamData({refreshKey}) {
         setDivisions(data.body);
       })
       .catch((error) => {
-        console.error('Error fetching divisions:', error);
+       // console.error('Error fetching divisions:', error);
       });
 
     fetch('https://survey.al-mizan.store/api/district')
@@ -56,7 +56,7 @@ function TeamData({refreshKey}) {
         setDistricts(data.body);
       })
       .catch((error) => {
-        console.error('Error fetching districts:', error);
+      //  console.error('Error fetching districts:', error);
       });
 
     fetch('https://survey.al-mizan.store/api/tehsil')
@@ -65,7 +65,7 @@ function TeamData({refreshKey}) {
         setTehsils(data.body);
       })
       .catch((error) => {
-        console.error('Error fetching tehsils:', error);
+      //  console.error('Error fetching tehsils:', error);
       });
 
     fetch('https://survey.al-mizan.store/api/uc')
@@ -74,13 +74,13 @@ function TeamData({refreshKey}) {
         setMauzas(data.body);
       })
       .catch((error) => {
-        console.error('Error fetching UCs:', error);
+      //  console.error('Error fetching UCs:', error);
       });
       fetch('https://survey.al-mizan.store/api/users/all-ucmo')
       .then((response) => response.json())
       .then((data) => setUCMOs(data.body))
        .catch((error) => {
-        console.error('Error fetching UCMOs:', error);
+      //  console.error('Error fetching UCMOs:', error);
       });
       
   }, [isModalVisible]);
@@ -92,7 +92,7 @@ function TeamData({refreshKey}) {
     fetch(`https://survey.al-mizan.store/api/users/umco/${ucmoid}/aics`)
       .then(response => response.json())
       .then(data => setAICs(data.body || []))  // Set AICs
-      .catch(error => console.error('Error fetching AICs:', error));
+    //  .catch(error => console.error('Error fetching AICs:', error));
   };
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
@@ -113,7 +113,7 @@ function TeamData({refreshKey}) {
     fetch(`https://survey.al-mizan.store/api/users/aics/${aicId}/flws`)
       .then(response => response.json())
       .then(data => setFLWs(data.body || []))  // Set FLWs
-      .catch(error => console.error('Error fetching FLWs:', error));
+     // .catch(error => console.error('Error fetching FLWs:', error));
   };
 
   const fetchTeams = async () => {
@@ -138,7 +138,7 @@ function TeamData({refreshKey}) {
       setDataSource(teams);
       setFilteredData(teams); // Initialize filteredData with full data
     } catch (error) {
-      console.error('Error fetching team data:', error);
+    //  console.error('Error fetching team data:', error);
     } finally {
       setLoading(false); // Stop loading spinner
     }
@@ -230,7 +230,7 @@ function TeamData({refreshKey}) {
         setIsDetailModalVisible(true);
       })
       .catch((error) => {
-        console.error('Error fetching team details:', error);
+     //   console.error('Error fetching team details:', error);
       });
   };
   

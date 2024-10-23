@@ -40,7 +40,7 @@ function AddAdmin() {
       setAdminData(data.body); // Set initial data
       setFilteredData(data.body); // Set filtered data as full dataset initially
     } catch (error) {
-      message.error("Failed to fetch Admin data");
+      // message.error("Failed to fetch Admin data");
     } finally {
       setLoading(false); // Stop loading spinner
     }

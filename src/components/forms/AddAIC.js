@@ -47,7 +47,7 @@ function AddAIC() {
       setAicList(data.body);
       setLoading(false);
     } catch (error) {
-      message.error("Failed to fetch AIC list");
+      // message.error("Failed to fetch UCMO list");
       setLoading(false);
     }
   };
@@ -63,7 +63,7 @@ function AddAIC() {
       setAicData(data.body); // Assuming the data is in the body field
       setFilteredData(data.body); // Initialize filteredData to the full dataset
     } catch (error) {
-      message.error("Failed to fetch AIC data");
+      // message.error("Failed to fetch AIC data");
     } finally {
       setLoading1(false); // Stop loading spinner
     }

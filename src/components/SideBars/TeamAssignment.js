@@ -26,28 +26,28 @@ function TeamAssignment() {
     fetch('https://survey.al-mizan.store/api/division')
       .then(response => response.json())
       .then(data => setDivisions(data.body || []))
-      .catch(error => console.error('Error fetching divisions:', error));
+     // .catch(error => console.error('Error fetching divisions:', error));
 
     fetch('https://survey.al-mizan.store/api/district')
       .then(response => response.json())
       .then(data => setDistricts(data.body || []))
-      .catch(error => console.error('Error fetching districts:', error));
+    //  .catch(error => console.error('Error fetching districts:', error));
 
     fetch('https://survey.al-mizan.store/api/tehsil')
       .then(response => response.json())
       .then(data => setTowns(data.body || []))
-      .catch(error => console.error('Error fetching towns:', error));
+    //  .catch(error => console.error('Error fetching towns:', error));
 
     fetch('https://survey.al-mizan.store/api/uc')
       .then(response => response.json())
       .then(data => setUcs(data.body || []))
-      .catch(error => console.error('Error fetching UCs:', error));
+     // .catch(error => console.error('Error fetching UCs:', error));
 
     // Fetch UCMO data
     fetch('https://survey.al-mizan.store/api/users/all-ucmo')
       .then(response => response.json())
       .then(data => setUCMOs(data.body || []))
-      .catch(error => console.error('Error fetching UCMOs:', error));
+     // .catch(error => console.error('Error fetching UCMOs:', error));
   }, []);
 
   // Fetch AICs when a UCMO is selected
@@ -58,7 +58,7 @@ function TeamAssignment() {
     fetch(`https://survey.al-mizan.store/api/users/umco/${ucmoid}/aics`)
       .then(response => response.json())
       .then(data => setAICs(data.body || []))  // Set AICs
-      .catch(error => console.error('Error fetching AICs:', error));
+     // .catch(error => console.error('Error fetching AICs:', error));
   };
 
   // Fetch FLWs when an AIC is selected
@@ -69,7 +69,7 @@ function TeamAssignment() {
     fetch(`https://survey.al-mizan.store/api/users/aics/${aicId}/flws`)
       .then(response => response.json())
       .then(data => setFLWs(data.body || []))  // Set FLWs
-      .catch(error => console.error('Error fetching FLWs:', error));
+    //  .catch(error => console.error('Error fetching FLWs:', error));
   };
 
   // Handle adding team

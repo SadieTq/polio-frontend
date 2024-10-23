@@ -34,7 +34,7 @@ function AddUCMO() {
       setUcmoData(data.body); 
       setFilteredData(data.body); 
     } catch (error) {
-      message.error('Failed to fetch UCMO data');
+      // message.error('Failed to fetch UCMO data');
     }
     finally {
       setLoading(false); 

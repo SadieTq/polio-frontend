@@ -46,7 +46,7 @@ function AddFLW() {
       setAicList(data.body);
       setLoading(false);
     } catch (error) {
-      message.error("Failed to fetch AIC list");
+      // message.error("Failed to fetch AIC list");
       setLoading(false);
     }
   };
@@ -68,7 +68,7 @@ function AddFLW() {
       setFilteredFlwList(data.body); // Initialize the filtered list
       setLoading(false);
     } catch (error) {
-      message.error("Failed to fetch FLW data");
+      // message.error("Failed to fetch FLW data");
     } finally {
       setLoading(false); // Stop loading spinner
     }

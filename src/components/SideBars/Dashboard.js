@@ -14,7 +14,7 @@ function Dashboard() {
       const data = await response.json();
       setSurveyData(data); // Store data in state
     } catch (error) {
-      message.error('Failed to fetch survey data');
+      // message.error('Failed to fetch survey data');
     }
     finally {
       setLoading(false); // Stop loading spinner

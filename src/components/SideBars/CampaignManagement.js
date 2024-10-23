@@ -27,7 +27,7 @@ function CampaignManagement() {
       setAicData(data.body);
       setFilteredData(data.body);
     } catch (error) {
-      message.error('Failed to fetch Campaign data');
+      // message.error('Failed to fetch Campaign data');
     }
     finally {
       setLoading(false); // Stop loading spinner
