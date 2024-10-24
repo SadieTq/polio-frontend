@@ -131,7 +131,7 @@ function AddFLW() {
           body: JSON.stringify(payload),
         }
       );
-
+      const data = await response.json();
       if (response.ok) {
         const newFlw = await response.json();
         message.success("FLW added successfully");
@@ -151,7 +151,7 @@ function AddFLW() {
         // Update the FLW list for the table with the newly added FLW
         fetchFlwsForTable();
       } else {
-        message.error("Failed to add FLW");
+        message.error("Failed to add FLW: " + data.message);
       }
     } catch (error) {
       message.error("An error occurred while adding FLW");
