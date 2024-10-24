@@ -293,7 +293,7 @@ function AddAIC() {
                 >
                   {aicList.map((aic) => (
                     <Option key={aic._id} value={aic._id}>
-                      {aic.firstName}
+                      {`${aic.firstName} ${aic.lastName}`}
                     </Option>
                   ))}
                 </Select>
@@ -460,14 +460,14 @@ function AddAIC() {
             >
               {aicList.map((aic) => (
                 <Option key={aic._id} value={aic._id}>
-                  {aic.firstName}
+                  {`${aic.firstName} ${aic.lastName}`}
                 </Option>
               ))}
             </Select>
           </div>
           <div className="form-group"></div>
           <div className="form-group">
-            <label>First Name</label>
+            <label>First Name<span style={{ color: "red" }}>*</span></label>
             <input
               type="text"
               value={editingAdmin?.firstName || ""}
@@ -478,7 +478,7 @@ function AddAIC() {
             />
           </div>
           <div className="form-group">
-            <label>Last Name</label>
+            <label>Last Name<span style={{ color: "red" }}>*</span></label>
             <input
               type="text"
               value={editingAdmin?.lastName || ""}
@@ -489,7 +489,7 @@ function AddAIC() {
             />
           </div>
           <div className="form-group">
-            <label>Mobile No</label>
+            <label>Mobile No<span style={{ color: "red" }}>*</span></label>
             <input
               type="text"
               value={editingAdmin?.phone || ""}

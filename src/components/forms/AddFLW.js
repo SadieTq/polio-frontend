@@ -311,7 +311,7 @@ function AddFLW() {
                 >
                   {aicList.map((aic) => (
                     <Option key={aic._id} value={aic._id}>
-                      {aic.firstName}
+                      {`${aic.firstName} ${aic.lastName}`}
                     </Option>
                   ))}
                 </Select>
@@ -481,7 +481,7 @@ function AddFLW() {
               >
                 {aicList.map((aic) => (
                   <Option key={aic._id} value={aic._id}>
-                    {aic.firstName}
+                    {`${aic.firstName} ${aic.lastName}`}
                   </Option>
                 ))}
               </Select>

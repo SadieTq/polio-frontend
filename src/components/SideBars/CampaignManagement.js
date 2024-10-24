@@ -228,9 +228,9 @@ function CampaignManagement() {
      
         <Form layout="vertical" onFinish={handleSubmit} requiredMark="optional">
           <div className="form-group2">
-            <label>Select Campaign Type</label>
+            <label>Select Campaign Type<span style={{ color: "red" }}>*</span></label>
             <Form.Item
-  label="Campaign Type"
+  
   name="campaignType"
   rules={[{ required: true, message: 'Please select a campaign type' }]}
 >
@@ -251,7 +251,7 @@ function CampaignManagement() {
 
           </div>
           <div className="form-group2">
-            <label>Campaign Name</label>
+            <label>Campaign Name<span style={{ color: "red" }}>*</span></label>
             <input
               type="text"
               name="campaignName"
@@ -262,7 +262,7 @@ function CampaignManagement() {
             />
           </div>
           <div className="form-group2">
-  <label>Number of Days</label>
+  <label>Number of Days<span style={{ color: "red" }}>*</span></label>
   <input
     type="number"
     name="numberOfDays"

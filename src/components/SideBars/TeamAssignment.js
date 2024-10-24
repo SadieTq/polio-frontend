@@ -240,7 +240,7 @@ function TeamAssignment() {
           >
             {ucmos.map(ucmo => (
               <Option key={ucmo._id} value={ucmo._id}>
-                {ucmo.firstName}
+                {`${ucmo.firstName} ${ucmo.lastName}`}
               </Option>
             ))}
           </Select>
@@ -262,7 +262,7 @@ function TeamAssignment() {
           >
             {aics.map(aic => (
               <Option key={aic._id} value={aic._id}>
-                {aic.firstName}
+                {`${aic.firstName} ${aic.lastName}`}
               </Option>
             ))}
           </Select>
@@ -287,7 +287,7 @@ function TeamAssignment() {
           >
             {flws.map(flw => (
               <Option key={flw._id} value={flw._id}>
-                {flw.firstName}
+                {`${flw.firstName} ${flw.lastName}`}
               </Option>
             ))}
           </Select>
