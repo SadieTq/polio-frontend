@@ -133,7 +133,6 @@ function AddFLW() {
       );
       const data = await response.json();
       if (response.ok) {
-        const newFlw = await response.json();
         message.success("FLW added successfully");
 
         setEditingAdmin(null);

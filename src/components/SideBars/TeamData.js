@@ -353,7 +353,7 @@ function TeamData({refreshKey}) {
       
 
       <Spin spinning={loading}>
-      <Table dataSource={filteredData} columns={columns} pagination={true} />
+      <Table dataSource={filteredData} columns={columns} pagination={{ pageSize: 7 }} />
       </Spin>
       <Modal
         title="Select Territory"
