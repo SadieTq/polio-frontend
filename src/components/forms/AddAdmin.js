@@ -34,7 +34,7 @@ function AddAdmin() {
     setLoading(true);
     try {
       const response = await fetch(
-        "https://survey.al-mizan.store/api/users/all-admin"
+        "http://110.38.226.9:4000/api/users/all-admin"
       );
       const data = await response.json();
       setAdminData(data.body); // Set initial data
@@ -78,7 +78,7 @@ function AddAdmin() {
     try {
       // POST request to API
       const response = await fetch(
-        "https://survey.al-mizan.store/api/users/add-admin",
+        "http://110.38.226.9:4000/api/users/add-admin",
         {
           method: "POST",
           headers: {
@@ -128,7 +128,7 @@ function AddAdmin() {
 
     try {
       const response = await fetch(
-        `https://survey.al-mizan.store/api/users/${editingAdmin._id}`,
+        `http://110.38.226.9:4000/api/users/${editingAdmin._id}`,
         {
           method: "PUT",
           headers: {

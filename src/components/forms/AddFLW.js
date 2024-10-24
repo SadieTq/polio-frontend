@@ -40,7 +40,7 @@ function AddFLW() {
     setLoading(true);
     try {
       const response = await fetch(
-        "https://survey.al-mizan.store/api/users/all-aic"
+        "http://110.38.226.9:4000/api/users/all-aic"
       );
       const data = await response.json();
       setAicList(data.body);
@@ -61,7 +61,7 @@ function AddFLW() {
     setLoading(true);
     try {
       const response = await fetch(
-        "https://survey.al-mizan.store/api/users/all-flw"
+        "http://110.38.226.9:4000/api/users/all-flw"
       );
       const data = await response.json();
       setFlwList(data.body);
@@ -122,7 +122,7 @@ function AddFLW() {
 
     try {
       const response = await fetch(
-        "https://survey.al-mizan.store/api/users/add-flw",
+        "http://110.38.226.9:4000/api/users/add-flw",
         {
           method: "POST",
           headers: {
@@ -171,7 +171,7 @@ function AddFLW() {
 
     try {
       const response = await fetch(
-        `https://survey.al-mizan.store/api/users/${editingAdmin._id}`,
+        `http://110.38.226.9:4000/api/users/${editingAdmin._id}`,
         {
           method: "PUT",
           headers: {

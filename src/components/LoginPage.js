@@ -29,7 +29,7 @@ const LoginPage = () => {
 
     try {
       // Making the POST request
-      const response = await fetch('https://survey.al-mizan.store/api/auth/login', {
+      const response = await fetch('http://110.38.226.9:4000/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

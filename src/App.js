@@ -12,19 +12,6 @@ import CampaignManagement from './components/SideBars/CampaignManagement';
 import Dashboard from './components/SideBars/Dashboard';
 
 function App() {
-  const [role, setRole] = useState(null); // State to store role
-
-  useEffect(() => {
-    const storedRole = localStorage.getItem('role');
-    if (storedRole) {
-      setRole(storedRole); // Set the role once it's fetched
-    }
-  }, []);
-
-  // Don't render the routes until the role is fetched
-  if (role === null) {
-    return null; // Return nothing until role is available
-  }
 
   return (
     <Router>
@@ -40,12 +27,7 @@ function App() {
                   <Route path="stats" element={<Dashboard />} />
                   <Route path="flw" element={<FlwManagement />} />
                   <Route path="team" element={<TeamAssignment />} />
-                  
-                  {/* Conditionally render CampaignManagement route based on role */}
-                  {role === 'ADMIN' && (
-                    <Route path="campaign" element={<CampaignManagement />} />
-                  )}
-
+                  <Route path="campaign" element={<CampaignManagement />} />
                   <Route path="/" element={<TabPanel />} />
                 </Routes>
               </div>

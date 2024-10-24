@@ -41,7 +41,7 @@ function AddAIC() {
     setLoading(true);
     try {
       const response = await fetch(
-        "https://survey.al-mizan.store/api/users/all-ucmo"
+        "http://110.38.226.9:4000/api/users/all-ucmo"
       );
       const data = await response.json();
       setAicList(data.body);
@@ -57,7 +57,7 @@ function AddAIC() {
     setLoading1(true);
     try {
       const response = await fetch(
-        "https://survey.al-mizan.store/api/users/all-aic"
+        "http://110.38.226.9:4000/api/users/all-aic"
       );
       const data = await response.json();
       setAicData(data.body); // Assuming the data is in the body field
@@ -117,7 +117,7 @@ function AddAIC() {
 
     try {
       const response = await fetch(
-        "https://survey.al-mizan.store/api/users/add-aic",
+        "http://110.38.226.9:4000/api/users/add-aic",
         {
           method: "POST",
           headers: {
@@ -165,7 +165,7 @@ function AddAIC() {
 
     try {
       const response = await fetch(
-        `https://survey.al-mizan.store/api/users/${editingAdmin._id}`,
+        `http://110.38.226.9:4000/api/users/${editingAdmin._id}`,
         {
           method: "PUT",
           headers: {

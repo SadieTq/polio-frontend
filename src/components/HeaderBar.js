@@ -10,7 +10,7 @@ function HeaderBar() {
   const handleLogout = async () => {
     try {
       // API call to logout using fetch
-      const response = await fetch('https://survey.al-mizan.store/api/auth/logout', {
+      const response = await fetch('http://110.38.226.9:4000/api/auth/logout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

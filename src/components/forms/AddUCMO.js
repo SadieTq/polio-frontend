@@ -29,7 +29,7 @@ function AddUCMO() {
   const fetchUcmoData = async () => {
     setLoading(true);
     try {
-      const response = await fetch('https://survey.al-mizan.store/api/users/all-ucmo');
+      const response = await fetch('http://110.38.226.9:4000/api/users/all-ucmo');
       const data = await response.json();
       setUcmoData(data.body); 
       setFilteredData(data.body); 
@@ -71,7 +71,7 @@ function AddUCMO() {
     };
 
     try {
-      const response = await fetch('https://survey.al-mizan.store/api/users/add-umco', {
+      const response = await fetch('http://110.38.226.9:4000/api/users/add-umco', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -131,7 +131,7 @@ function AddUCMO() {
     };
   
     try {
-      const response = await fetch(`https://survey.al-mizan.store/api/users/${editingAdmin._id}`, {
+      const response = await fetch(`http://110.38.226.9:4000/api/users/${editingAdmin._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
