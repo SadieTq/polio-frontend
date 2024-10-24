@@ -135,7 +135,7 @@ function TeamAssignment() {
       <div className="select-container-team">
         {/* Division */}
         <div className="select-group-team">
-          <label>Select Division</label>
+          <label>Select Division<span style={{ color: "red" }}>*</span></label>
           <Select
           showSearch
             placeholder="Select Division"
@@ -157,7 +157,7 @@ function TeamAssignment() {
 
         {/* District */}
         <div className="select-group-team">
-          <label>Select District</label>
+          <label>Select District<span style={{ color: "red" }}>*</span></label>
           <Select
           showSearch
             placeholder="Select District"
@@ -179,7 +179,7 @@ function TeamAssignment() {
 
         {/* Town */}
         <div className="select-group-team">
-          <label>Select Town</label>
+          <label>Select Town<span style={{ color: "red" }}>*</span></label>
           <Select
   showSearch
   placeholder="Select Town"
@@ -204,7 +204,7 @@ function TeamAssignment() {
       {/* UC */}
       <div className="select-container-team2">
         <div className="select-group-team">
-          <label>Select UC</label>
+          <label>Select UC<span style={{ color: "red" }}>*</span></label>
           <Select
           showSearch
             placeholder="Select UC"
@@ -226,7 +226,7 @@ function TeamAssignment() {
 
         {/* UCMO */}
         <div className="select-group-team">
-          <label>Select UCMO</label>
+          <label>Select UCMO<span style={{ color: "red" }}>*</span></label>
           <Select
           showSearch
             placeholder="Select UCMO"
@@ -248,7 +248,7 @@ function TeamAssignment() {
 
         {/* AIC */}
         <div className="select-group-team">
-          <label>Select AIC</label>
+          <label>Select AIC<span style={{ color: "red" }}>*</span></label>
           <Select
           showSearch
             placeholder="Select AIC"
@@ -272,7 +272,7 @@ function TeamAssignment() {
       {/* FLW */}
       <div className="select-container-team2">
         <div className="select-group-team">
-          <label>Select FLWs</label>
+          <label>Select FLWs<span style={{ color: "red" }}>*</span></label>
           <Select
           showSearch
             placeholder="Select FLWs"

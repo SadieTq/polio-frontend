@@ -180,8 +180,7 @@ function TeamData({refreshKey}) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Team updated successfully:', data);
-        message.success("Team added successfully!");
+        message.success("Team Updated successfully!");
         setIsModalVisible(false);
         setSelectedUCMO(null);
         setSelectedAIC(null);
