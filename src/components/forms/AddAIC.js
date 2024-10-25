@@ -156,13 +156,12 @@ function AddAIC() {
       firstName: editingAdmin.firstName,
       lastName: editingAdmin.lastName,
       phone: editingAdmin.phone,
-
       status: editingAdmin.status,
       isEmployee: editingAdmin.isEmployee,
       updatedBy: userID,
       password: editingAdmin.password,
     };
-
+  
     try {
       const response = await fetch(
         `http://110.38.226.9:4000/api/users/${editingAdmin._id}`,
@@ -174,21 +173,26 @@ function AddAIC() {
           body: JSON.stringify(payload),
         }
       );
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
         message.success("Admin updated successfully!");
         fetchAicData(); // Refresh admin data
         setIsEditModalVisible(false); // Close the modal
       } else {
-        message.error("Failed to update admin: " + data.message);
+        if (data.message === "\"ucmo\" must be a string") {
+          message.error("Please Select a UCMO");
+        } else {
+          message.error("Failed to update admin: " + data.message);
+        }
       }
     } catch (error) {
       console.error("Error:", error);
       message.error("An error occurred while updating the admin.");
     }
   };
+  
 
   // Handle search input change and filter the data
   const handleSearch = (e) => {
