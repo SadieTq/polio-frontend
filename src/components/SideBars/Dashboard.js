@@ -1,8 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
-import { Spin, Divider, Row, Col, Card } from 'antd';
+import React, { useEffect, useState } from "react";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
+import { Spin, Divider, Row, Col, Card, Button } from "antd";
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FF6347', '#32CD32', '#6A5ACD', '#FFD700'];
+const COLORS = [
+  "#0088FE",
+  "#00C49F",
+  "#FFBB28",
+  "#FF8042",
+  "#AF19FF",
+  "#FF6347",
+  "#32CD32",
+  "#6A5ACD",
+  "#FFD700",
+];
 
 function Dashboard() {
   const [surveyData, setSurveyData] = useState(null);
@@ -12,7 +22,7 @@ function Dashboard() {
   const fetchSurveyData = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://110.38.226.9:4000/api/survey/');
+      const response = await fetch("http://110.38.226.9:4000/api/survey/");
       const data = await response.json();
       setSurveyData(data);
     } catch (error) {
@@ -27,58 +37,107 @@ function Dashboard() {
   }, []);
 
   // Define data for each chart category
-  const vaccinationData = surveyData ? [
-    { name: 'Total Vaccinated Coverage Today', value: surveyData.total },
-    { name: 'Total AFP Cases', value: surveyData['Total AFP Case'] },
-    { name: 'Zero Dose Count', value: surveyData['Total Zero Dose Count'] }
-  ] : [];
+  const vaccinationData = surveyData
+    ? [
+        { name: "Total Vaccinated Coverage today", value: surveyData.total },
+        { name: "Total AFP cases", value: surveyData["Total AFP Case"] },
+        { name: "Zero Dose count", value: surveyData["Total Zero Dose Count"] },
+      ]
+    : [];
 
-  const teamData = surveyData ? [
-    { name: 'Team Login Before 8:30', value: surveyData['before 8:30'] },
-    { name: 'Team Login After 8:30', value: surveyData['after 8:30'] },
-    { name: 'Team Revisited After 2pm', value: surveyData.visitsAfter2PMCount }
-  ] : [];
+  const teamData = surveyData
+    ? [
+        { name: "Team login before 8:30", value: surveyData["before 8:30"] },
+        { name: "Team login after 8:30", value: surveyData["after 8:30"] },
+        {
+          name: "Team revisited after 2pm",
+          value: surveyData.visitsAfter2PMCount,
+        },
+      ]
+    : [];
 
-  const housesData = surveyData ? [
-    { name: 'Locked Houses', value: surveyData.uniqueLockedHouseCount },
-    { name: 'NA Visited Same Day', value: surveyData['Na Housenot visted same day'] },
-    { name: 'NA Not Visited Same Day', value: surveyData['Na Housenot Not visted same day'] },
-    { name: 'Revisited Houses', value: surveyData.revisitedHouseData }
-  ] : [];
+  const housesData = surveyData
+    ? [
+        { name: "Locked houses", value: surveyData.uniqueLockedHouseCount },
 
-  const childrenData = surveyData ? [
-    // { name: 'Children', value: surveyData.uniqueNAChildrenCount },
-    { name: 'School Children', value: surveyData.school },
-    { name: 'Street Children', value: surveyData.street },
-    { name: 'Guest Children', value: surveyData.guestChild },
-    { name: 'Total Children Vaccinated In House', value: surveyData.availableChild },
-    // { name: 'NA Children Same Day', value: surveyData['covered NA Children same day'] },
-    // { name: 'Newborn Count', value: surveyData['Total Newborn Count'] }
-  ] : [];
+        { name: "Revisited houses", value: surveyData.revisitedHouseData },
+      ]
+    : [];
 
-  const refusalsData = surveyData ? [
-    { name: 'Total Refusals', value: surveyData.refusalStats.totalRefusalCount },
-    { name: 'Religious Refusals', value: surveyData.refusalStats.refusalReasons.religiousRefusal },
-    { name: 'Other Refusals', value: surveyData.refusalStats.refusalReasons.otherRefusal }
-  ] : [];
+  const childrenData = surveyData
+    ? [
+        { name: "School children", value: surveyData.school },
+        { name: "Street children", value: surveyData.street },
+        { name: "Guest children", value: surveyData.guestChild },
+        {
+          name: "Total children vaccinated in house",
+          value: surveyData.availableChild,
+        },
+      ]
+    : [];
+
+  const refusalsData = surveyData
+    ? [
+        {
+          name: "Total refusals",
+          value: surveyData.refusalStats.totalRefusalCount,
+        },
+        {
+          name: "Religious refusals",
+          value: surveyData.refusalStats.refusalReasons.religiousRefusal,
+        },
+        {
+          name: "Other refusals",
+          value: surveyData.refusalStats.refusalReasons.otherRefusal,
+        },
+      ]
+    : [];
+
+  const nadata = surveyData
+    ? [
+        {
+          name: "NA Children Same Day",
+          value: surveyData["covered NA Children same day"],
+        },
+        { name: "Newborn Count", value: surveyData["Total Newborn Count"] },
+        { name: "Children", value: surveyData.uniqueNAChildrenCount },
+        {
+          name: "NA same day (visited)",
+          value: surveyData["Na Housenot visted same day"],
+        },
+        {
+          name: "NA same day (not visited)",
+          value: surveyData["Na Housenot Not visted same day"],
+        },
+      ]
+    : [];
 
   // Render individual pie charts with color-coded legend and values
   const renderPieChartWithLegend = (data, colorIndex) => (
     <Row align="middle">
       <Col span={6}>
-        <div style={{ padding: '10px' }}>
+        <div style={{ padding: "10px" }}>
           {data.map((entry, index) => (
-            <div key={`item-${index}`} style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
+            <div
+              key={`item-${index}`}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "8px",
+              }}
+            >
               <div
                 style={{
-                  width: '16px',
-                  height: '16px',
+                  width: "16px",
+                  height: "16px",
                   backgroundColor: COLORS[(colorIndex + index) % COLORS.length],
-                  marginRight: '8px',
-                  borderRadius: '50%'
+                  marginRight: "8px",
+                  borderRadius: "50%",
                 }}
               />
-              <span>{entry.name}: <strong>{entry.value}</strong></span>
+              <span>
+                {entry.name}: <strong>{entry.value}</strong>
+              </span>
             </div>
           ))}
         </div>
@@ -97,7 +156,10 @@ function Dashboard() {
               label
             >
               {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[(colorIndex + index) % COLORS.length]} />
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[(colorIndex + index) % COLORS.length]}
+                />
               ))}
             </Pie>
             <Tooltip />
@@ -108,20 +170,34 @@ function Dashboard() {
   );
 
   // Render individual data cards with color-coded legend and values
-  const renderDataCard = (title, data, colorIndex) => (
-    <Card title={title} bordered={true} style={{ marginBottom: '16px' }}>
+  const renderDataCard = (title, data, colorIndex, buttonLabel) => (
+    <Card
+      bordered
+      title={
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <span>{title}</span>
+          <Button style={{ width: "25%" }} type="primary" size="small">{buttonLabel}Details</Button>
+        </div>
+      }
+      style={{ marginBottom: "16px" }}
+    >
       {data.map((entry, index) => (
-        <div key={`card-item-${index}`} style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
+        <div
+          key={`card-item-${index}`}
+          style={{ display: "flex", alignItems: "center", marginBottom: "8px" }}
+        >
           <div
             style={{
-              width: '16px',
-              height: '16px',
+              width: "16px",
+              height: "16px",
               backgroundColor: COLORS[(colorIndex + index) % COLORS.length],
-              marginRight: '8px',
-              borderRadius: '50%'
+              marginRight: "8px",
+              borderRadius: "50%",
             }}
           />
-          <span>{entry.name}: <strong>{entry.value}</strong></span>
+          <span>
+            {entry.name}: <strong>{entry.value}</strong>
+          </span>
         </div>
       ))}
     </Card>
@@ -130,7 +206,7 @@ function Dashboard() {
   return (
     <div className="tab-panel">
       <div className="form-container">
-        <h2 >Survey Data</h2>
+        <h2>Survey Data</h2>
 
         {loading ? (
           <Spin tip="Loading data..." />
@@ -162,33 +238,38 @@ function Dashboard() {
                 <h3>Refusals Data</h3>
                 {renderPieChartWithLegend(refusalsData, 4)}
               </Col>
+              <Col span={12}>
+                <h3>NA Data</h3>
+                {renderPieChartWithLegend(nadata, 4)}
+              </Col>
             </Row>
-
-          
-
-          
-           
           </>
         )}
       </div>
-      <Divider style={{ marginTop: '50px', marginBottom: '50px' }} />
-
+      <Divider style={{ marginTop: "50px", marginBottom: "50px" }} />
 
       <div className="form-container">
-      <h2 >Overall View</h2>
-      <Row gutter={[16, 16]}>
-              <Col span={12}>{renderDataCard("Vaccination Data", vaccinationData, 0)}</Col>
-              <Col span={12}>{renderDataCard("Team Data", teamData, 1)}</Col>
-            </Row>
-            <Row gutter={[16, 16]}>
-              <Col span={12}>{renderDataCard("Houses Data", housesData, 2)}</Col>
-              <Col span={12}>{renderDataCard("Children Data", childrenData, 3)}</Col>
-            </Row>
-            <Row gutter={[16, 16]}>
-              <Col span={12}>{renderDataCard("Refusals Data", refusalsData, 4)}</Col>
-            </Row>
-
-</div>
+        <h2>Overall View</h2>
+        <Row gutter={[16, 16]}>
+          <Col span={8}>
+            {renderDataCard("Vaccination Data", vaccinationData, 0)}
+          
+          </Col>
+          <Col span={8}>{renderDataCard("Team Data", teamData, 1)}</Col>
+          <Col span={8}>{renderDataCard("Houses Data", housesData, 2)}</Col>
+        </Row>
+        <Row gutter={[16, 16]}>
+          <Col span={8}>
+            {renderDataCard("Children Data", childrenData, 3)}
+          </Col>
+          <Col span={8}>
+            {renderDataCard("Refusals Data", refusalsData, 4)}
+          </Col>
+          <Col span={8}>
+            {renderDataCard("NA Data", nadata, 4)}
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 }
