@@ -26,7 +26,7 @@ function Dashboard() {
       const data = await response.json();
       setSurveyData(data);
     } catch (error) {
-      // Handle error
+      
     } finally {
       setLoading(false);
     }
@@ -224,14 +224,8 @@ function Dashboard() {
        </div>
        <Divider style={{ marginTop: "10px", marginBottom: "10px" }} />
       <div className="form-container">
-        
-      
-    
-       
+ 
         <h3>Survey Data</h3>
-   
-
-
         <Row gutter={[16, 16]}>
           <Col span={8}>
             {renderDataCard("Vaccination Data", vaccinationData, 0)}
