@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import { Spin, Divider, Row, Col, Card, Button } from "antd";
+import SurveyData from "../SideBars/SurveyData";
 
 const COLORS = [
   "#0088FE",
@@ -213,6 +214,10 @@ function Dashboard() {
 
   return (
     <div className="tab-panel">
+
+
+
+
        <div className="form-container">
          <h2>District Health Authority Lahore</h2> 
       <div style={{ display: 'flex' }}>
@@ -222,7 +227,15 @@ function Dashboard() {
 </div>  
 
        </div>
+
        <Divider style={{ marginTop: "10px", marginBottom: "10px" }} />
+<div className="form-container">
+<SurveyData/>
+</div>
+
+
+
+       {/* <Divider style={{ marginTop: "10px", marginBottom: "10px" }} />
       <div className="form-container">
  
         <h3>Survey Data</h3>
@@ -245,7 +258,7 @@ function Dashboard() {
             {renderDataCard("NA Data", nadata, 4)}
           </Col>
         </Row>
-      </div>
+      </div> */}
       <Divider style={{ marginTop: "20px", marginBottom: "20px" }} />
       <div className="form-container">
         <h2>Chart View</h2>
