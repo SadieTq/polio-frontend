@@ -184,7 +184,7 @@ function AddAIC() {
       const data = await response.json();
   
       if (response.ok) {
-        message.success("Admin updated successfully!");
+        message.success("AIC updated successfully!");
         fetchAicData(); // Refresh admin data
         setIsEditModalVisible(false); // Close the modal
         setSelectedEditAic(null);
@@ -192,12 +192,12 @@ function AddAIC() {
         if (data.message === "\"ucmo\" must be a string") {
           message.error("Please Select a UCMO");
         } else {
-          message.error("Failed to update admin: " + data.message);
+          message.error("Failed to update AIC: " + data.message);
         }
       }
     } catch (error) {
       console.error("Error:", error);
-      message.error("An error occurred while updating the admin.");
+      message.error("An error occurred while updating the AIC.");
     }
   };
   
