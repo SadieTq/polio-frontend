@@ -23,6 +23,8 @@ function AddAIC() {
   const [selectedAic, setSelectedAic] = useState(null); // UCMO ID
   const [gender, setGender] = useState("MALE"); // State for gender toggle
   const [isEmployee, setIsEmployee] = useState(true); // State for employment status toggle
+  const [selectedEditAic, setSelectedEditAic] = useState(null); // Separate state for edit modal UCMO
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -83,13 +85,18 @@ function AddAIC() {
   };
 
   // Handle selection of AIC (UCMO)
-  const handleSelectAIC = (value) => {
-    setSelectedAic(value); // Update the state used for the form submission
-    setEditingAdmin((prevAdmin) => ({
-      ...prevAdmin,
-      ucmo: value, // Store the selected UCMO ID in editingAdmin state
-    }));
+  const handleSelectAIC = (value, isEdit = false) => {
+    if (isEdit) {
+      setSelectedEditAic(value); // Update edit modal UCMO state
+      setEditingAdmin((prevAdmin) => ({
+        ...prevAdmin,
+        ucmo: value,
+      }));
+    } else {
+      setSelectedAic(value); // Update add form UCMO state
+    }
   };
+  
 
   const showEditModal = (admin) => {
     setEditingAdmin(admin); // Set the selected admin data
@@ -180,6 +187,7 @@ function AddAIC() {
         message.success("Admin updated successfully!");
         fetchAicData(); // Refresh admin data
         setIsEditModalVisible(false); // Close the modal
+        setSelectedEditAic(null);
       } else {
         if (data.message === "\"ucmo\" must be a string") {
           message.error("Please Select a UCMO");
@@ -288,7 +296,7 @@ function AddAIC() {
                   onFocus={fetchAICs} // Trigger API call when dropdown is focused
                   value={selectedAic} // Bind the selected value to the dropdown
                   loading={loading}
-                  onChange={handleSelectAIC} // Correctly handle selection
+                  onChange={(value) => handleSelectAIC(value)} // Correctly handle selection
                   optionFilterProp="children"
                   filterOption={(input, option) =>
                     option.children.toLowerCase().includes(input.toLowerCase())
@@ -449,25 +457,25 @@ function AddAIC() {
           <div className="form-group">
             <label>Select UCMO<span style={{ color: "red" }}>*</span></label>
             <Select
-              showSearch
-              placeholder="Select UCMO"
-              style={{ width: "42%" }}
-              onFocus={fetchAICs}
-              value={editingAdmin?.ucmo} // Bind to editingAdmin.ucmo
-              loading={loading}
-              onChange={handleSelectAIC} // Use handleSelectAIC to store the selected UCMO ID
-              optionFilterProp="children"
-              filterOption={(input, option) =>
-                option.children.toLowerCase().includes(input.toLowerCase())
-              }
-              notFoundContent={loading ? <Spin size="small" /> : "No data"}
-            >
-              {aicList.map((aic) => (
-                <Option key={aic._id} value={aic._id}>
-                  {`${aic.firstName} ${aic.lastName}`}
-                </Option>
-              ))}
-            </Select>
+  showSearch
+  placeholder="Select UCMO"
+  style={{ width: "42%" }}
+  onFocus={fetchAICs}
+  value={selectedEditAic} // Use separate state for edit modal
+  loading={loading}
+  onChange={(value) => handleSelectAIC(value, true)} // Pass `true` for `isEdit`
+  optionFilterProp="children"
+  filterOption={(input, option) =>
+    option.children.toLowerCase().includes(input.toLowerCase())
+  }
+  notFoundContent={loading ? <Spin size="small" /> : "No data"}
+>
+  {aicList.map((aic) => (
+    <Option key={aic._id} value={aic._id}>
+      {`${aic.firstName} ${aic.lastName}`}
+    </Option>
+  ))}
+</Select>
           </div>
           <div className="form-group"></div>
           <div className="form-group">
