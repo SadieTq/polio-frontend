@@ -19,6 +19,7 @@ const { Option } = Select;
 function AddFLW() {
   const [aicList, setAicList] = useState([]); // For dropdown (AICs)
   const [loading, setLoading] = useState(false);
+  const [flwLoading, setFlwLoading] = useState(false);
   const [selectedAic, setSelectedAic] = useState(null); // Selected AIC ID
   const [flwList, setFlwList] = useState([]); // For the table (FLWs)
   const [filteredFlwList, setFilteredFlwList] = useState([]); // Filtered table data
@@ -44,7 +45,7 @@ function AddFLW() {
       );
       const data = await response.json();
       setAicList(data.body);
-      setLoading(false);
+      
     } catch (error) {
       // message.error("Failed to fetch AIC list");
       setLoading(false);
@@ -58,7 +59,7 @@ function AddFLW() {
   };
   // Function to fetch FLWs for the table
   const fetchFlwsForTable = async () => {
-    setLoading(true);
+    setFlwLoading(true);
     try {
       const response = await fetch(
         "http://110.38.226.9:4000/api/users/all-flw"
@@ -66,11 +67,11 @@ function AddFLW() {
       const data = await response.json();
       setFlwList(data.body);
       setFilteredFlwList(data.body); // Initialize the filtered list
-      setLoading(false);
+     
     } catch (error) {
       // message.error("Failed to fetch FLW data");
     } finally {
-      setLoading(false); // Stop loading spinner
+      setFlwLoading(false); // Stop loading spinner
     }
   };
 
@@ -240,14 +241,9 @@ function AddFLW() {
       key: "updatedby",
     },
     {
-      title: "Reporting To",
-      key: "reportingTo",
-      render: (text, record) => {
-        
-        return record.teams && record.teams.length > 0 && record.teams[0].aicDetails
-          ? record.teams[0].aicDetails.firstName 
-          : ""; // 
-      },
+      title: "Reporting Tooo",
+      dataIndex: ["aic", "firstName"],
+      key: "reporting",
     },
     {
       title: "Team",
@@ -424,7 +420,7 @@ function AddFLW() {
             style={{ width: 300 }}
           />
         </div>
-        <Spin spinning={loading}>
+        <Spin spinning={flwLoading}>
           <Table
             dataSource={filteredFlwList}
             columns={flwColumns}
