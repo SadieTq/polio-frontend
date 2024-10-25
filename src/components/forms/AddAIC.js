@@ -152,7 +152,7 @@ function AddAIC() {
   };
   const handleUpdate = async () => {
     const payload = {
-      ucmo: editingAdmin.ucmo, // UCMO ID from selected option
+      ucmo: editingAdmin.ucmo || null, // UCMO ID from selected option
       firstName: editingAdmin.firstName,
       lastName: editingAdmin.lastName,
       phone: editingAdmin.phone,
@@ -443,7 +443,7 @@ function AddAIC() {
       >
         <form>
           <div className="form-group">
-            <label>Select UCMO</label>
+            <label>Select UCMO<span style={{ color: "red" }}>*</span></label>
             <Select
               showSearch
               placeholder="Select UCMO"
