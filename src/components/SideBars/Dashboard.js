@@ -42,6 +42,7 @@ function Dashboard() {
   const housesData = surveyData ? [
     { name: 'Locked Houses', value: surveyData.uniqueLockedHouseCount },
     { name: 'NA Visited Same Day', value: surveyData['Na Housenot visted same day'] },
+    { name: 'NA Not Visited Same Day', value: surveyData['Na Housenot Not visted same day'] },
     { name: 'Revisited Houses', value: surveyData.revisitedHouseData }
   ] : [];
 
@@ -51,6 +52,7 @@ function Dashboard() {
     { name: 'Street Children', value: surveyData.street },
     { name: 'Guest Children', value: surveyData.guestChild },
     { name: 'Total Children Vaccinated In House', value: surveyData.availableChild },
+    { name: 'NA Children Same Day', value: surveyData['covered NA Children same day'] },
     { name: 'Newborn Count', value: surveyData['Total Newborn Count'] }
   ] : [];
 
