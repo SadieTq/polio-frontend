@@ -39,9 +39,10 @@ function Dashboard() {
   // Define data for each chart category
   const vaccinationData = surveyData
     ? [
-        { name: "Total Vaccinated Coverage today", value: surveyData.total },
+        { name: "Total Vaccinated Coverage", value: surveyData.total },
         { name: "Total AFP cases", value: surveyData["Total AFP Case"] },
         { name: "Zero Dose count", value: surveyData["Total Zero Dose Count"] },
+        { name: "Newborn Count", value: surveyData["Total Newborn Count"] },
       ]
     : [];
 
@@ -90,16 +91,20 @@ function Dashboard() {
           name: "Other refusals",
           value: surveyData.refusalStats.refusalReasons.otherRefusal,
         },
+        {
+          name: "Medical refusals",
+          value: surveyData.refusalStats.refusalReasons.medicalRefusal,
+        },
       ]
     : [];
 
   const nadata = surveyData
     ? [
         {
-          name: "NA Children Same Day",
+          name: "NA Children Same Day covered",
           value: surveyData["covered NA Children same day"],
         },
-        { name: "Newborn Count", value: surveyData["Total Newborn Count"] },
+        
         { name: "NA Children", value: surveyData.uniqueNAChildrenCount },
         {
           name: "NA same day (visited)",
@@ -179,8 +184,11 @@ function Dashboard() {
           <Button style={{ width: "22%" }} type="primary" size="small">{buttonLabel}Details</Button>
         </div>
       }
+      
       style={{ marginBottom: "16px" }}
+      
     >
+      {/* <Divider style={{ marginTop: "5px", marginBottom: "5px" }} /> */}
       {data.map((entry, index) => (
         <div
           key={`card-item-${index}`}
@@ -205,8 +213,48 @@ function Dashboard() {
 
   return (
     <div className="tab-panel">
+       <div className="form-container">
+         <h2>District Health Authority Lahore</h2> 
+      <div style={{ display: 'flex' }}>
+         
+    <h3 style={{ marginRight: '20px' }}>District: Lahore</h3>
+    <h3>Division: Lahore</h3>
+</div>  
+
+       </div>
+       <Divider style={{ marginTop: "10px", marginBottom: "10px" }} />
       <div className="form-container">
-        <h2>Survey Data</h2>
+        
+      
+    
+       
+        <h3>Survey Data</h3>
+   
+
+
+        <Row gutter={[16, 16]}>
+          <Col span={8}>
+            {renderDataCard("Vaccination Data", vaccinationData, 0)}
+          
+          </Col>
+          <Col span={8}>{renderDataCard("Team Data", teamData, 1)}</Col>
+          <Col span={8}>{renderDataCard("Houses Data", housesData, 2)}</Col>
+        </Row>
+        <Row gutter={[16, 16]}>
+          <Col span={8}>
+            {renderDataCard("Children Data", childrenData, 3)}
+          </Col>
+          <Col span={8}>
+            {renderDataCard("Refusals Data", refusalsData, 4)}
+          </Col>
+          <Col span={8}>
+            {renderDataCard("NA Data", nadata, 4)}
+          </Col>
+        </Row>
+      </div>
+      <Divider style={{ marginTop: "20px", marginBottom: "20px" }} />
+      <div className="form-container">
+        <h2>Chart View</h2>
 
         {loading ? (
           <Spin tip="Loading data..." />
@@ -246,30 +294,7 @@ function Dashboard() {
           </>
         )}
       </div>
-      <Divider style={{ marginTop: "50px", marginBottom: "50px" }} />
-
-      <div className="form-container">
-        <h2>Overall View</h2>
-        <Row gutter={[16, 16]}>
-          <Col span={8}>
-            {renderDataCard("Vaccination Data", vaccinationData, 0)}
-          
-          </Col>
-          <Col span={8}>{renderDataCard("Team Data", teamData, 1)}</Col>
-          <Col span={8}>{renderDataCard("Houses Data", housesData, 2)}</Col>
-        </Row>
-        <Row gutter={[16, 16]}>
-          <Col span={8}>
-            {renderDataCard("Children Data", childrenData, 3)}
-          </Col>
-          <Col span={8}>
-            {renderDataCard("Refusals Data", refusalsData, 4)}
-          </Col>
-          <Col span={8}>
-            {renderDataCard("NA Data", nadata, 4)}
-          </Col>
-        </Row>
-      </div>
+      
     </div>
   );
 }
