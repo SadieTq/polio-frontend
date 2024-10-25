@@ -176,7 +176,7 @@ function Dashboard() {
       title={
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <span>{title}</span>
-          <Button style={{ width: "25%" }} type="primary" size="small">{buttonLabel}Details</Button>
+          <Button style={{ width: "22%" }} type="primary" size="small">{buttonLabel}Details</Button>
         </div>
       }
       style={{ marginBottom: "16px" }}
