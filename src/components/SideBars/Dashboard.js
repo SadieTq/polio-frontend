@@ -28,7 +28,7 @@ function Dashboard() {
 
   // Define data for each chart category
   const vaccinationData = surveyData ? [
-    { name: 'Total Coverage Today', value: surveyData.total },
+    { name: 'Total Vaccinated Coverage Today', value: surveyData.total },
     { name: 'Total AFP Cases', value: surveyData['Total AFP Case'] },
     { name: 'Zero Dose Count', value: surveyData['Total Zero Dose Count'] }
   ] : [];
@@ -47,13 +47,13 @@ function Dashboard() {
   ] : [];
 
   const childrenData = surveyData ? [
-    { name: 'NA Children', value: surveyData.uniqueNAChildrenCount },
+    // { name: 'Children', value: surveyData.uniqueNAChildrenCount },
     { name: 'School Children', value: surveyData.school },
     { name: 'Street Children', value: surveyData.street },
     { name: 'Guest Children', value: surveyData.guestChild },
     { name: 'Total Children Vaccinated In House', value: surveyData.availableChild },
-    { name: 'NA Children Same Day', value: surveyData['covered NA Children same day'] },
-    { name: 'Newborn Count', value: surveyData['Total Newborn Count'] }
+    // { name: 'NA Children Same Day', value: surveyData['covered NA Children same day'] },
+    // { name: 'Newborn Count', value: surveyData['Total Newborn Count'] }
   ] : [];
 
   const refusalsData = surveyData ? [
