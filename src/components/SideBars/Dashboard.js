@@ -28,7 +28,7 @@ function Dashboard() {
 
   // Prepare data for Bar and Pie Charts
   const chartData = surveyData ? [
-    { name: 'Total Vaccinated', value: surveyData.total },
+    { name: 'Total Coverage Today', value: surveyData.total },
     { name: 'Team Login Before 8:30', value: surveyData['before 8:30'] },
     { name: 'Team Login After 8:30', value: surveyData['after 8:30'] },
     { name: 'Locked Houses', value: surveyData.uniqueLockedHouseCount },
@@ -38,7 +38,7 @@ function Dashboard() {
     { name: 'School Children', value: surveyData.school },
     { name: 'Street Children', value: surveyData.street },
     { name: 'Guest Children', value: surveyData.guestChild },
-    { name: 'Available Children', value: surveyData.availableChild },
+    { name: 'Total Children Vaccinated In House', value: surveyData.availableChild },
     { name: 'Total Refusals', value: surveyData.refusalStats.totalRefusalCount },
     { name: 'Religious Refusals', value: surveyData.refusalStats.refusalReasons.religiousRefusal },
     { name: 'Other Refusals', value: surveyData.refusalStats.refusalReasons.otherRefusal },
