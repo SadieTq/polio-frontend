@@ -241,7 +241,7 @@ function AddFLW() {
       key: "updatedby",
     },
     {
-      title: "Reporting Tooo",
+      title: "Reporting To",
       dataIndex: ["aic", "firstName"],
       key: "reporting",
     },
