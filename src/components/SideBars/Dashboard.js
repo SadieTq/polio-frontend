@@ -100,7 +100,7 @@ function Dashboard() {
           value: surveyData["covered NA Children same day"],
         },
         { name: "Newborn Count", value: surveyData["Total Newborn Count"] },
-        { name: "Children", value: surveyData.uniqueNAChildrenCount },
+        { name: "NA Children", value: surveyData.uniqueNAChildrenCount },
         {
           name: "NA same day (visited)",
           value: surveyData["Na Housenot visted same day"],
