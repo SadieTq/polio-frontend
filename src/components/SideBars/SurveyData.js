@@ -32,7 +32,9 @@ const SurveyData = () => {
           <Divider style={{ marginTop: "5px", marginBottom: "5px" }} />
           <p style={cardTextStyle}><span style={{ color: '#00C49F', fontWeight: 'bold', fontSize: '18px' }}>●</span> Total AFP cases: <strong>{data ? data['Total AFP Case'] : 'Loading...'}</strong></p>
           <p style={cardTextStyle}><span style={{ color: '#FFBB28', fontWeight: 'bold', fontSize: '18px' }}>●</span> Zero Dose count: <strong>{data ? data['Total Zero Dose Count'] : 'Loading...'}</strong></p>
-          <p style={cardTextStyle}><span style={{ color: '#FF8042', fontWeight: 'bold', fontSize: '18px' }}>●</span> Newborn Count: <strong>{data ? data['Total Newborn Count'] : 'Loading...'}</strong></p>
+          <p style={cardTextStyle}><span style={{ color: '#FFBB28', fontWeight: 'bold', fontSize: '18px' }}>●</span> UCMO Percentage: <strong>{data ? data['ucmo %'] : 'Loading...'}</strong></p>
+          <p style={cardTextStyle}><span style={{ color: '#FFBB28', fontWeight: 'bold', fontSize: '18px' }}>●</span> AIC Pecentage: <strong>{data ? data['aic %'] : 'Loading...'}</strong></p>
+
         </Card>
 
         {/* Team Data Card */}
@@ -71,6 +73,7 @@ const SurveyData = () => {
 
           <Divider style={{ marginTop: "5px", marginBottom: "5px" }} />
                    <p style={cardTextStyle}><span style={{ color: '#FF8042', fontWeight: 'bold', fontSize: '18px' }}>●</span> School children: <strong>{data ? data.school : 'Loading...'}</strong></p>
+                   <p style={cardTextStyle}><span style={{ color: '#FF8042', fontWeight: 'bold', fontSize: '18px' }}>●</span> Newborn Count: <strong>{data ? data['Total Newborn Count'] : 'Loading...'}</strong></p>
 
           <p style={cardTextStyle}><span style={{ color: '#AF19FF', fontWeight: 'bold', fontSize: '18px' }}>●</span> Street children: <strong>{data ? data.street : 'Loading...'}</strong></p>
           <p style={cardTextStyle}><span style={{ color: '#FFBB28', fontWeight: 'bold', fontSize: '18px' }}>●</span> Guest children: <strong>{data ? data.guestChild : 'Loading...'}</strong></p>
@@ -88,6 +91,8 @@ const SurveyData = () => {
           <p style={cardTextStyle}><span style={{ color: '#FFD700', fontWeight: 'bold', fontSize: '18px' }}>●</span> Religious refusals: <strong>{data ? data.refusalStats.refusalReasons.religiousRefusal : 'Loading...'}</strong></p>
           <p style={cardTextStyle}><span style={{ color: '#32CD32', fontWeight: 'bold', fontSize: '18px' }}>●</span> Other refusals: <strong>{data ? data.refusalStats.refusalReasons.otherRefusal : 'Loading...'}</strong></p>
           <p style={cardTextStyle}><span style={{ color: '#6A5ACD', fontWeight: 'bold', fontSize: '18px' }}>●</span> Medical refusals: <strong>{data ? data.refusalStats.refusalReasons.medicalRefusal : 'Loading...'}</strong></p>
+          <p style={cardTextStyle}><span style={{ color: '#6A5ACD', fontWeight: 'bold', fontSize: '18px' }}>●</span> Unknown refusals: <strong>{data ? data.refusalStats.refusalReasons.unknown : 'Loading...'}</strong></p>
+      
         </Card>
 
         {/* NA Data Card */}

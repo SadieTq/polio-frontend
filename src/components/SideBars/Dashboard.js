@@ -43,7 +43,8 @@ function Dashboard() {
         // { name: "Total Vaccinated Coverage", value: surveyData.total },
         { name: "Total AFP cases", value: surveyData["Total AFP Case"] },
         { name: "Zero Dose count", value: surveyData["Total Zero Dose Count"] },
-        { name: "Newborn Count", value: surveyData["Total Newborn Count"] },
+        { name: "UCMO Percentage", value: surveyData["ucmo %"] },
+        { name: "AIC Percentage", value: surveyData["aic %"] },
       ]
     : [];
 
@@ -71,6 +72,7 @@ function Dashboard() {
         { name: "School children", value: surveyData.school },
         { name: "Street children", value: surveyData.street },
         { name: "Guest children", value: surveyData.guestChild },
+        { name: "Newborn Count", value: surveyData["Total Newborn Count"] },
         // {
         //   name: "Total vaccinated in house",
         //   value: surveyData.availableChild,
@@ -88,13 +90,19 @@ function Dashboard() {
           name: "Religious refusals",
           value: surveyData.refusalStats.refusalReasons.religiousRefusal,
         },
-        {
-          name: "Other refusals",
-          value: surveyData.refusalStats.refusalReasons.otherRefusal,
-        },
+      
         {
           name: "Medical refusals",
           value: surveyData.refusalStats.refusalReasons.medicalRefusal,
+        },
+  {
+          name: "Other refusals",
+          value: surveyData.refusalStats.refusalReasons.otherRefusal,
+        },
+
+        {
+          name: "Unknown refusals",
+          value: surveyData.refusalStats.refusalReasons.unknown,
         },
       ]
     : [];
