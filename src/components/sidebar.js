@@ -11,13 +11,13 @@ function Sidebar() {
       <nav>
         <ul>
           <li>
-            <Link to="/dashboard/stats">Dashboard</Link>
+            <Link to="/dashboard">Dashboard</Link>
           </li>
           <li>
             <Link to="/dashboard/campaign">Campaign</Link>
           </li>
           <li>
-            <Link to="/dashboard">User Management</Link>
+            <Link to="/dashboard/user">User Management</Link>
           </li>
           <li>
             <Link to="/dashboard/flw">FLW Management</Link>

@@ -42,6 +42,11 @@ const LoginPage = () => {
       const data = await response.json();
 
       if (response.ok && data.token && data.user && data.user.role) { // Check for token and user role
+        if (data.user.role === "FLW") {
+          setError("Access Denied to FLW");
+          setLoading(false);
+          return;
+        }
         localStorage.setItem('token', data.token); // Store the token
         localStorage.setItem('role', data.user.role);   // Store the user role
         localStorage.setItem('id', data.user.id);   // Store the user id
