@@ -17,17 +17,22 @@ function TabPanel() {
     const userRole = localStorage.getItem('role');
     setRole(userRole);
 
-    // Only ADMIN role should have access
+    // Set the default active tab based on role
     if (userRole === 'ADMIN') {
       setActiveKey("1");
-    } else {
+    } else if (userRole === 'UCMO') {
+      setActiveKey("2");
+    } else if (userRole === 'AIC') {
+      setActiveKey("3");
+    } else if (userRole === 'FLW') {
       setIsModalVisible(true); // Show modal if user is not authorized
     }
   }, [navigate]);
 
   const handleModalOk = () => {
-    navigate('/');
-    setIsModalVisible(false);
+  navigate('/');
+  setIsModalVisible(false);
+    
   };
 
   return (
@@ -39,25 +44,45 @@ function TabPanel() {
         onOk={handleModalOk}
         onCancel={handleModalOk}
       >
-        <p>Sorry, you do not have access</p>
+        <p>Sorry, you are not authorized</p>
       </Modal>
 
-      {/* Only render tabs if role is ADMIN */}
-      {role === 'ADMIN' && (
-        <Tabs activeKey={activeKey} onChange={(key) => setActiveKey(key)}>
-          <TabPane tab="Add Admin" key="1">
-            <AddAdmin />
-          </TabPane>
-          <TabPane tab="Add UCMO" key="2">
-            <AddUCMO />
-          </TabPane>
+      <Tabs activeKey={activeKey} onChange={(key) => setActiveKey(key)}>
+        {role === 'ADMIN' && (
+          <>
+            <TabPane tab="Add Admin" key="1">
+              <AddAdmin />
+            </TabPane>
+            <TabPane tab="Add UCMO" key="2">
+              <AddUCMO />
+            </TabPane>
+            <TabPane tab="Add AIC" key="3">
+              <AddAIC />
+            </TabPane>
+          </>
+        )}
+        {role === 'UCMO' && (
+          <>
+            <TabPane tab="Add UCMO" key="2">
+              <AddUCMO />
+            </TabPane>
+            <TabPane tab="Add AIC" key="3">
+              <AddAIC />
+            </TabPane>
+          </>
+        )}
+        {role === 'AIC' && (
           <TabPane tab="Add AIC" key="3">
             <AddAIC />
           </TabPane>
-        </Tabs>
-      )}
+        )}
+      </Tabs>
     </div>
   );
 }
 
 export default TabPanel;
+
+
+
+
