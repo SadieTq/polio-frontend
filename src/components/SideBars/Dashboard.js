@@ -40,7 +40,7 @@ function Dashboard() {
   // Define data for each chart category
   const vaccinationData = surveyData
     ? [
-        { name: "Total Vaccinated Coverage", value: surveyData.total },
+        // { name: "Total Vaccinated Coverage", value: surveyData.total },
         { name: "Total AFP cases", value: surveyData["Total AFP Case"] },
         { name: "Zero Dose count", value: surveyData["Total Zero Dose Count"] },
         { name: "Newborn Count", value: surveyData["Total Newborn Count"] },
@@ -71,19 +71,19 @@ function Dashboard() {
         { name: "School children", value: surveyData.school },
         { name: "Street children", value: surveyData.street },
         { name: "Guest children", value: surveyData.guestChild },
-        {
-          name: "Total children vaccinated in house",
-          value: surveyData.availableChild,
-        },
+        // {
+        //   name: "Total vaccinated in house",
+        //   value: surveyData.availableChild,
+        // },
       ]
     : [];
 
   const refusalsData = surveyData
     ? [
-        {
-          name: "Total refusals",
-          value: surveyData.refusalStats.totalRefusalCount,
-        },
+        // {
+        //   name: "Total refusals",
+        //   value: surveyData.refusalStats.totalRefusalCount,
+        // },
         {
           name: "Religious refusals",
           value: surveyData.refusalStats.refusalReasons.religiousRefusal,
@@ -175,48 +175,10 @@ function Dashboard() {
     </Row>
   );
 
-  // Render individual data cards with color-coded legend and values
-  const renderDataCard = (title, data, colorIndex, buttonLabel) => (
-    <Card
-      bordered
-      title={
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <span>{title}</span>
-          <Button style={{ width: "22%" }} type="primary" size="small">{buttonLabel}Details</Button>
-        </div>
-      }
-      
-      style={{ marginBottom: "16px" }}
-      
-    >
-      {/* <Divider style={{ marginTop: "5px", marginBottom: "5px" }} /> */}
-      {data.map((entry, index) => (
-        <div
-          key={`card-item-${index}`}
-          style={{ display: "flex", alignItems: "center", marginBottom: "8px" }}
-        >
-          <div
-            style={{
-              width: "16px",
-              height: "16px",
-              backgroundColor: COLORS[(colorIndex + index) % COLORS.length],
-              marginRight: "8px",
-              borderRadius: "50%",
-            }}
-          />
-          <span>
-            {entry.name}: <strong>{entry.value}</strong>
-          </span>
-        </div>
-      ))}
-    </Card>
-  );
+
 
   return (
     <div className="tab-panel">
-
-
-
 
        <div className="form-container">
          <h2>District Health Authority Lahore</h2> 
@@ -234,31 +196,6 @@ function Dashboard() {
 </div>
 
 
-
-       {/* <Divider style={{ marginTop: "10px", marginBottom: "10px" }} />
-      <div className="form-container">
- 
-        <h3>Survey Data</h3>
-        <Row gutter={[16, 16]}>
-          <Col span={8}>
-            {renderDataCard("Vaccination Data", vaccinationData, 0)}
-          
-          </Col>
-          <Col span={8}>{renderDataCard("Team Data", teamData, 1)}</Col>
-          <Col span={8}>{renderDataCard("Houses Data", housesData, 2)}</Col>
-        </Row>
-        <Row gutter={[16, 16]}>
-          <Col span={8}>
-            {renderDataCard("Children Data", childrenData, 3)}
-          </Col>
-          <Col span={8}>
-            {renderDataCard("Refusals Data", refusalsData, 4)}
-          </Col>
-          <Col span={8}>
-            {renderDataCard("NA Data", nadata, 4)}
-          </Col>
-        </Row>
-      </div> */}
       <Divider style={{ marginTop: "20px", marginBottom: "20px" }} />
       <div className="form-container">
         <h2>Chart View</h2>

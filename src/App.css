@@ -29,6 +29,11 @@ body, html {
   text-align: center;
 }
 
+.logo-image {
+  max-width: 100px;  
+  height: auto;
+}
+
 nav ul {
   list-style-type: none;
   padding: 0;

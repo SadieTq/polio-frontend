@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Button } from 'antd';
+import { Card, Button, Divider } from 'antd';
 
 const SurveyData = () => {
   const [data, setData] = useState(null);
@@ -29,6 +29,7 @@ const SurveyData = () => {
           bordered
         >
           <p style={cardTextStyle}><span style={{ color: '#0088FE', fontWeight: 'bold', fontSize: '18px' }}>●</span> Total Vaccinated Coverage: <strong>{data ? data.total : 'Loading...'}</strong></p>
+          <Divider style={{ marginTop: "5px", marginBottom: "5px" }} />
           <p style={cardTextStyle}><span style={{ color: '#00C49F', fontWeight: 'bold', fontSize: '18px' }}>●</span> Total AFP cases: <strong>{data ? data['Total AFP Case'] : 'Loading...'}</strong></p>
           <p style={cardTextStyle}><span style={{ color: '#FFBB28', fontWeight: 'bold', fontSize: '18px' }}>●</span> Zero Dose count: <strong>{data ? data['Total Zero Dose Count'] : 'Loading...'}</strong></p>
           <p style={cardTextStyle}><span style={{ color: '#FF8042', fontWeight: 'bold', fontSize: '18px' }}>●</span> Newborn Count: <strong>{data ? data['Total Newborn Count'] : 'Loading...'}</strong></p>
@@ -42,6 +43,7 @@ const SurveyData = () => {
           bordered
         >
           <p style={cardTextStyle}><span style={{ color: '#00C49F', fontWeight: 'bold', fontSize: '18px' }}>●</span> Team login before 8:30: <strong>{data ? data['before 8:30'] : 'Loading...'}</strong></p>
+          <Divider style={{ marginTop: "5px", marginBottom: "5px" }} />
           <p style={cardTextStyle}><span style={{ color: '#FFBB28', fontWeight: 'bold', fontSize: '18px' }}>●</span> Team login after 8:30: <strong>{data ? data['after 8:30'] : 'Loading...'}</strong></p>
           <p style={cardTextStyle}><span style={{ color: '#FF8042', fontWeight: 'bold', fontSize: '18px' }}>●</span> Team revisited after 2pm: <strong>{data ? data.visitsAfter2PMCount : 'Loading...'}</strong></p>
         </Card>
@@ -54,6 +56,7 @@ const SurveyData = () => {
           bordered
         >
           <p style={cardTextStyle}><span style={{ color: '#FFBB28', fontWeight: 'bold', fontSize: '18px' }}>●</span> Locked houses: <strong>{data ? data.uniqueLockedHouseCount : 'Loading...'}</strong></p>
+          <Divider style={{ marginTop: "5px", marginBottom: "5px" }} />
           <p style={cardTextStyle}><span style={{ color: '#FF8042', fontWeight: 'bold', fontSize: '18px' }}>●</span> Revisited houses: <strong>{data ? data.revisitedHouseData : 'Loading...'}</strong></p>
         </Card>
 
@@ -64,10 +67,13 @@ const SurveyData = () => {
           style={{ flex: '1 1 calc(33.333% - 16px)' }}
           bordered
         >
-          <p style={cardTextStyle}><span style={{ color: '#FF8042', fontWeight: 'bold', fontSize: '18px' }}>●</span> School children: <strong>{data ? data.school : 'Loading...'}</strong></p>
+                    <p style={cardTextStyle}><span style={{ color: '#00C49F', fontWeight: 'bold', fontSize: '18px' }}>●</span> Total vaccinated in house: <strong>{data ? data.availableChild : 'Loading...'}</strong></p>
+
+          <Divider style={{ marginTop: "5px", marginBottom: "5px" }} />
+                   <p style={cardTextStyle}><span style={{ color: '#FF8042', fontWeight: 'bold', fontSize: '18px' }}>●</span> School children: <strong>{data ? data.school : 'Loading...'}</strong></p>
+
           <p style={cardTextStyle}><span style={{ color: '#AF19FF', fontWeight: 'bold', fontSize: '18px' }}>●</span> Street children: <strong>{data ? data.street : 'Loading...'}</strong></p>
           <p style={cardTextStyle}><span style={{ color: '#FFBB28', fontWeight: 'bold', fontSize: '18px' }}>●</span> Guest children: <strong>{data ? data.guestChild : 'Loading...'}</strong></p>
-          <p style={cardTextStyle}><span style={{ color: '#00C49F', fontWeight: 'bold', fontSize: '18px' }}>●</span> Total children vaccinated in house: <strong>{data ? data.availableChild : 'Loading...'}</strong></p>
         </Card>
 
         {/* Refusals Data Card */}
@@ -78,6 +84,7 @@ const SurveyData = () => {
           bordered
         >
           <p style={cardTextStyle}><span style={{ color: '#AF19FF', fontWeight: 'bold', fontSize: '18px' }}>●</span> Total refusals: <strong>{data ? data.refusalStats.totalRefusalCount : 'Loading...'}</strong></p>
+          <Divider style={{ marginTop: "5px", marginBottom: "5px" }} />
           <p style={cardTextStyle}><span style={{ color: '#FFD700', fontWeight: 'bold', fontSize: '18px' }}>●</span> Religious refusals: <strong>{data ? data.refusalStats.refusalReasons.religiousRefusal : 'Loading...'}</strong></p>
           <p style={cardTextStyle}><span style={{ color: '#32CD32', fontWeight: 'bold', fontSize: '18px' }}>●</span> Other refusals: <strong>{data ? data.refusalStats.refusalReasons.otherRefusal : 'Loading...'}</strong></p>
           <p style={cardTextStyle}><span style={{ color: '#6A5ACD', fontWeight: 'bold', fontSize: '18px' }}>●</span> Medical refusals: <strong>{data ? data.refusalStats.refusalReasons.medicalRefusal : 'Loading...'}</strong></p>
@@ -91,6 +98,7 @@ const SurveyData = () => {
           bordered
         >
           <p style={cardTextStyle}><span style={{ color: '#AF19FF', fontWeight: 'bold', fontSize: '18px' }}>●</span> NA Children Same Day covered: <strong>{data ? data['covered NA Children same day'] : 'Loading...'}</strong></p>
+          <Divider style={{ marginTop: "5px", marginBottom: "5px" }} />
           <p style={cardTextStyle}><span style={{ color: '#FF8042', fontWeight: 'bold', fontSize: '18px' }}>●</span> NA Children: <strong>{data ? data['uniqueNAChildrenCount'] : 'Loading...'}</strong></p>
           <p style={cardTextStyle}><span style={{ color: '#32CD32', fontWeight: 'bold', fontSize: '18px' }}>●</span> NA same day (visited): <strong>{data ? data['Na Housenot visted same day'] : 'Loading...'}</strong></p>
           <p style={cardTextStyle}><span style={{ color: '#6A5ACD', fontWeight: 'bold', fontSize: '18px' }}>●</span> NA same day (not visited): <strong>{data ? data['Na Housenot Not visted same day'] : 'Loading...'}</strong></p>
