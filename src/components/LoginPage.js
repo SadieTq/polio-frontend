@@ -11,9 +11,11 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('id');
-    localStorage.removeItem('role');
+    localStorage.removeItem("id");
+    localStorage.removeItem("role");
+    localStorage.removeItem("token");
+    localStorage.removeItem("cnic");
+    localStorage.removeItem("name");
   }, []);
 
   const handleSubmit = async (e) => {
@@ -43,6 +45,8 @@ const LoginPage = () => {
         localStorage.setItem('token', data.token); // Store the token
         localStorage.setItem('role', data.user.role);   // Store the user role
         localStorage.setItem('id', data.user.id);   // Store the user id
+        localStorage.setItem('name', data.user.firstName); 
+        localStorage.setItem('cnic', data.user.cnic); 
         navigate('/dashboard');
       } else {
         console.error('Login failed:', data);

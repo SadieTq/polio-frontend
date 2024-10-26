@@ -6,6 +6,8 @@ import { Tooltip } from 'antd';
 function HeaderBar() {
   const navigate = useNavigate();
   const userID = localStorage.getItem("id"); // Get the user ID from localStorage
+  const name = localStorage.getItem("name");
+  const cnic = localStorage.getItem("cnic");
 
   const handleLogout = async () => {
     try {
@@ -23,6 +25,8 @@ function HeaderBar() {
         localStorage.removeItem("id");
         localStorage.removeItem("role");
         localStorage.removeItem("token");
+        localStorage.removeItem("cnic");
+        localStorage.removeItem("name");
         // Navigate to the home page
         navigate('/');
       } else {
@@ -35,12 +39,15 @@ function HeaderBar() {
 
   return (
     <div className="header-bar">
+    <div className="welcome-and-logout">
+      <span className="welcome-message">Welcome, {name}! CNIC: {cnic}</span>
       <p className="logout" onClick={handleLogout} style={{ cursor: 'pointer' }}>
         <Tooltip title="Sign Out">
-          <IoPowerSharp size={25} style={{ marginRight: '20px' }} />
+          <IoPowerSharp size={25} style={{ marginLeft: '10px' }} />
         </Tooltip>
       </p>
     </div>
+  </div>
   );
 }
 
