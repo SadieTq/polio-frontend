@@ -39,7 +39,8 @@ function Dashboard() {
 
   // Define data for each chart category
   const vaccinationData = surveyData
-    ? [{ name: "Total Vaccinated Coverage", value: surveyData.total },
+    ? [
+      // { name: "Total Vaccinated Coverage", value: surveyData.total },
       { name: "School children", value: surveyData.school },
       { name: "Street children", value: surveyData.street },
       { name: "Guest children", value: surveyData.guestChild },
@@ -51,46 +52,47 @@ function Dashboard() {
     ? [
         { name: "Team login before 8:30", value: surveyData["before 8:30"] },
         { name: "Team login after 8:30", value: surveyData["after 8:30"] },
-        {
-          name: "Team revisited after 2pm",
-          value: surveyData.visitsAfter2PMCount,
-        },
+       
       ]
     : [];
 
   const housesData = surveyData
     ? [
-        { name: "Total NA Houses", value: surveyData["Total NA houses"] },
+        // { name: "Total NA Houses", value: surveyData["Total NA houses"] },
         { name: "NA house cover same day", value: surveyData["NA house cover same day "] },
         { name: "Remaining Na House", value: surveyData["Remaining Na House "] },
-        { name: "Na house visited after 2 pm", value: surveyData["Na housevisited after 2 pm "] },
+        
       ]
     : [];
 
   const childrenData = surveyData
     ? [
-      
-        { name: "Newborn Count", value: surveyData["Total Newborn Count"] },
+      // { name: "Na house visited after 2 pm", value: surveyData["Na housevisited after 2 pm "] },
+      // {
+      //   name: "Team revisited after 2pm",
+      //   value: surveyData.visitsAfter2PMCount,
+      // },
+      { name: "Not covered after 2pm", value: surveyData["Not cover after 2pm day"] },
+        { name: "Covered after 2pm", value: surveyData["NA cover after 2 pm "] },
       ]
     : [];
 
   const refusalsData = surveyData
     ? [
-        { name: "Total refusals", value: surveyData.refusalStats.totalRefusalCount },
+        // { name: "Total refusals", value: surveyData.refusalStats.totalRefusalCount },
         { name: "Religious refusals", value: surveyData.refusalStats.refusalReasons.religiousRefusal },
         { name: "Medical refusals", value: surveyData.refusalStats.refusalReasons.medicalRefusal },
-        { name: "Other refusals", value: surveyData.refusalStats.refusalReasons.otherRefusal },
-        { name: "Unknown refusals", value: surveyData.refusalStats.refusalReasons.unknown },
+        { name: "Other refusals", value: surveyData.refusalStats.refusalReasons.otherRefusal + surveyData.refusalStats.refusalReasons.unknown },
+       
       ]
     : [];
 
   const nadata = surveyData
     ? [
-        { name: "Total NA", value: surveyData["Total Na "] },
-        { name: "NA Covered Same Day", value: surveyData["Cover same day Na "] },
-        { name: "Remaining NA", value: surveyData["Remaining Na "] },
-        { name: "Not covered after 2pm", value: surveyData["Not cover after 2pm day"] },
-        { name: "Covered after 2pm", value: surveyData["NA cover after 2 pm "] },
+        // { name: "Total NA Children", value: surveyData["Total Na "] },
+        { name: "NA children covered same day", value: surveyData["Cover same day Na "] },
+        { name: "Remaining NA children", value: surveyData["Remaining Na "] },
+        
       ]
     : [];
 
@@ -163,7 +165,7 @@ function Dashboard() {
         <SurveyData />
       </div>
 
-      {/* <Divider style={{ marginTop: "20px", marginBottom: "20px" }} />
+      <Divider style={{ marginTop: "20px", marginBottom: "20px" }} />
       <div className="form-container">
         <h2>Chart View</h2>
 
@@ -173,7 +175,7 @@ function Dashboard() {
           <>
             <Row gutter={[16, 16]}>
               <Col span={12}>
-                <h3>Vaccination Data</h3>
+                <h3>Overall Vaccination Data</h3>
                 {renderPieChartWithLegend(vaccinationData, 0)}
               </Col>
               <Col span={12}>
@@ -193,17 +195,19 @@ function Dashboard() {
             </Row>
             <Row gutter={[16, 16]}>
               <Col span={12}>
-                <h3>Refusals Data</h3>
-                {renderPieChartWithLegend(refusalsData, 4)}
-              </Col>
-              <Col span={12}>
                 <h3>NA Children</h3>
                 {renderPieChartWithLegend(nadata, 5)}
               </Col>
+  <Col span={12}>
+                <h3>Refusals Data</h3>
+                {renderPieChartWithLegend(refusalsData, 4)}
+              </Col>
+
+
             </Row>
           </>
         )}
-      </div> */}
+      </div>
     </div>
   );
 }
