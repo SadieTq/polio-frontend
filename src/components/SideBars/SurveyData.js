@@ -37,6 +37,46 @@ const SurveyData = () => {
             Total Vaccinated Coverage:{" "}
             <strong>{data ? data.total : "Loading..."}</strong>
           </p>
+          <p style={cardTextStyle}>
+            <span
+              style={{ color: "#FF8042", fontWeight: "bold", fontSize: "18px" }}
+            >
+              ●
+            </span>{" "}
+            School children:{" "}
+            <strong>{data ? data.school : "Loading..."}</strong>
+          </p>
+  
+
+          <p style={cardTextStyle}>
+            <span
+              style={{ color: "#AF19FF", fontWeight: "bold", fontSize: "18px" }}
+            >
+              ●
+            </span>{" "}
+            Street children:{" "}
+            <strong>{data ? data.street : "Loading..."}</strong>
+          </p>
+          <p style={cardTextStyle}>
+            <span
+              style={{ color: "#FFBB28", fontWeight: "bold", fontSize: "18px" }}
+            >
+              ●
+            </span>{" "}
+            Guest children:{" "}
+            <strong>{data ? data.guestChild : "Loading..."}</strong>
+          </p>
+          <p style={cardTextStyle}>
+            <span
+              style={{ color: "#FFBB28", fontWeight: "bold", fontSize: "18px" }}
+            >
+              ●
+            </span>{" "}
+            Inhouse Children:{" "}
+            <strong>
+              {data ? data["Children vaccinated at House"] : "Loading..."}
+            </strong>
+          </p>
           
    </Card>
 
@@ -121,22 +161,12 @@ const SurveyData = () => {
 
         {/* Children Data Card */}
         <Card
-          title="Children Data"
+          title="New Born Data"
           extra={<Button type="primary">Details</Button>}
           style={{ flex: "1 1 calc(33.333% - 16px)" }}
           bordered
         >
-          {/* <Divider style={{ marginTop: "5px", marginBottom: "5px" }} /> */}
-          <p style={cardTextStyle}>
-            <span
-              style={{ color: "#FF8042", fontWeight: "bold", fontSize: "18px" }}
-            >
-              ●
-            </span>{" "}
-            School children:{" "}
-            <strong>{data ? data.school : "Loading..."}</strong>
-          </p>
-          <p style={cardTextStyle}>
+                  <p style={cardTextStyle}>
             <span
               style={{ color: "#FF8042", fontWeight: "bold", fontSize: "18px" }}
             >
@@ -145,36 +175,8 @@ const SurveyData = () => {
             Newborn Count:{" "}
             <strong>{data ? data["Total Newborn Count"] : "Loading..."}</strong>
           </p>
-
-          <p style={cardTextStyle}>
-            <span
-              style={{ color: "#AF19FF", fontWeight: "bold", fontSize: "18px" }}
-            >
-              ●
-            </span>{" "}
-            Street children:{" "}
-            <strong>{data ? data.street : "Loading..."}</strong>
-          </p>
-          <p style={cardTextStyle}>
-            <span
-              style={{ color: "#FFBB28", fontWeight: "bold", fontSize: "18px" }}
-            >
-              ●
-            </span>{" "}
-            Guest children:{" "}
-            <strong>{data ? data.guestChild : "Loading..."}</strong>
-          </p>
-          <p style={cardTextStyle}>
-            <span
-              style={{ color: "#FFBB28", fontWeight: "bold", fontSize: "18px" }}
-            >
-              ●
-            </span>{" "}
-            Inhouse Children:{" "}
-            <strong>
-              {data ? data["Children vaccinated at House"] : "Loading..."}
-            </strong>
-          </p>
+          {/* <Divider style={{ marginTop: "5px", marginBottom: "5px" }} /> */}
+        
         </Card>
 
         <Card
