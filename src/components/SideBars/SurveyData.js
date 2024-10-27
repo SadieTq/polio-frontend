@@ -23,7 +23,7 @@ const SurveyData = () => {
       <div style={{ display: "flex", flexWrap: "wrap", gap: "16px" }}>
         {/* Vaccination Data Card */}
         <Card
-          title="Vaccination Data"
+          title="Overall Vaccination Data"
           extra={<Button type="primary">Details</Button>}
           style={{ flex: "1 1 calc(33.333% - 16px)" }}
           bordered
@@ -34,7 +34,7 @@ const SurveyData = () => {
             >
               ●
             </span>{" "}
-            Total Vaccinated Coverage:{" "}
+            Total vaccinated coverage:{" "}
             <strong>{data ? data.total : "Loading..."}</strong>
           </p>
           <p style={cardTextStyle}>
@@ -122,8 +122,8 @@ const SurveyData = () => {
             >
               ●
             </span>{" "}
-            Total NA Houses:{" "}
-            <strong>{data ? data["Total NA houses"] : "Loading..."}</strong>
+            Total NA houses:(Locked or No children under age 5){" "}
+            <strong >{data ? data["Total NA houses"] : "Loading..."}</strong>
           </p>
           {/* <Divider style={{ marginTop: "5px", marginBottom: "5px" }} /> */}
           <p style={cardTextStyle}>
@@ -143,30 +143,20 @@ const SurveyData = () => {
             >
               ●
             </span>{" "}
-            Remaining Na House:{" "}
+            Remaining NA House:{" "}
             <strong>{data ? data["Remaining Na House "] : "Loading..."}</strong>
           </p>
-          <p style={cardTextStyle}>
-            <span
-              style={{ color: "#FF8042", fontWeight: "bold", fontSize: "18px" }}
-            >
-              ●
-            </span>{" "}
-            Na housevisited after 2 pm:{" "}
-            <strong>
-              {data ? data["Na housevisited after 2 pm "] : "Loading..."}
-            </strong>
-          </p>
+       
         </Card>
 
         {/* Children Data Card */}
         <Card
-          title="New Born Data"
+          title="NA after 2pm"
           extra={<Button type="primary">Details</Button>}
           style={{ flex: "1 1 calc(33.333% - 16px)" }}
           bordered
         >
-                  <p style={cardTextStyle}>
+                  {/* <p style={cardTextStyle}>
             <span
               style={{ color: "#FF8042", fontWeight: "bold", fontSize: "18px" }}
             >
@@ -174,9 +164,43 @@ const SurveyData = () => {
             </span>{" "}
             Newborn Count:{" "}
             <strong>{data ? data["Total Newborn Count"] : "Loading..."}</strong>
+          </p> */}
+
+
+          <p style={cardTextStyle}>
+            <span
+              style={{ color: "#6A5ACD", fontWeight: "bold", fontSize: "18px" }}
+            >
+              ●
+            </span>{" "}
+            NA covered after 2pm:{" "}
+            <strong>
+              {data ? data["NA cover after 2 pm "] : "Loading..."}
+            </strong>
           </p>
           {/* <Divider style={{ marginTop: "5px", marginBottom: "5px" }} /> */}
-        
+          <p style={cardTextStyle}>
+            <span
+              style={{ color: "#6A5ACD", fontWeight: "bold", fontSize: "18px" }}
+            >
+              ●
+            </span>{" "}
+            NA not covered after 2pm:{" "}
+            <strong>
+              {data ? data["Not cover after 2pm day"] : "Loading..."}
+            </strong>
+          </p>
+          {/* <p style={cardTextStyle}>
+            <span
+              style={{ color: "#FF8042", fontWeight: "bold", fontSize: "18px" }}
+            >
+              ●
+            </span>{" "}
+            NA house visited after 2 pm:{" "}
+            <strong>
+              {data ? data["Na housevisited after 2 pm "] : "Loading..."}
+            </strong>
+          </p> */}
         </Card>
 
         <Card
@@ -191,7 +215,7 @@ const SurveyData = () => {
             >
               ●
             </span>{" "}
-            Total NA:{" "}
+            Total NA children:{" "}
             <strong>
               {data ? data["Total Na "] : "Loading..."}
             </strong>
@@ -203,7 +227,7 @@ const SurveyData = () => {
             >
               ●
             </span>{" "}
-            NA Covered Same Day:{" "}
+            NA children covered same day:{" "}
             <strong>
               {data ? data["Cover same day Na "] : "Loading..."}
             </strong>
@@ -214,33 +238,13 @@ const SurveyData = () => {
             >
               ●
             </span>{" "}
-            Remaining NA:{" "}
+            Remaining NA children:{" "}
             <strong>
               {data ? data["Remaining Na "] : "Loading..."}
             </strong>
           </p>
-          <p style={cardTextStyle}>
-            <span
-              style={{ color: "#6A5ACD", fontWeight: "bold", fontSize: "18px" }}
-            >
-              ●
-            </span>{" "}
-            Not covered after 2pm:{" "}
-            <strong>
-              {data ? data["Not cover after 2pm day"] : "Loading..."}
-            </strong>
-          </p>
-          <p style={cardTextStyle}>
-            <span
-              style={{ color: "#6A5ACD", fontWeight: "bold", fontSize: "18px" }}
-            >
-              ●
-            </span>{" "}
-            Covered after 2pm:{" "}
-            <strong>
-              {data ? data["NA cover after 2 pm "] : "Loading..."}
-            </strong>
-          </p>
+         
+       
         </Card>
 
 
@@ -284,7 +288,7 @@ const SurveyData = () => {
             Other refusals:{" "}
             <strong>
               {data
-                ? data.refusalStats.refusalReasons.otherRefusal
+                ? data.refusalStats.refusalReasons.otherRefusal + data.refusalStats.refusalReasons.unknown
                 : "Loading..."}
             </strong>
           </p>
@@ -301,17 +305,7 @@ const SurveyData = () => {
                 : "Loading..."}
             </strong>
           </p>
-          <p style={cardTextStyle}>
-            <span
-              style={{ color: "#6A5ACD", fontWeight: "bold", fontSize: "18px" }}
-            >
-              ●
-            </span>{" "}
-            Unknown refusals:{" "}
-            <strong>
-              {data ? data.refusalStats.refusalReasons.unknown : "Loading..."}
-            </strong>
-          </p>
+
         </Card>
 
 

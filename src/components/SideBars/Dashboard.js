@@ -19,6 +19,7 @@ function Dashboard() {
   const [surveyData, setSurveyData] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // Function to fetch survey data
   const fetchSurveyData = async () => {
     setLoading(true);
     try {
@@ -36,17 +37,30 @@ function Dashboard() {
     fetchSurveyData();
   }, []);
 
+  // Define data for each chart category
+  const vaccinationData = surveyData
+    ? [{ name: "Total Vaccinated Coverage", value: surveyData.total },
+      { name: "School children", value: surveyData.school },
+      { name: "Street children", value: surveyData.street },
+      { name: "Guest children", value: surveyData.guestChild },
+      { name: "Inhouse Children", value: surveyData["Children vaccinated at House"] },
+    ]
+    : [];
+
   const teamData = surveyData
     ? [
         { name: "Team login before 8:30", value: surveyData["before 8:30"] },
         { name: "Team login after 8:30", value: surveyData["after 8:30"] },
-        
+        {
+          name: "Team revisited after 2pm",
+          value: surveyData.visitsAfter2PMCount,
+        },
       ]
     : [];
 
   const housesData = surveyData
     ? [
-        // { name: "Total NA Houses", value: surveyData["Total NA houses"] },
+        { name: "Total NA Houses", value: surveyData["Total NA houses"] },
         { name: "NA house cover same day", value: surveyData["NA house cover same day "] },
         { name: "Remaining Na House", value: surveyData["Remaining Na House "] },
         { name: "Na house visited after 2 pm", value: surveyData["Na housevisited after 2 pm "] },
@@ -55,17 +69,14 @@ function Dashboard() {
 
   const childrenData = surveyData
     ? [
-        { name: "School children", value: surveyData.school },
-        { name: "Street children", value: surveyData.street },
-        { name: "Guest children", value: surveyData.guestChild },
-        { name: "In-house Children", value: surveyData["Children vaccinated at House"] },
+      
         { name: "Newborn Count", value: surveyData["Total Newborn Count"] },
       ]
     : [];
 
   const refusalsData = surveyData
     ? [
-        // { name: "Total refusals", value: surveyData.refusalStats.totalRefusalCount },
+        { name: "Total refusals", value: surveyData.refusalStats.totalRefusalCount },
         { name: "Religious refusals", value: surveyData.refusalStats.refusalReasons.religiousRefusal },
         { name: "Medical refusals", value: surveyData.refusalStats.refusalReasons.medicalRefusal },
         { name: "Other refusals", value: surveyData.refusalStats.refusalReasons.otherRefusal },
@@ -75,7 +86,7 @@ function Dashboard() {
 
   const nadata = surveyData
     ? [
-        // { name: "Total NA", value: surveyData["Total Na "] },
+        { name: "Total NA", value: surveyData["Total Na "] },
         { name: "NA Covered Same Day", value: surveyData["Cover same day Na "] },
         { name: "Remaining NA", value: surveyData["Remaining Na "] },
         { name: "Not covered after 2pm", value: surveyData["Not cover after 2pm day"] },
@@ -83,6 +94,7 @@ function Dashboard() {
       ]
     : [];
 
+  // Render individual pie charts with color-coded legend and values
   const renderPieChartWithLegend = (data, colorIndex) => (
     <Row align="middle">
       <Col span={6}>
@@ -141,9 +153,9 @@ function Dashboard() {
       <div className="form-container">
         <h2>District Health Authority Lahore</h2>
         <div style={{ display: 'flex' }}>
-          <h3 style={{ marginRight: '20px' }}>District: Lahore</h3>
-          <h3>Division: Lahore</h3>
-        </div>  
+          <h3 style={{ marginRight: '20px' }}>Division: Lahore</h3>
+          <h3>District: Lahore</h3>
+        </div>
       </div>
 
       <Divider style={{ marginTop: "10px", marginBottom: "10px" }} />
@@ -151,7 +163,7 @@ function Dashboard() {
         <SurveyData />
       </div>
 
-      <Divider style={{ marginTop: "20px", marginBottom: "20px" }} />
+      {/* <Divider style={{ marginTop: "20px", marginBottom: "20px" }} />
       <div className="form-container">
         <h2>Chart View</h2>
 
@@ -161,39 +173,37 @@ function Dashboard() {
           <>
             <Row gutter={[16, 16]}>
               <Col span={12}>
-                <h3>Team Data</h3>
-                {renderPieChartWithLegend(teamData, 0)}
+                <h3>Vaccination Data</h3>
+                {renderPieChartWithLegend(vaccinationData, 0)}
               </Col>
+              <Col span={12}>
+                <h3>Team Data</h3>
+                {renderPieChartWithLegend(teamData, 1)}
+              </Col>
+            </Row>
+            <Row gutter={[16, 16]}>
               <Col span={12}>
                 <h3>NA Houses Data</h3>
-                {renderPieChartWithLegend(housesData, 1)}
+                {renderPieChartWithLegend(housesData, 2)}
+              </Col>
+              <Col span={12}>
+                <h3>Children Data</h3>
+                {renderPieChartWithLegend(childrenData, 3)}
               </Col>
             </Row>
             <Row gutter={[16, 16]}>
               <Col span={12}>
-                <h3>Children Data</h3>
-                {renderPieChartWithLegend(childrenData, 2)}
-              </Col>
-             <Col span={12}>
-                <h3>NA Children Data</h3>
-                {renderPieChartWithLegend(nadata, 4)}
-              </Col>
-            </Row>
-            <Row gutter={[16, 16]}>
-              
-
-
- <Col span={12}>
                 <h3>Refusals Data</h3>
-                {renderPieChartWithLegend(refusalsData, 3)}
+                {renderPieChartWithLegend(refusalsData, 4)}
               </Col>
-
-
-
+              <Col span={12}>
+                <h3>NA Children</h3>
+                {renderPieChartWithLegend(nadata, 5)}
+              </Col>
             </Row>
           </>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }
