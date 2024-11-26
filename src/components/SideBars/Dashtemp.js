@@ -93,29 +93,29 @@ const areaData = {
   ],
 };
 
-// const lineData = {
-//   labels: ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM"],
-//   datasets: [
-//     {
-//       label: "In house Children",
-//       data: [10, 20, 15, 25, 30],
-//       borderColor: "#00C49F",
-//       tension: 0.4,
-//     },
-//     {
-//       label: "School Children",
-//       data: [10, 50, 69, 25, 500],
-//       borderColor: "#FFBB28",
-//       tension: 0.4,
-//     },
-//     {
-//       label: "Street Children",
-//       data: [25, 50, 249, 55, 500],
-//       borderColor: "#00b2ea",
-//       tension: 0.4,
-//     },
-//   ],
-// };
+const lineData2 = {
+  labels: ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM"],
+  datasets: [
+    {
+      label: "In house Children",
+      data: [10, 20, 15, 25, 30],
+      borderColor: "#00C49F",
+      tension: 0.4,
+    },
+    {
+      label: "School Children",
+      data: [10, 50, 69, 25, 500],
+      borderColor: "#FFBB28",
+      tension: 0.4,
+    },
+    {
+      label: "Street Children",
+      data: [25, 50, 249, 55, 500],
+      borderColor: "#00b2ea",
+      tension: 0.4,
+    },
+  ],
+};
 
 const options = [
   { label: "Day 1", value: "2024-11-24" },
@@ -690,7 +690,7 @@ const Dashtemp = () => {
                       />
                       NA house cover same day:{" "}
                       <strong>
-                      {data ? data["NA house cover same day "] : "..."}
+                      {lockedHouseData ? lockedHouseData[0].NAHouseCoveredSameDay : "..."}
                       </strong>
                     </div>
                     <div>
@@ -699,7 +699,7 @@ const Dashtemp = () => {
                       />
                       Remaining NA House:{" "}
                       <strong>
-                      {data ? data["Remaining Na House "] : "..."}
+                      {lockedHouseData ? lockedHouseData[0].RemainingNAHouse : "..."}
                       </strong>
                     </div>
                   
@@ -743,7 +743,7 @@ const Dashtemp = () => {
                       {childrenData ? childrenData[0].NAChildrenCoveredSameDay : "..."}
                       </strong>
                     </div>
-                    <div>
+                    {/* <div>
                       <TeamOutlined
                         style={{ marginRight: "8px", color: "#722ed1" }}
                       />
@@ -751,7 +751,7 @@ const Dashtemp = () => {
                       <strong>
                       {childrenData ? childrenData[0].RemainingNAChildren : "..."}
                       </strong>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </Card>
@@ -807,7 +807,7 @@ const Dashtemp = () => {
                 <div className="dash-chart-title">Data Table</div>
                 <div className="dash-chart-content2">
                   <Line
-                    data={lineData}
+                    data={lineData2}
                     options={{ maintainAspectRatio: false }}
                   />
                 </div>
