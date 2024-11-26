@@ -92,29 +92,29 @@ const areaData = {
   ],
 };
 
-const lineData = {
-  labels: ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM"],
-  datasets: [
-    {
-      label: "In house Children",
-      data: [10, 20, 15, 25, 30],
-      borderColor: "#00C49F",
-      tension: 0.4,
-    },
-    {
-      label: "School Children",
-      data: [10, 50, 69, 25, 500],
-      borderColor: "#FFBB28",
-      tension: 0.4,
-    },
-    {
-      label: "Street Children",
-      data: [25, 50, 249, 55, 500],
-      borderColor: "#00b2ea",
-      tension: 0.4,
-    },
-  ],
-};
+// const lineData = {
+//   labels: ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM"],
+//   datasets: [
+//     {
+//       label: "In house Children",
+//       data: [10, 20, 15, 25, 30],
+//       borderColor: "#00C49F",
+//       tension: 0.4,
+//     },
+//     {
+//       label: "School Children",
+//       data: [10, 50, 69, 25, 500],
+//       borderColor: "#FFBB28",
+//       tension: 0.4,
+//     },
+//     {
+//       label: "Street Children",
+//       data: [25, 50, 249, 55, 500],
+//       borderColor: "#00b2ea",
+//       tension: 0.4,
+//     },
+//   ],
+// };
 
 const options = [
   { label: "Day 1", value: "2024-11-24" },
@@ -360,6 +360,9 @@ const Dashtemp = () => {
     }
   };
 
+ 
+  
+  
   const fetchTableSchool = async (day = null) => {
     setLoading(true);
     try {
@@ -423,6 +426,30 @@ const Dashtemp = () => {
       setLoading(false);
     }
   };
+ const lineData = {
+  labels: tableStreet ? tableStreet.map(item => item.HourRange) : [],
+  datasets: [
+    {
+      label: "Street Children",
+      data: tableStreet ? tableStreet.map(item => item.TotalChildren) : [],
+      borderColor: "#00b2ea",
+      tension: 0.4,
+    },
+    {
+      label: "House Children",
+      data: tableHouse ? tableHouse.map(item => item.TotalChildren) : [],
+      borderColor: "#FFBB28",
+      tension: 0.4,
+    },
+
+    {
+      label: "School Children",
+      data: tableSchool ? tableSchool.map(item => item.TotalChildren) : [],
+      borderColor: "#00C49F",
+      tension: 0.4,
+    },
+  ],
+};
 
   const handleCheckboxChange = (checkedValues) => {
     setCheckedDay(checkedValues); // Update the state with the selected days array
