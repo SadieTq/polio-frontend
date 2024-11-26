@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import img3 from "../../assets/images/img3.png"
 import {
   Card,
   Col,
@@ -582,12 +583,8 @@ const Dashtemp = () => {
     <>
       <div className="tab-panel">
         <div className="dash-dashboard-container">
-          <div className="form-container">
-            <h2>District Health Authority Lahore</h2>
-            <div style={{ display: "flex" }}>
-              <h3 style={{ marginRight: "20px" }}>Division: Lahore</h3>
-              <h3>District: Lahore</h3>
-            </div>
+          <div style={{ marginBottom: 20 }}>
+          <img src={img3} alt="logo1" className="logo-image1" />
           </div>
           <div className="form-container">
             <h3>Day Of Campaign</h3>
