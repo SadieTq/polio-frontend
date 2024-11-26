@@ -145,7 +145,6 @@ const Dashtemp = () => {
   const [isModalVisible, setIsModalVisible] = useState(false); // Modal visibility state
   const [checkedDay, setCheckedDay] = useState([]); // Default to an empty array
 
-  const [surveyData, setSurveyData] = useState(null);
   useEffect(() => {
     fetchVaccinationData();
     fetchHouseData();
