@@ -93,7 +93,7 @@ const areaData = {
   ],
 };
 
-const lineData2 = {
+  const lineData2 = {
   labels: ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM"],
   datasets: [
     {
@@ -144,6 +144,7 @@ const Dashtemp = () => {
   const [selectedDays, setSelectedDays] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false); // Modal visibility state
   const [checkedDay, setCheckedDay] = useState([]); // Default to an empty array
+
 
   useEffect(() => {
     fetchVaccinationData();
@@ -427,7 +428,7 @@ const Dashtemp = () => {
     }
   };
  const lineData = {
-  labels: tableStreet ? tableStreet.map(item => item.HourRange) : [],
+  labels: tableHouse ? tableHouse.map(item => item.HourRange) : [],
   datasets: [
     {
       label: "Street Children",
@@ -663,6 +664,15 @@ const Dashtemp = () => {
                       {lockedHouseData ? lockedHouseData[0].UsersAfter830Count : "..."}
                       </strong>
                     </div>
+                    <div>
+                      <LoginOutlined
+                        style={{ marginRight: "8px", color: "#722ed1" }}
+                      />
+                      User sync data:{" "}
+                      <strong>
+                      {lockedHouseData ? lockedHouseData[0].DistinctSyncUserCount : "..."}
+                      </strong>
+                    </div>
                   </div>
                 </div>
               </Card>
@@ -721,7 +731,8 @@ const Dashtemp = () => {
                       />
                       NA covered after 2pm:{" "}
                       <strong>
-                      {childrenData ? childrenData[0].NACoveredAfter2pm : "..."}
+                      {childrenData ? childrenData[0].NACoveredAfter2pm : "..."} 
+
                       </strong>
                     </div>
                     
@@ -731,7 +742,8 @@ const Dashtemp = () => {
                       />
                       Total NA children:{" "}
                       <strong>
-                      {childrenData ? childrenData[0].TotalNAChildren : "..."}
+                      {childrenData?.[0]?.TotalNAChildren && typeof childrenData[0].TotalNAChildren !== "object" ? childrenData[0].TotalNAChildren : "..."}
+
                       </strong>
                     </div>
                     <div>
@@ -740,7 +752,9 @@ const Dashtemp = () => {
                       />
                       NA children covered same day:{" "}
                       <strong>
-                      {childrenData ? childrenData[0].NAChildrenCoveredSameDay : "..."}
+  
+                      {childrenData?.[0]?.NAChildrenCoveredSameDay && typeof childrenData[0].NAChildrenCoveredSameDay !== "object" ? childrenData[0].NAChildrenCoveredSameDay : "..."}
+
                       </strong>
                     </div>
                     {/* <div>
