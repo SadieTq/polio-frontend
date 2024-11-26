@@ -1,16 +1,47 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, Divider } from "antd";
+import { Card, Button,DatePicker, Spin} from "antd";
+import dayjs from "dayjs";
+import { baseURL } from "../../apiConfig"
 
+
+const { RangePicker } = DatePicker;
 const SurveyData = () => {
   const [data, setData] = useState(null);
+  const [startDate, setStartDate] = useState(dayjs()); // Current date
+  const [endDate, setEndDate] = useState(dayjs()); // Current date
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    // Fetch data from the API
-    fetch("http://110.38.226.9:4000/api/survey")
+  const getPakistanDate = () => {
+    return new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Karachi" });
+  };
+
+  const fetchData = (start, end) => {
+    setLoading(true); // Start loading
+    fetch(`${baseURL}/api/survey?startDate=${start}&endDate=${end}`)
       .then((response) => response.json())
       .then((json) => setData(json))
-      .catch((error) => console.error("Error fetching data:", error));
+      .catch((error) => console.error("Error fetching data:", error))
+      .finally(() => setLoading(false)); // Stop loading
+  };
+
+  useEffect(() => {
+    const todayDate = getPakistanDate();
+    // Fetch data for today's date initially
+    fetchData(todayDate, todayDate);
+    setStartDate(dayjs(todayDate));
+    setEndDate(dayjs(todayDate));
   }, []);
+
+  const onSearch = () => {
+    // Convert selected startDate and endDate to the format required by the API
+    const formattedStartDate = startDate.format("YYYY-MM-DD");
+    const formattedEndDate = endDate.format("YYYY-MM-DD");
+    fetchData(formattedStartDate, formattedEndDate);
+  };
+
+  // const disableFutureDates = (current) => {
+  //   return current && current > dayjs().endOf("day");
+  // };
 
   const cardTextStyle = {
     fontSize: "14px", // Reducing font size for more compact text
@@ -18,8 +49,32 @@ const SurveyData = () => {
   };
 
   return (
-    <div >
-      <h3>Survey Data</h3>
+   <>
+   
+      <div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <h3>Survey Data</h3>
+        <div style={{ fontSize: "12px", display: "flex", gap: "8px", alignItems: "center" }}>
+        <p style={{ marginBottom: "4px", fontSize: "13px" }}>Date</p>
+        <DatePicker 
+        value={startDate} 
+        onChange={(date) => setStartDate(date)} 
+        // disabledDate={disableFutureDates}
+        />
+        <DatePicker
+              value={endDate}
+              onChange={(date) => setEndDate(date)}
+              // disabledDate={disableFutureDates} // Disable future dates for end date
+            />
+          <Button style={{ marginRight:"6%" }} type="primary" onClick={onSearch}>Search</Button>
+      </div>
+</div>
+
+{loading ? (
+        <div style={{ textAlign: "center", padding: "20px" }}>
+          <Spin size="large" /> {/* Show loading spinner */}
+        </div>
+      ) : (
       <div style={{ display: "flex", flexWrap: "wrap", gap: "16px" }}>
         {/* Vaccination Data Card */}
         <Card
@@ -309,8 +364,9 @@ const SurveyData = () => {
         </Card>
 
 
-      </div>
+      </div>)}
     </div>
+  </>
   );
 };
 

@@ -13,6 +13,7 @@ import {
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { FaEdit } from "react-icons/fa";
+import { baseURL } from "../../apiConfig"
 
 const { Option } = Select;
 
@@ -41,7 +42,7 @@ function AddFLW() {
     setLoading(true);
     try {
       const response = await fetch(
-        "http://110.38.226.9:4000/api/users/all-aic"
+        `${baseURL}/api/users/all-aic`
       );
       const data = await response.json();
       setAicList(data.body);
@@ -62,7 +63,7 @@ function AddFLW() {
     setFlwLoading(true);
     try {
       const response = await fetch(
-        "http://110.38.226.9:4000/api/users/all-flw"
+        `${baseURL}/api/users/all-flw`
       );
       const data = await response.json();
       setFlwList(data.body);
@@ -123,7 +124,7 @@ function AddFLW() {
 
     try {
       const response = await fetch(
-        "http://110.38.226.9:4000/api/users/add-flw",
+        `${baseURL}/api/users/add-flw`,
         {
           method: "POST",
           headers: {
@@ -158,10 +159,17 @@ function AddFLW() {
     }
   };
   const handleUpdate = async () => {
+
+    if (!editingAdmin.cnic || editingAdmin.cnic.length !== 13 || isNaN(editingAdmin.cnic)) {
+      message.error("CNIC must be a 13-digit number.");
+      return;
+    }
+
     const payload = {
       aic: editingAdmin.aic,
       firstName: editingAdmin.firstName,
       lastName: editingAdmin.lastName,
+      cnic: editingAdmin.cnic,
       phone: editingAdmin.phone,
       status: editingAdmin.status,
       isEmployee: editingAdmin.isEmployee,
@@ -171,7 +179,7 @@ function AddFLW() {
 
     try {
       const response = await fetch(
-        `http://110.38.226.9:4000/api/users/${editingAdmin._id}`,
+        `${baseURL}/api/users/${editingAdmin._id}`,
         {
           method: "PUT",
           headers: {
@@ -482,7 +490,17 @@ function AddFLW() {
               </Select>
             </div>
           </div>
-          <div className="form-group"></div>
+          <div className="form-group">
+            <label>CNIC</label>
+            <input
+              type="text"
+              value={editingAdmin?.cnic || ""}
+              onChange={(e) =>
+                setEditingAdmin({ ...editingAdmin, cnic: e.target.value })
+              }
+              required
+            />
+          </div>
           <div className="form-group">
             <label>First Name</label>
             <input

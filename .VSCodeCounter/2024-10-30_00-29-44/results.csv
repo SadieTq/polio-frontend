@@ -1,0 +1,25 @@
+"filename", "language", "CSS", "JavaScript", "XML", "comment", "blank", "total"
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\App.css", "CSS", 233, 0, 0, 3, 46, 282
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\App.js", "JavaScript", 0, 39, 0, 0, 4, 43
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\App.test.js", "JavaScript", 0, 7, 0, 0, 2, 9
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\Example.js", "JavaScript", 0, 0, 0, 0, 1, 1
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\HeaderBar.js", "JavaScript", 0, 46, 0, 3, 6, 55
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\LoginPage.js", "JavaScript", 0, 103, 0, 3, 12, 118
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\PrivateRoute.js", "JavaScript", 0, 7, 0, 0, 2, 9
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\SideBars\CampaignManagement.js", "JavaScript", 0, 278, 0, 6, 42, 326
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\SideBars\Dashboard.js", "JavaScript", 0, 181, 0, 12, 23, 216
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\SideBars\FlwManagement.js", "JavaScript", 0, 17, 0, 0, 4, 21
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\SideBars\SurveyData.js", "JavaScript", 0, 320, 0, 23, 30, 373
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\SideBars\TeamAssignment.js", "JavaScript", 0, 267, 0, 16, 30, 313
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\SideBars\TeamData.js", "JavaScript", 0, 489, 0, 16, 68, 573
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\TabPanel.js", "JavaScript", 0, 74, 0, 1, 14, 89
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\forms\AddAIC.js", "JavaScript", 0, 509, 0, 12, 40, 561
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\forms\AddAdmin.js", "JavaScript", 0, 391, 0, 7, 38, 436
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\forms\AddFLW.js", "JavaScript", 0, 523, 0, 11, 32, 566
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\forms\AddUCMO.js", "JavaScript", 0, 352, 0, 8, 45, 405
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\sidebar.js", "JavaScript", 0, 32, 0, 0, 3, 35
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\index.css", "CSS", 0, 0, 0, 0, 1, 1
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\index.js", "JavaScript", 0, 12, 0, 3, 3, 18
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\logo.svg", "XML", 0, 0, 1, 0, 0, 1
+"d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\reportWebVitals.js", "JavaScript", 0, 12, 0, 0, 2, 14
+"Total", "-", 233, 3659, 1, 124, 448, 4465

@@ -7,7 +7,7 @@ const { TabPane } = Tabs;
 function FlwManagement() {
   const [activeKey, setActiveKey] = useState("1");
   return (
-    <div className="tab-panel">
+    <div className="tab-panel1">
     <Tabs activeKey={activeKey} onChange={(key) => setActiveKey(key)}>
       <TabPane tab="Add FLW" key="1">
       <AddFLW />

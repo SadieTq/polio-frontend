@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoPowerSharp } from "react-icons/io5";
 import { Tooltip } from 'antd';
+import { baseURL } from "../apiConfig"
 
 function HeaderBar() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function HeaderBar() {
   const handleLogout = async () => {
     try {
       // API call to logout using fetch
-      const response = await fetch('http://110.38.226.9:4000/api/auth/logout', {
+      const response = await fetch(`${baseURL}/api/auth/logout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Spin, Alert } from 'antd'; 
+import img1 from '../assets/images/img1.png'; 
+import { baseURL } from "../apiConfig"
 
 const LoginPage = () => {
   const [cnic, setCnic] = useState('');
@@ -31,7 +33,7 @@ const LoginPage = () => {
 
     try {
       // Making the POST request
-      const response = await fetch('http://110.38.226.9:4000/api/auth/login', {
+      const response = await fetch(`${baseURL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -75,8 +77,8 @@ const LoginPage = () => {
       {!loading && ( /* Only show the form when not loading */
         <div className="wrapperLogin">
           <div className="leftLogin">
-            <div className="logoLogin">Polio</div>
-            <h1 className="titleLogin">Welcome</h1>
+            
+            <h1 className="titleLogin">Welcome!</h1>
             <p>Enter your CNIC and password to sign in</p>
 
             {error && (
@@ -107,7 +109,11 @@ const LoginPage = () => {
               <button type="submit" className="buttonLogin">Sign in</button>
             </form>
           </div>
-          <div className="rightLogin"></div>
+          <div className="rightLogin">
+          
+        <img src={img1} alt="logo1" className="logo-image1" />
+      
+          </div>
         </div>
       )}
     </div>

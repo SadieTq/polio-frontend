@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Select, Button, message, Divider } from 'antd';
 import TeamData from './TeamData';
-
+import { baseURL } from "../../apiConfig"
 const { Option } = Select;
 
 function TeamAssignment() {
@@ -23,28 +23,28 @@ function TeamAssignment() {
   const [refreshKey, setRefreshKey] = useState(0);
   // Fetch data from APIs for the first 4 selects
   useEffect(() => {
-    fetch('http://110.38.226.9:4000/api/division')
+    fetch(`${baseURL}/api/division`)
       .then(response => response.json())
       .then(data => setDivisions(data.body || []))
      // .catch(error => console.error('Error fetching divisions:', error));
 
-    fetch('http://110.38.226.9:4000/api/district')
+    fetch(`${baseURL}/api/district`)
       .then(response => response.json())
       .then(data => setDistricts(data.body || []))
     //  .catch(error => console.error('Error fetching districts:', error));
 
-    fetch('http://110.38.226.9:4000/api/tehsil')
+    fetch(`${baseURL}/api/tehsil`)
       .then(response => response.json())
       .then(data => setTowns(data.body || []))
     //  .catch(error => console.error('Error fetching towns:', error));
 
-    fetch('http://110.38.226.9:4000/api/uc')
+    fetch(`${baseURL}/api/uc`)
       .then(response => response.json())
       .then(data => setUcs(data.body || []))
      // .catch(error => console.error('Error fetching UCs:', error));
 
     // Fetch UCMO data
-    fetch('http://110.38.226.9:4000/api/users/all-ucmo')
+    fetch(`${baseURL}/api/users/all-ucmo`)
       .then(response => response.json())
       .then(data => setUCMOs(data.body || []))
      // .catch(error => console.error('Error fetching UCMOs:', error));
@@ -55,7 +55,7 @@ function TeamAssignment() {
     setSelectedUCMO(ucmoid);
 
     // Make API call to fetch AICs for the selected UCMO
-    fetch(`http://110.38.226.9:4000/api/users/umco/${ucmoid}/aics`)
+    fetch(`${baseURL}/api/users/umco/${ucmoid}/aics`)
       .then(response => response.json())
       .then(data => setAICs(data.body || []))  // Set AICs
      // .catch(error => console.error('Error fetching AICs:', error));
@@ -66,7 +66,7 @@ function TeamAssignment() {
     setSelectedAIC(aicId);
 
     // Make API call to fetch FLWs for the selected AIC
-    fetch(`http://110.38.226.9:4000/api/users/aics/${aicId}/flws`)
+    fetch(`${baseURL}/api/users/aics/${aicId}/flws`)
       .then(response => response.json())
       .then(data => setFLWs(data.body || []))  // Set FLWs
     //  .catch(error => console.error('Error fetching FLWs:', error));
@@ -94,7 +94,7 @@ function TeamAssignment() {
     };
 
     // POST request to the Add Team API
-    fetch('http://110.38.226.9:4000/api/teams', {
+    fetch(`${baseURL}/api/teams`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -270,8 +270,8 @@ function TeamAssignment() {
       </div>
 
       {/* FLW */}
-      <div className="select-container-team2">
-        <div className="select-group-team">
+      {/* <div className="select-container-team3">
+        <div className="select-group-team2">
           <label>Select FLWs<span style={{ color: "red" }}>*</span></label>
           <Select
           showSearch
@@ -292,8 +292,55 @@ function TeamAssignment() {
             ))}
           </Select>
         </div>
-      </div>
-
+        <div className="select-group-team2">
+        <div className="form-group0">
+          <label>Assign Team Number<span style={{ color: "red" }}>*</span></label>
+         
+            <input
+           placeholder="e.g. 5"
+           required
+           type='number'
+           className="custom-select-team2"
+            />
+        </div> </div></div> */}
+     <div className="select-container-team3">
+  <div className="select-group-team3">
+    <label>
+      Select FLWs<span style={{ color: "red" }}>*</span>
+    </label>
+    <Select
+      showSearch
+      placeholder="Select FLWs"
+      className="custom-select-team2"
+      mode="multiple"
+      onChange={setSelectedFLWs}
+      value={selectedFLWs}
+      optionFilterProp="children"
+      filterOption={(input, option) =>
+        option.children.toLowerCase().includes(input.toLowerCase())
+      }
+    >
+      {flws.map((flw) => (
+        <Option key={flw._id} value={flw._id}>
+          {`${flw.firstName} ${flw.lastName}`}
+        </Option>
+      ))}
+    </Select>
+  </div>
+  <div className="select-group-team3">
+  <div className="form-group0">
+    <label>
+      Assign Team Number<span style={{ color: "red" }}>*</span>
+    </label>
+    <input
+      placeholder="e.g. 5"
+      required
+      type="number"
+      className="custom-select-team2"
+    />
+  </div>
+</div>
+</div>
       <div className="add-team-btn">
         <Button type="primary" onClick={handleAddTeam} style={{margin:'50px 10px'}}>
           Add Team

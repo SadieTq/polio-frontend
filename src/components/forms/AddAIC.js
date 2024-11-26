@@ -13,6 +13,7 @@ import {
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { FaEdit } from "react-icons/fa";
+import { baseURL } from "../../apiConfig"
 
 const { Option } = Select;
 
@@ -43,7 +44,7 @@ function AddAIC() {
     setLoading(true);
     try {
       const response = await fetch(
-        "http://110.38.226.9:4000/api/users/all-ucmo"
+        `${baseURL}/api/users/all-ucmo`
       );
       const data = await response.json();
       setAicList(data.body);
@@ -59,7 +60,7 @@ function AddAIC() {
     setLoading1(true);
     try {
       const response = await fetch(
-        "http://110.38.226.9:4000/api/users/all-aic"
+        `${baseURL}/api/users/all-aic`
       );
       const data = await response.json();
       setAicData(data.body); // Assuming the data is in the body field
@@ -124,7 +125,7 @@ function AddAIC() {
 
     try {
       const response = await fetch(
-        "http://110.38.226.9:4000/api/users/add-aic",
+        `${baseURL}/api/users/add-aic`,
         {
           method: "POST",
           headers: {
@@ -158,10 +159,17 @@ function AddAIC() {
     }
   };
   const handleUpdate = async () => {
+    if (!editingAdmin.cnic || editingAdmin.cnic.length !== 13 || isNaN(editingAdmin.cnic)) {
+      message.error("CNIC must be a 13-digit number.");
+      return;
+    }
+
+
     const payload = {
       ucmo: editingAdmin.ucmo || null, // UCMO ID from selected option
       firstName: editingAdmin.firstName,
       lastName: editingAdmin.lastName,
+      cnic: editingAdmin.cnic,
       phone: editingAdmin.phone,
       status: editingAdmin.status,
       isEmployee: editingAdmin.isEmployee,
@@ -171,7 +179,7 @@ function AddAIC() {
   
     try {
       const response = await fetch(
-        `http://110.38.226.9:4000/api/users/${editingAdmin._id}`,
+        `${baseURL}/api/users/${editingAdmin._id}`,
         {
           method: "PUT",
           headers: {
@@ -477,7 +485,17 @@ function AddAIC() {
   ))}
 </Select>
           </div>
-          <div className="form-group"></div>
+          <div className="form-group">
+            <label>CNIC<span style={{ color: "red" }}>*</span></label>
+            <input
+              type="text"
+              value={editingAdmin?.cnic || ""}
+              onChange={(e) =>
+                setEditingAdmin({ ...editingAdmin, cnic: e.target.value })
+              }
+              required
+            />
+          </div>
           <div className="form-group">
             <label>First Name<span style={{ color: "red" }}>*</span></label>
             <input

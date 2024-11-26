@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Select, message, Table, Divider, Input, Switch, Tooltip, Modal, Spin, Form } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { MdDelete } from "react-icons/md";
+import { baseURL } from "../../apiConfig"
 
 const { Option } = Select;
 const { confirm } = Modal; // Importing confirm from Modal
@@ -22,7 +23,7 @@ function CampaignManagement() {
   const fetchCampData = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://110.38.226.9:4000/api/campaign');
+      const response = await fetch(`${baseURL}/api/campaign`);
       const data = await response.json();
       setAicData(data.body);
       setFilteredData(data.body);
@@ -65,8 +66,8 @@ function CampaignManagement() {
 
   const handleStatusToggle = async (checked, record) => {
     const apiUrl = checked
-      ? `http://110.38.226.9:4000/api/campaign/active/${record._id}`
-      : `http://110.38.226.9:4000/api/campaign/inactive/${record._id}`;
+      ? `${baseURL}/api/campaign/active/${record._id}`
+      : `${baseURL}/api/campaign/inactive/${record._id}`;
   
     // Find the active campaign and its page number
     const activeCampaign = aicData.find(item => item.status === 'ACTIVE');
@@ -107,7 +108,7 @@ function CampaignManagement() {
     };
   
     try {
-      const response = await fetch('http://110.38.226.9:4000/api/campaign', {
+      const response = await fetch(`${baseURL}/api/campaign`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -142,7 +143,7 @@ function CampaignManagement() {
       cancelText: 'No, Cancel',
       onOk() {
         // If confirmed, perform the DELETE request
-        fetch(`http://110.38.226.9:4000/api/campaign/${teamId}`, {
+        fetch(`${baseURL}/api/campaign/${teamId}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',

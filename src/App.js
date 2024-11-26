@@ -10,6 +10,7 @@ import TeamAssignment from './components/SideBars/TeamAssignment';
 import PrivateRoute from './components/PrivateRoute'; 
 import CampaignManagement from './components/SideBars/CampaignManagement';
 import Dashboard from './components/SideBars/Dashboard';
+import Dashtemp from './components/SideBars/Dashtemp';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
                   <Route path="flw" element={<FlwManagement />} />
                   <Route path="team" element={<TeamAssignment />} />
                   <Route path="campaign" element={<CampaignManagement />} />
+                  <Route path="dashtemp" element={<Dashtemp />} />
                   <Route path="/" element={<Dashboard />} />
                 </Routes>
               </div>

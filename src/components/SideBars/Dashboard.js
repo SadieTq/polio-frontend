@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import { Spin, Divider, Row, Col } from "antd";
 import SurveyData from "../SideBars/SurveyData";
+import { baseURL } from "../../apiConfig"
 
 const COLORS = [
   "#0088FE",
@@ -23,7 +24,7 @@ function Dashboard() {
   const fetchSurveyData = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://110.38.226.9:4000/api/survey/");
+      const response = await fetch(`${baseURL}/api/survey/`);
       const data = await response.json();
       setSurveyData(data);
     } catch (error) {
@@ -150,7 +151,7 @@ function Dashboard() {
     </Row>
   );
 
-  return (
+  return (<>
     <div className="tab-panel">
       <div className="form-container">
         <h2>District Health Authority Lahore</h2>
@@ -165,9 +166,9 @@ function Dashboard() {
         <SurveyData />
       </div>
 
-      <Divider style={{ marginTop: "20px", marginBottom: "20px" }} />
+      {/* <Divider style={{ marginTop: "20px", marginBottom: "20px" }} />
       <div className="form-container">
-        <h2>Chart View</h2>
+        <h2>Chart View For Today</h2>
 
         {loading ? (
           <Spin tip="Loading data..." />
@@ -207,8 +208,9 @@ function Dashboard() {
             </Row>
           </>
         )}
-      </div>
+      </div> */}
     </div>
+    </>
   );
 }
 

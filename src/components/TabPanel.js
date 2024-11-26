@@ -36,7 +36,7 @@ function TabPanel() {
   };
 
   return (
-    <div className="tab-panel">
+    <div className="tab-panel1">
       {/* Modal to show unauthorized message */}
       <Modal
         title="Unauthorized"

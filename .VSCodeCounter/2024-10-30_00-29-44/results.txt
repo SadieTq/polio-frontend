@@ -1,0 +1,54 @@
+Date : 2024-10-30 00:29:44
+Directory : d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src
+Total : 23 files,  3893 codes, 124 comments, 448 blanks, all 4465 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |         20 |      3,659 |        121 |        401 |      4,181 |
+| CSS        |          2 |        233 |          3 |         47 |        283 |
+| XML        |          1 |          1 |          0 |          0 |          1 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                            | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                               |         23 |      3,893 |        124 |        448 |      4,465 |
+| . (Files)                                                                                                       |          7 |        304 |          6 |         58 |        368 |
+| components                                                                                                      |         16 |      3,589 |        118 |        390 |      4,097 |
+| components (Files)                                                                                              |          6 |        262 |          7 |         38 |        307 |
+| components\SideBars                                                                                             |          6 |      1,552 |         73 |        197 |      1,822 |
+| components\forms                                                                                                |          4 |      1,775 |         38 |        155 |      1,968 |
++-----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                        | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\App.css                                   | CSS        |        233 |          3 |         46 |        282 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\App.js                                    | JavaScript |         39 |          0 |          4 |         43 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\App.test.js                               | JavaScript |          7 |          0 |          2 |          9 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\Example.js                     | JavaScript |          0 |          0 |          1 |          1 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\HeaderBar.js                   | JavaScript |         46 |          3 |          6 |         55 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\LoginPage.js                   | JavaScript |        103 |          3 |         12 |        118 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\PrivateRoute.js                | JavaScript |          7 |          0 |          2 |          9 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\SideBars\CampaignManagement.js | JavaScript |        278 |          6 |         42 |        326 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\SideBars\Dashboard.js          | JavaScript |        181 |         12 |         23 |        216 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\SideBars\FlwManagement.js      | JavaScript |         17 |          0 |          4 |         21 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\SideBars\SurveyData.js         | JavaScript |        320 |         23 |         30 |        373 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\SideBars\TeamAssignment.js     | JavaScript |        267 |         16 |         30 |        313 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\SideBars\TeamData.js           | JavaScript |        489 |         16 |         68 |        573 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\TabPanel.js                    | JavaScript |         74 |          1 |         14 |         89 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\forms\AddAIC.js                | JavaScript |        509 |         12 |         40 |        561 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\forms\AddAdmin.js              | JavaScript |        391 |          7 |         38 |        436 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\forms\AddFLW.js                | JavaScript |        523 |         11 |         32 |        566 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\forms\AddUCMO.js               | JavaScript |        352 |          8 |         45 |        405 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\components\sidebar.js                     | JavaScript |         32 |          0 |          3 |         35 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\index.css                                 | CSS        |          0 |          0 |          1 |          1 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\index.js                                  | JavaScript |         12 |          3 |          3 |         18 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\logo.svg                                  | XML        |          1 |          0 |          0 |          1 |
+| d:\Development\Polio Project\Frontend\Polio clone\survey-frontend\src\reportWebVitals.js                        | JavaScript |         12 |          0 |          2 |         14 |
+| Total                                                                                                           |            |      3,893 |        124 |        448 |      4,465 |
++-----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
