@@ -328,7 +328,7 @@ function TeamAssignment() {
     </Select>
   </div>
   <div className="select-group-team3">
-  <div className="form-group0">
+  {/* <div className="form-group0">
     <label>
       Assign Team Number<span style={{ color: "red" }}>*</span>
     </label>
@@ -338,7 +338,7 @@ function TeamAssignment() {
       type="number"
       className="custom-select-team2"
     />
-  </div>
+  </div> */}
 </div>
 </div>
       <div className="add-team-btn">

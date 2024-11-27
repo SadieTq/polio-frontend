@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Select, message, Table, Divider, Input, Switch, Tooltip, Modal, Spin, Form } from 'antd';
+import { Button, Select, message, Table, Divider, Input, Switch, Tooltip, Modal, Spin, Form, DatePicker } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { MdDelete } from "react-icons/md";
 import { baseURL } from "../../apiConfig"
@@ -14,10 +14,13 @@ function CampaignManagement() {
   const [filteredData, setFilteredData] = useState([]);
   const userID = localStorage.getItem('id');
   const userRole = localStorage.getItem('role');
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const [formData, setFormData] = useState({
     campaignType: '',
     campaignName: '',
-    numberOfDays: ''
+    startDate: null,
+    endDate: null,
   });
 
   const fetchCampData = async () => {
@@ -98,12 +101,26 @@ function CampaignManagement() {
     }
   };
   
+  const handleDateChange = (name, date) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: date,
+    }));
+  };
 
   const handleSubmit = async (e) => {
+    const { campaignName, campaignType, startDate, endDate } = formData;
+  
+    if (!startDate || !endDate) {
+      message.error("Please select start and end dates");
+      return;
+    }
+  
     const payload = {
-      campaignName: formData.campaignName,
-      numberOfDays: parseInt(formData.numberOfDays, 10),
-      campaignType: formData.campaignType,
+      campaignName,
+      campaignType,
+      startDate: startDate.format('YYYY-MM-DD'),
+      endDate: endDate.format('YYYY-MM-DD'),
       createdBy: userID
     };
   
@@ -122,7 +139,8 @@ function CampaignManagement() {
         setFormData({
           campaignType: '',
           campaignName: '',
-          numberOfDays: ''
+          startDate: null,
+          endDate: null,
         });
       } else {
         message.error('Failed to add campaign');
@@ -181,14 +199,19 @@ function CampaignManagement() {
       key: 'campaignType',
     },
     {
-      title: 'Days',
-      dataIndex: 'numberOfDays',
-      key: 'numberOfDays',
-    },
-    {
       title: 'Created By',
       dataIndex: ['createdBy', 'firstName'], 
       key: 'createdby',
+    },
+    {
+      title: 'Start Date',
+      dataIndex: 'startDate',
+      key: 'startDate',
+    },
+    {
+      title: 'End Date',
+      dataIndex: 'endDate',
+      key: 'endDate',
     },
     {
       title: 'Status',
@@ -219,40 +242,39 @@ function CampaignManagement() {
     },
   ];
 
-  return (
+   return (
     <div className="tab-panel">
       <div className="form-container">
         <h2>Add Campaign</h2>
         <p>Fill in the details below:</p>
-     
-     
-     
+
         <Form layout="vertical" onFinish={handleSubmit} requiredMark="optional">
           <div className="form-group2">
-            <label>Select Campaign Type<span style={{ color: "red" }}>*</span></label>
+            <label>
+              Select Campaign Type<span style={{ color: 'red' }}>*</span>
+            </label>
             <Form.Item
-  
-  name="campaignType"
-  rules={[{ required: true, message: 'Please select a campaign type' }]}
->
-  <Select
-    placeholder="Select Type"
-    style={{ width: '42%' }}
-    loading={loading}
-    value={formData.campaignType || undefined}
-    onChange={handleCampaignTypeChange}
-  >
-    {['SNID', 'NID', 'OBR', 'CR'].map(type => (
-      <Option key={type} value={type}>
-        {type}
-      </Option>
-    ))}
-  </Select>
-</Form.Item>
-
+              name="campaignType"
+              rules={[{ required: true, message: 'Please select a campaign type' }]}
+            >
+              <Select
+                placeholder="Select Type"
+                style={{ width: '42%' }}
+                loading={loading}
+                value={formData.campaignType || undefined}
+                onChange={handleCampaignTypeChange}
+              >
+                {['SNID', 'NID', 'OBR', 'CR'].map((type) => (
+                  <Option key={type} value={type}>
+                    {type}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
           </div>
+
           <div className="form-group2">
-            <label>Campaign Name<span style={{ color: "red" }}>*</span></label>
+            <label>Campaign Name<span style={{ color: 'red' }}>*</span></label>
             <input
               type="text"
               name="campaignName"
@@ -262,54 +284,58 @@ function CampaignManagement() {
               required
             />
           </div>
+
           <div className="form-group2">
-  <label>Number of Days<span style={{ color: "red" }}>*</span></label>
-  <input
-    type="number"
-    name="numberOfDays"
-    placeholder="e.g. 30"
-    value={formData.numberOfDays}
-    onChange={(e) => {
-      const value = e.target.value;
-      if (value > 0) {
-        handleInputChange(e);
-      } else {
-        message.error('Number of days must be greater than 0');
-      }
-    }}
-    required
-  />
-</div>
+            <label>Start Date<span style={{ color: 'red' }}>*</span></label>
+            <DatePicker
+              style={{ width: '42%' }}
+              value={formData.startDate}
+              onChange={(date) => handleDateChange('startDate', date)}
+              format="YYYY-MM-DD"
+            />
+          </div>
 
+          <div className="form-group2">
+            <label>End Date<span style={{ color: 'red' }}>*</span></label>
+            <DatePicker
+              style={{ width: '42%' }}
+              value={formData.endDate}
+              onChange={(date) => handleDateChange('endDate', date)}
+              format="YYYY-MM-DD"
+            />
+          </div>
 
-          <Button type="primary" htmlType="submit">Add Campaign</Button>
+      
+
+          <Button type="primary" htmlType="submit">
+            Add Campaign
+          </Button>
         </Form>
       </div>
 
       <Divider style={{ marginTop: '20px' }} />
 
       <div className="form-container">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h3>Campaign Details</h3>
-          <Input
-            placeholder="Search by Campaign Name"
-            prefix={<SearchOutlined />}
-            value={searchTerm}
-            onChange={handleSearch}
-            style={{ width: 300 }}
-          />
-        </div>
-        <Spin spinning={loading}>
-        <Table
-          dataSource={filteredData}
-          columns={aicColumns}
-          rowKey="_id"
-          pagination={{ pageSize: 7 }}
+        <h3>Campaign Details</h3>
+        <Input
+          placeholder="Search by Campaign Name"
+          prefix={<SearchOutlined />}
+          value={searchTerm}
+          onChange={handleSearch}
+          style={{ width: 300 }}
         />
+        <Spin spinning={loading}>
+          <Table
+            dataSource={filteredData}
+            columns={aicColumns}
+            rowKey="_id"
+            pagination={{ pageSize: 7 }}
+          />
         </Spin>
       </div>
     </div>
   );
+
 }
 
 export default CampaignManagement;
